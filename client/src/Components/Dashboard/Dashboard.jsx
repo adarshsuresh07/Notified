@@ -1,5 +1,6 @@
 import React from 'react'
-import Opstack from './Opstack';
+import Opstack from './Opstack'
+import Todostack from './Todostack'
 import Opmodal from "./Opmodal"
 class Dashboard extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class Dashboard extends React.Component {
         return (
             <div className="overlay">
                 <Opstack />
-                <Opmodal/>
+                <Todostack />
+                <Opmodal />
             </div>
         );
     }

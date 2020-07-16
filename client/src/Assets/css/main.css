@@ -2,6 +2,7 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  display: flex;
 }
 
 /* ----------------opportunity tab --------------*/
@@ -27,18 +28,21 @@
   margin: 0.5rem 0;
   border-radius: 0.2rem;
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
 }
 
 .optab {
-  width: 95%;
+  width: 90%;
   padding: 0.5rem;
   background-color: #b45dfc;
   height: 5rem;
   font-size: 0.8rem;
+  border-bottom-left-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
 }
 
 .optab-first {
@@ -80,5 +84,83 @@
   border-bottom-right-radius: 0.2rem;
 }
 
-/* ----------------opportunity details modal --------------*/
+/* ----------------Todo tab --------------*/
+
+.todostack-container {
+  width: 25%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #5c636e;
+  /* color: #e2dfea; */
+  /* color: #f5f3f8; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todotab-container {
+  width: 95%;
+  height: 5rem;
+  background-color: #f8b500;
+  /* color: #f5f3f8; */
+  color: white;
+  margin: 0.5rem 0;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.todotab {
+  width: 90%;
+  padding: 0.5rem;
+  background-color: #f8b500;
+  height: 5rem;
+  font-size: 0.8rem;
+  border-bottom-left-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+}
+
+.todotab-first {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todotab-name {
+  width: 70%;
+  overflow: hidden;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.todotab-addtodo {
+  display: none;
+}
+
+.todotab-container:hover .todotab-addtodo{
+  display: block;
+  width: 15%;
+  height:100%;
+}
+
+.todotab-addtodo button{
+  all:unset;
+  height:100%;
+  width:100%;
+  background-color: #f5f3f8;
+  color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
 
