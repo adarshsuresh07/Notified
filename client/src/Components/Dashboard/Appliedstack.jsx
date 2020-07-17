@@ -1,6 +1,6 @@
 import React from 'react'
-import Optab from './Optab'
-class Opstack extends React.Component {
+import Appliedtab from './Appliedtab'
+class Appliedstack extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,30 +30,14 @@ class Opstack extends React.Component {
 
     render() {
         return (
-            <div style={{ height: "100%", width: "100%" }}>
-                <div className="filters">
-                    <select>
-                        <option>All</option>
-                        <option>Job</option>
-                        <option>Internship</option>
-                        <option>Fellowship</option>
-                    </select>
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="Search" />
-                        <button class="searchButton">
-                            <i>s</i>
-                        </button>
-                    </div>
-                </div>
-                <div className="opstack-container">
-                    {
-                        this.state.data.map((item, index) => {
-                            return <Optab data={item} key={index} />
-                        })
-                    }
-                </div>
+            <div className="appliedstack-container">
+                {
+                    this.state.data.map((item, index) => {
+                        return <Appliedtab data={item} key={index} />
+                    })
+                }
             </div>
         );
     }
 }
-export default Opstack; 
+export default Appliedstack; 
