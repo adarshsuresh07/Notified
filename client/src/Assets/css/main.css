@@ -21,6 +21,50 @@
 .second-col-top {
   width: 100%;
   height: 20%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+}
+
+.profile {
+  display: flex;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  align-items: center;
+}
+
+.profile img {
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid #393e46;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0.5rem;
+}
+
+.profile-name span {
+  color: white;
+  text-align: right;
+}
+
+.logo {
+  color: #f8b500;
+  margin-left: 30%;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.field-names{
+  font-family: 'Pacifico', cursive;
+  margin-left: 2rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .second-col-bottom {
@@ -57,26 +101,98 @@
   font-size: large;
 }
 
-.button1{
+.button1 {
   border: 3px solid #f7f7f7;
   border-bottom: 3px solid #b45dfc;
 }
 
-.button2{
+.button2 {
   border: 3px solid #f7f7f7;
   border-bottom: 3px solid #f8b500;
 }
 
-.button3{
+.button3 {
   border: 3px solid #f7f7f7;
   border-bottom: 3px solid #e84a5f;
 }
 
 /* ----------------opportunity tab --------------*/
 
+.filters {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+}
+
+.filters select {
+  all: unset;
+  width: 40%;
+  height: 2.2rem;
+  background-color: #393e46;
+  color: #f7f7f7;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+option {
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.searchBox {
+  /* margin: 10px; */
+  background: #2f3640;
+  height: 2.5rem;
+  width: 40%;
+  border-radius: 2rem;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  all: unset;
+  padding: 0;
+  color: white;
+  font-size: 12px;
+  width: 0px;
+}
+
+.searchBox:hover>.searchInput {
+  transition: 0.4s width ease-in-out;
+  padding: 0 6px;
+  width: 70%;
+}
+
+.searchBox:hover>.searchButton {
+  background: white;
+  color: #2f3640;
+}
+
+.searchButton {
+  color: white;
+  float: right;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+}
+
 .opstack-container {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   width: 90%;
-  height: 95%;
+  height: 88%;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #393e46;
@@ -85,7 +201,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 1rem 0 1rem;
+  margin: 0 1rem 0 1rem;
   border: 5px solid grey;
   border-radius: 0.5rem;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
@@ -94,7 +210,7 @@
 .optab-container {
   width: 95%;
   height: 5rem;
-  background-color: #b45dfce3;
+  background-color: #b45dfc;
   color: #f5f3f8;
   margin: 0.5rem 0;
   border-radius: 0.2rem;
@@ -136,7 +252,7 @@
   display: none;
 }
 
-.optab-container:hover .optab-addtodo {
+.optab-container:hover>.optab-addtodo {
   display: block;
   width: 15%;
   height: 100%;
@@ -177,117 +293,12 @@
   background: #b45dfc;
 }
 
-/* ----------------Todo tab --------------*/
-
-.todostack-container {
-  width: 90%;
-  height: 94%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: #393e46;
-  /* color: #e2dfea; */
-  /* color: #f5f3f8; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 1rem 0 1rem;
-  border: 5px solid grey;
-  border-radius: 0.5rem;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
-}
-
-.todotab-container {
-  width: 95%;
-  height: 5rem;
-  background-color: #f8b500;
-  /* color: #f5f3f8; */
-  color: #f7f7f7;
-  margin: 0.5rem 0;
-  border-radius: 0.2rem;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.todotab {
-  width: 90%;
-  padding: 0.5rem;
-  background-color: #f8b500;
-  height: 5rem;
-  font-size: 0.8rem;
-  border-bottom-left-radius: 0.2rem;
-  border-top-left-radius: 0.2rem;
-}
-
-.todotab-first {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.todotab-name {
-  width: 70%;
-  overflow: hidden;
-  font-size: 1rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.todotab-addtodo {
-  display: none;
-}
-
-.todotab-container:hover .todotab-addtodo {
-  display: block;
-  width: 15%;
-  height: 100%;
-}
-
-.todotab-addtodo button {
-  all: unset;
-  height: 100%;
-  width: 100%;
-  background-color: #f5f3f8;
-  color: #393e46;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
-}
-
-.todostack-container::-webkit-scrollbar {
-  width: 3px;
-}
-
-/* Track */
-
-.todostack-container::-webkit-scrollbar-track {
-  background: #e2dfea;
-}
-
-/* Handle */
-
-.todostack-container::-webkit-scrollbar-thumb {
-  background: #f8b500;
-}
-
-/* Handle on hover */
-
-.todostack-container::-webkit-scrollbar-thumb:hover {
-  background: #f8b500;
-}
-
 /* ----------------Applied tab --------------*/
 
 .appliedstack-container {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   width: 90%;
-  height: 94%;
+  height: 89%;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #393e46;
@@ -305,7 +316,7 @@
 .appliedtab-container {
   width: 95%;
   height: 5rem;
-  background-color: #e84a5f;
+  background-color: #f8b500;
   /* color: #f5f3f8; */
   color: #f7f7f7;
   margin: 0.5rem 0;
@@ -321,7 +332,7 @@
 .appliedtab {
   width: 90%;
   padding: 0.5rem;
-  background-color: #e84a5f;
+  background-color: #f8b500;
   height: 5rem;
   font-size: 0.8rem;
   border-bottom-left-radius: 0.2rem;
@@ -348,7 +359,7 @@
   display: none;
 }
 
-.appliedtab-container:hover .appliedtab-addapplied {
+.appliedtab-container:hover>.appliedtab-addapplied {
   display: block;
   width: 15%;
   height: 100%;
@@ -380,11 +391,118 @@
 /* Handle */
 
 .appliedstack-container::-webkit-scrollbar-thumb {
-  background: #e84a5f;
+  background: #f8b500;
 }
 
 /* Handle on hover */
 
 .appliedstack-container::-webkit-scrollbar-thumb:hover {
+  background: #f8b500;
+}
+
+/* ----------------Todo tab --------------*/
+
+.todostack-container {
+  width: 90%;
+  height: 89%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #393e46;
+  /* color: #e2dfea; */
+  /* color: #f5f3f8; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 1rem 0 1rem;
+  border: 5px solid grey;
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+.todotab-container {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  width: 95%;
+  height: 5rem;
+  background-color: #e84a5f;
+  /* color: #f5f3f8; */
+  color: #f7f7f7;
+  margin: 0.5rem 0;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.todotab {
+  width: 90%;
+  padding: 0.5rem;
+  background-color: #e84a5f;
+  height: 5rem;
+  font-size: 0.8rem;
+  border-bottom-left-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+}
+
+.todotab-first {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todotab-name {
+  width: 70%;
+  overflow: hidden;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.todotab-addtodo {
+  display: none;
+}
+
+.todotab-container:hover>.todotab-addtodo {
+  display: block;
+  width: 15%;
+  height: 100%;
+}
+
+.todotab-addtodo button {
+  all: unset;
+  height: 100%;
+  width: 100%;
+  background-color: #f5f3f8;
+  color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+
+.todostack-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+
+.todostack-container::-webkit-scrollbar-track {
+  background: #e2dfea;
+}
+
+/* Handle */
+
+.todostack-container::-webkit-scrollbar-thumb {
+  background: #e84a5f;
+}
+
+/* Handle on hover */
+
+.todostack-container::-webkit-scrollbar-thumb:hover {
   background: #e84a5f;
 }

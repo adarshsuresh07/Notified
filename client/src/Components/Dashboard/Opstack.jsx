@@ -30,12 +30,28 @@ class Opstack extends React.Component {
 
     render() {
         return (
-            <div className="opstack-container">
-                {
-                    this.state.data.map((item, index) => {
-                        return <Optab data={item} key={index} />
-                    })
-                }
+            <div style={{ height: "100%", width: "100%" }}>
+                <div className="filters">
+                    <select>
+                        <option>All</option>
+                        <option>Job</option>
+                        <option>Internship</option>
+                        <option>Fellowship</option>
+                    </select>
+                    <div class="searchBox">
+                        <input class="searchInput" type="text" name="" placeholder="Search" />
+                        <button class="searchButton">
+                            <i>s</i>
+                        </button>
+                    </div>
+                </div>
+                <div className="opstack-container">
+                    {
+                        this.state.data.map((item, index) => {
+                            return <Optab data={item} key={index} />
+                        })
+                    }
+                </div>
             </div>
         );
     }
