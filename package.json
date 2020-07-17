@@ -1,5 +1,5 @@
 {
-  "name": "notified",
+  "name": "mern-app",
   "version": "1.0.0",
   "description": "Application to notify clients with career opportunities",
   "main": "server.js",
