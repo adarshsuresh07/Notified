@@ -7,6 +7,10 @@ import Opmodal from "./Opmodal"
 import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
 import defaultimg from "../../Assets/Images/you.jpg"
+import newjob from "../../Assets/Icons/new-job.png"
+import expired from "../../Assets/Icons/expired.png"
+import logout from "../../Assets/Icons/logout.png"
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -31,7 +35,7 @@ class Dashboard extends React.Component {
                                 <span>Adarsh S</span>
                                 <small>@adarsh</small>
                             </div>
-                            <img src={defaultimg} alt=""/>
+                            <img src={defaultimg} alt="" />
                         </div>
                     </div>
                     <div className="second-col-bottom">
@@ -44,9 +48,15 @@ class Dashboard extends React.Component {
                             <Appliedstack />
                         </div>
                         <div className="second-col-bottom-options">
-                            <button className="second-col-bottom-buttons button1" onClick={() => this.setState({ newop: true })}>+</button>
-                            <button className="second-col-bottom-buttons button2">-</button>
-                            <button className="second-col-bottom-buttons button3">*</button>
+                            <button className="second-col-bottom-buttons button1" onClick={() => this.setState({ newop: true })}>
+                                <img src={newjob} alt="+" style={{ width: "60%" }} />
+                            </button>
+                            <button className="second-col-bottom-buttons button2">
+                                <img src={expired} alt="x" style={{ width: "60%" }} />
+                            </button>
+                            <button className="second-col-bottom-buttons button3">
+                                <img src={logout} alt="C-" style={{ width: "60%" }} />
+                            </button>
                         </div>
                     </div>
                 </div>
