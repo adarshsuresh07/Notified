@@ -31,7 +31,7 @@ class Opmodal extends React.Component {
                     <p>{data.description}</p>
                 </div>
                 <div className="modal-right">
-                    <img src={data.image} />
+                    <img src={data.image} alt=""/>
                     <span>{data.contact}</span>
                     <span style={{ color: color }}>{data.applylink}</span>
                     <p>{data.furtherdetails}</p>

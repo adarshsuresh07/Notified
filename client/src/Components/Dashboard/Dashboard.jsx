@@ -4,15 +4,19 @@ import Todostack from './Todostack'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Opmodal from "./Opmodal"
+import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
 import defaultimg from "../../Assets/Images/you.jpg"
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            newop: false
+        }
     }
-    componentDidMount() {
-        console.log(this.props.feed);
-    }
+    // componentDidMount() {
+    //     console.log(this.props.feed);
+    // }
     render() {
         return (
             <div className="overlay">
@@ -27,7 +31,7 @@ class Dashboard extends React.Component {
                                 <span>Adarsh S</span>
                                 <small>@adarsh</small>
                             </div>
-                            <img src={defaultimg} />
+                            <img src={defaultimg} alt=""/>
                         </div>
                     </div>
                     <div className="second-col-bottom">
@@ -40,13 +44,14 @@ class Dashboard extends React.Component {
                             <Appliedstack />
                         </div>
                         <div className="second-col-bottom-options">
-                            <button className="second-col-bottom-buttons button1">+</button>
+                            <button className="second-col-bottom-buttons button1" onClick={() => this.setState({ newop: true })}>+</button>
                             <button className="second-col-bottom-buttons button2">-</button>
                             <button className="second-col-bottom-buttons button3">*</button>
                         </div>
                     </div>
                 </div>
                 <Opmodal />
+                {this.state.newop ? <Newop newop={this.state.newop} closeModal={() => this.setState({ newop: false })} /> : null}
             </div>
         );
     }
