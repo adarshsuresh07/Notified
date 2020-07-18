@@ -1,12 +1,17 @@
 import React from 'react'
 import Opstack from './Opstack'
 import Todostack from './Todostack'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Opmodal from "./Opmodal"
 import Appliedstack from "./Appliedstack"
 import defaultimg from "../../Assets/Images/you.jpg"
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
+    }
+    componentDidMount() {
+        console.log(this.props.feed);
     }
     render() {
         return (
@@ -47,4 +52,14 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+    feed: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    feed: state.feed
+});
+
+export default connect(
+    mapStateToProps,
+)(Dashboard);
