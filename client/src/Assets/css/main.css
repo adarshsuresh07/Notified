@@ -542,7 +542,7 @@ option {
   margin-left: 0;
   height: 0;
   visibility: hidden;
-  opacity:0;
+  opacity: 0;
   color: white;
   /* transition: height 0.5s ease-in-out opacity 5s; */
 }
@@ -574,6 +574,16 @@ option {
   cursor: pointer;
 }
 
+.modal-submit {
+  all: unset;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
 .modal-left {
   width: 50%;
   height: 100%;
@@ -593,9 +603,9 @@ option {
   justify-content: space-evenly;
 }
 
-.modal-right img{
-  width:70%;
-  height:50%;
+.modal-right img {
+  width: 70%;
+  height: 50%;
   object-fit: contain;
 }
 
@@ -624,4 +634,18 @@ option {
 
 .type2 {
   background-color: #b45dfc;
+}
+
+.dashboard-modal-on input, .dashboard-modal-on textarea, .dashboard-modal-on select {
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border:none
+}
+
+.modal-row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  margin-left: 5px;
 }
