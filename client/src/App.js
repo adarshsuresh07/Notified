@@ -7,7 +7,7 @@ import Dashboard from "./Components/Dashboard/Dashboard.jsx"
 import 'bootstrap/dist/css/bootstrap.css';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/actions";
 import { Provider } from "react-redux";
 import store from "./store";
 import { isLogin, getToken} from './utils/Token'

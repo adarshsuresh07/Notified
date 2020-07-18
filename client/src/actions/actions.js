@@ -1,10 +1,11 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import {login, logout} from "../utils/Token";
+import { login, logout } from "../utils/Token";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
+// Auth Actions
 
 export const loginUser = userData => dispatch => {
   axios
@@ -41,4 +42,14 @@ export const logoutUser = () => dispatch => {
   logout();
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+};
+
+// Feed Actions
+
+export const showData = (data, stack) => dispatch => {
+  if (data && Object.keys(data).includes("position")) {
+    dispatch({ type: "Modal-On", data: data, stack:stack});
+  }
+  else
+    dispatch({ type: "Modal-Off"});
 };

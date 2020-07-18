@@ -61,7 +61,7 @@
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-.field-names{
+.field-names {
   font-family: 'Pacifico', cursive;
   margin-left: 2rem;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -167,7 +167,13 @@ option {
 
 .searchBox:hover>.searchInput {
   transition: 0.4s width ease-in-out;
-  padding: 0 6px;
+  padding: 0 4px;
+  width: 70%;
+}
+
+.searchInput:focus {
+  transition: 0.4s width ease-in-out;
+  padding: 0 4px;
   width: 70%;
 }
 
@@ -225,7 +231,6 @@ option {
 .optab {
   width: 90%;
   padding: 0.5rem;
-  background-color: #b45dfc;
   height: 5rem;
   font-size: 0.8rem;
   border-bottom-left-radius: 0.2rem;
@@ -238,6 +243,13 @@ option {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.optab-first small {
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .optab-name {
@@ -332,7 +344,6 @@ option {
 .appliedtab {
   width: 90%;
   padding: 0.5rem;
-  background-color: #f8b500;
   height: 5rem;
   font-size: 0.8rem;
   border-bottom-left-radius: 0.2rem;
@@ -347,6 +358,13 @@ option {
   align-items: center;
 }
 
+.appliedtab-first small {
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .appliedtab-name {
   width: 70%;
   overflow: hidden;
@@ -355,17 +373,17 @@ option {
   text-overflow: ellipsis;
 }
 
-.appliedtab-addapplied {
+.appliedtab-addtodo {
   display: none;
 }
 
-.appliedtab-container:hover>.appliedtab-addapplied {
+.appliedtab-container:hover>.appliedtab-addtodo {
   display: block;
   width: 15%;
   height: 100%;
 }
 
-.appliedtab-addapplied button {
+.appliedtab-addtodo button {
   all: unset;
   height: 100%;
   width: 100%;
@@ -454,6 +472,13 @@ option {
   align-items: center;
 }
 
+.todotab-first small {
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .todotab-name {
   width: 70%;
   overflow: hidden;
@@ -505,4 +530,98 @@ option {
 
 .todostack-container::-webkit-scrollbar-thumb:hover {
   background: #e84a5f;
+}
+
+/* ---------------- Modal --------------*/
+
+.dashboard-modal-off {
+  position: absolute;
+  top: 0;
+  width: 80%;
+  margin-top: 0;
+  margin-left: 0;
+  height: 0;
+  visibility: hidden;
+  opacity:0;
+  color: white;
+  /* transition: height 0.5s ease-in-out opacity 5s; */
+}
+
+.dashboard-modal-on {
+  position: absolute;
+  top: 0;
+  width: 80%;
+  margin-top: 10vh;
+  height: 80vh;
+  margin-left: 10%;
+  visibility: visible;
+  background-color: #393e46;
+  color: white;
+  transition: opacity 0.5s;
+  opacity: 1;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  border-radius: 0.2rem;
+  display: flex;
+}
+
+.modal-close {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.modal-left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1rem;
+  text-align: justify;
+}
+
+.modal-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: space-evenly;
+}
+
+.modal-right img{
+  width:70%;
+  height:50%;
+  object-fit: contain;
+}
+
+.modal-type-container {
+  display: flex;
+  max-width: 100%;
+}
+
+.modal-type {
+  padding: 0.2rem;
+  width: auto;
+  margin: 3px;
+  font-size: 12px;
+  border-radius: 1px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(34, 34, 34, 0.3);
+}
+
+.type0 {
+  background-color: #e84a5f;
+}
+
+.type1 {
+  background-color: #f8b500;
+}
+
+.type2 {
+  background-color: #b45dfc;
 }

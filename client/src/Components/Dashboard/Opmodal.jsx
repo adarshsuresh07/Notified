@@ -1,12 +1,56 @@
 import React from 'react'
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { showData } from "../../actions/actions"
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const colors = ["#b45dfc", "#e84a5f", "#f8b500"];
 class Opmodal extends React.Component {
     render() {
+        const data = this.props.feed.data;
+        const d = new Date(data.due);
+        const date = d.getDate() + " " + months[d.getMonth()]
+        const t = data.type ? data.type.split(" ") : [];
+        const color = colors[this.props.feed.stack]
         return (
-            <>
-            </>
+            <div className={this.props.feed.modalon ? "dashboard-modal-on" : "dashboard-modal-off"}>
+                <span className="modal-close" onClick={() => this.props.showData()}>x</span>
+                <div className="modal-left">
+                    <div>
+                        <h5 style={{ color: color }}>{date}</h5>
+                        <h4>{data.position}</h4>
+                        <span>@{data.company}</span> <br />
+                        <span>{data.category}</span>
+                    </div>
+                    <div className="modal-type-container">
+                        {
+                            t.map((type, index) => {
+                                return <div className={"modal-type type" + index % 3}>{type}</div>
+                            })
+                        }
+                    </div>
+                    <p>{data.description}</p>
+                </div>
+                <div className="modal-right">
+                    <img src={data.image} />
+                    <span>{data.contact}</span>
+                    <span style={{ color: color }}>{data.applylink}</span>
+                    <p>{data.furtherdetails}</p>
+                </div>
+            </div>
         )
     }
 }
 
-export default Opmodal;
+Opmodal.propTypes = {
+    showData: PropTypes.func.isRequired,
+    feed: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    feed: state.feed
+});
+
+export default connect(
+    mapStateToProps,
+    { showData }
+)(Opmodal);
