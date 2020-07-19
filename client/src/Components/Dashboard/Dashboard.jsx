@@ -9,13 +9,15 @@ import Appliedstack from "./Appliedstack"
 import defaultimg from "../../Assets/Images/you.jpg"
 import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
+import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
 
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newop: false
+            newop: false,
+            expired: false,
         }
     }
     // componentDidMount() {
@@ -25,7 +27,7 @@ class Dashboard extends React.Component {
         return (
             <div className="overlay">
                 <div className="first-col">
-                    <Opstack />
+                    <Opstack expired={this.state.expired} />
                 </div>
                 <div className="second-col">
                     <div className="second-col-top">
@@ -48,13 +50,18 @@ class Dashboard extends React.Component {
                             <Appliedstack />
                         </div>
                         <div className="second-col-bottom-options">
-                            <button className="second-col-bottom-buttons button1" onClick={() => this.setState({ newop: true })}>
+                            <button className="second-col-bottom-buttons button1" title="Add Opportunity" onClick={() => this.setState({ newop: true })}>
                                 <img src={newjob} alt="+" style={{ width: "60%" }} />
                             </button>
-                            <button className="second-col-bottom-buttons button2">
-                                <img src={expired} alt="x" style={{ width: "60%" }} />
-                            </button>
-                            <button className="second-col-bottom-buttons button3">
+                            {!this.state.expired ?
+                                <button className="second-col-bottom-buttons button2" title="View Expired" onClick={() => this.setState({ expired: !this.state.expired })}>
+                                    <img src={expired} alt="x" style={{ width: "60%" }} />
+                                </button> :
+                                <button className="second-col-bottom-buttonactive" title="View New Opportunities" onClick={() => this.setState({ expired: !this.state.expired })}>
+                                    <img src={expiredactive} alt="x" style={{ width: "60%" }} />
+                                </button>
+                            }
+                            <button className="second-col-bottom-buttons button3" title="Logout">
                                 <img src={logout} alt="C-" style={{ width: "60%" }} />
                             </button>
                         </div>
