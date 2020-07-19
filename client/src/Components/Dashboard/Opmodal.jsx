@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import close from "../../Assets/Icons/close.png"
 import { showData } from "../../actions/actions"
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const colors = ["#b45dfc", "#e84a5f", "#f8b500"];
@@ -13,7 +14,9 @@ class Opmodal extends React.Component {
         const color = colors[this.props.feed.stack]
         return (
             <div className={this.props.feed.modalon ? "dashboard-modal-on" : "dashboard-modal-off"}>
-                <span className="modal-close" onClick={() => this.props.showData()}>x</span>
+                <span className="modal-close" onClick={() => this.props.showData()}>
+                    <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                </span>
                 <div className="modal-left">
                     <div>
                         <h5 style={{ color: color }}>{date}</h5>
@@ -31,7 +34,7 @@ class Opmodal extends React.Component {
                     <p>{data.description}</p>
                 </div>
                 <div className="modal-right">
-                    <img src={data.image} alt=""/>
+                    <img src={data.image} alt="" />
                     <span>{data.contact}</span>
                     <span style={{ color: color }}>{data.applylink}</span>
                     <p>{data.furtherdetails}</p>

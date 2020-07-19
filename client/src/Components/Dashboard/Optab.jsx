@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { showData } from "../../actions/actions"
 import addtodo from "../../Assets/Icons/add-todo.png"
+import close from "../../Assets/Icons/close.png"
 import applied from "../../Assets/Icons/add-applied.png"
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const types = ["op", "todo", "applied", "expired"];
@@ -26,7 +27,9 @@ class Optab extends React.Component {
                 </div>
                 {this.props.type == 1 ?
                     <div className={type + "tab-addtodo"}>
-                        <span className="delete-tab">x</span>
+                        <span className="delete-tab">
+                            <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                        </span>
                         <button title="Add to applied">
                             <img src={applied} alt="+" style={{ width: "60%" }} />
                         </button>
@@ -37,7 +40,9 @@ class Optab extends React.Component {
                                 <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} />
                             </button>
                             : this.props.type == 2 ?
-                                <span className="delete-tab">x</span>
+                                <span className="delete-tab">
+                                    <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                                </span>
                                 : null
                         }
                     </div>
