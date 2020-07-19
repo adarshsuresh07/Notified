@@ -45,13 +45,25 @@ class Opstack extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className="opstack-container">
-                    {
-                        this.state.data.map((item, index) => {
-                            return <Optab data={item} key={index} type={0} />
-                        })
-                    }
-                </div>
+                {!this.props.expired ?
+                    <div className="opstack-container">
+                        {
+                            this.state.data.map((item, index) => {
+                                return <Optab data={item} key={index} type={0} />
+                            })
+                        }
+                    </div> :
+                    <div style={{ width: "100%", height: "100%" }}>
+                        <h4 className="field-names" style={{ color: "#f7f7f7" }}>Expired</h4>
+                        <div className="expiredstack-container">
+                            {
+                                this.state.data.map((item, index) => {
+                                    return <Optab data={item} key={index} type={3} />
+                                })
+                            }
+                        </div>
+                    </div>
+                }
             </div>
         );
     }

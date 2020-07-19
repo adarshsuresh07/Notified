@@ -1,5 +1,6 @@
 import React from 'react'
 import addimage from "../../Assets/Images/add-image.png"
+import close from "../../Assets/Icons/close.png"
 class Newop extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +38,9 @@ class Newop extends React.Component {
     render() {
         return (
             <div className={this.props.newop ? "dashboard-modal-on" : "dashboard-modal-off"}>
-                <span className="modal-close" onClick={this.props.closeModal}>x</span>
+                <span className="modal-close" onClick={this.props.closeModal}>
+                    <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                </span>
                 <div className="modal-left">
                     <input type="text" placeholder="Position" onChange={e => this.setState({ position: e.target.value })} />
                     <input type="text" placeholder="Company" onChange={e => this.setState({ company: e.target.value })} /> <br />

@@ -101,6 +101,22 @@
   font-size: large;
 }
 
+.second-col-bottom-buttonactive {
+  all: unset;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: large;
+  border: 3px solid #393e46;
+  border-bottom: 3px solid #f8b500;
+}
+
 .button1 {
   border: 3px solid #f7f7f7;
   border-bottom: 3px solid #b45dfc;
@@ -381,6 +397,9 @@ option {
   display: block;
   width: 15%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .appliedtab-addtodo button {
@@ -495,19 +514,33 @@ option {
   display: block;
   width: 15%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.delete-tab {
+  cursor: pointer;
+  text-shadow: 2px 2px 2px #393e46;
+  margin: 0.2rem;
+  margin-right: 0.4rem;
 }
 
 .todotab-addtodo button {
   all: unset;
-  height: 100%;
-  width: 100%;
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 50%;
   background-color: #f5f3f8;
   color: #393e46;
+  box-shadow: 2px 2px 2px solid rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
+  margin: 0.2rem;
+  margin-bottom: 0.4rem;
 }
 
 .todostack-container::-webkit-scrollbar {
@@ -530,6 +563,119 @@ option {
 
 .todostack-container::-webkit-scrollbar-thumb:hover {
   background: #e84a5f;
+}
+
+/* ----------------Todo tab --------------*/
+
+.expiredstack-container {
+  width: 90%;
+  height: 81%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #393e46;
+  /* color: #e2dfea; */
+  /* color: #f5f3f8; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 1rem 0 1rem;
+  border: 5px solid grey;
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+.expiredtab-container {
+  /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); */
+  width: 95%;
+  height: 5rem;
+  background-color: #f7f7f7;
+  /* color: #f5f3f8; */
+  color: #393e46;
+  margin: 0.5rem 0;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.expiredtab {
+  width: 90%;
+  padding: 0.5rem;
+  height: 5rem;
+  font-size: 0.8rem;
+  border-bottom-left-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+}
+
+.expiredtab-first {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expiredtab-first small {
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expiredtab-name {
+  width: 70%;
+  overflow: hidden;
+  font-size: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expiredtab-addtodo {
+  display: none;
+}
+
+.expiredtab-container:hover>.expiredtab-addtodo {
+  display: block;
+  width: 15%;
+  height: 100%;
+}
+
+.expiredtab-addtodo button {
+  all: unset;
+  height: 100%;
+  width: 100%;
+  background-color: #f5f3f8;
+  color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+
+.expiredstack-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+
+.expiredstack-container::-webkit-scrollbar-track {
+  background: #393e46;
+}
+
+/* Handle */
+
+.expiredstack-container::-webkit-scrollbar-thumb {
+  background: #f7f7f7;
+}
+
+/* Handle on hover */
+
+.expiredstack-container::-webkit-scrollbar-thumb:hover {
+  background: #f7f7f7;
 }
 
 /* ---------------- Modal --------------*/
@@ -640,7 +786,7 @@ option {
   width: 70%;
   padding: 0.5rem;
   border-radius: 0.3rem;
-  border:none
+  border: none
 }
 
 .modal-row {
