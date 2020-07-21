@@ -1,3 +1,116 @@
+/*-----------Landing----------------------*/
+
+.landing-container {
+  width: 100%;
+  height: 100%;
+  background-color: #5c636e;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.landing-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+
+.landing-container::-webkit-scrollbar-track {
+  background: #e2dfea;
+}
+
+/* Handle */
+
+.landing-container::-webkit-scrollbar-thumb {
+  background: #b45dfc;
+}
+
+/* Handle on hover */
+
+.landing-container::-webkit-scrollbar-thumb:hover {
+  background: #b45dfc;
+}
+
+.landing-first {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.landing-left {
+  width: 60%;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+}
+
+.landing-right {
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-carousel{
+  width:100%;
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #393e46;
+}
+
+.test {
+  width: 20rem;
+  height: 20rem;
+  border: 5px solid #f8b500;
+  background-color: #393e46;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.test-inner {
+  width: 15rem;
+  height: 20rem;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  background-color: #393e46;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.test-inner input {
+  margin: 0.5rem;
+}
+
+.test button {
+  background-color: #f8b500;
+  color: #393e46;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 0.1rem;
+}
+
+.landing-logo {
+  height: 30vh;
+  margin-left: 2rem;
+}
+
+.landing-left p {
+  margin-left: 2rem;
+  color: white;
+}
+
+.aboutus-container{
+  width:100%;
+}
+
+/*-----------Dashboard----------------------*/
+
 .overlay {
   width: 100vw;
   height: 100vh;
