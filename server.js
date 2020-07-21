@@ -1,21 +1,16 @@
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
 const path = require('path')
 
-const express = require("express");
-const app = express();
 
-// Bodyparser middleware
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-app.use(bodyParser.json());
+// Express app
+const express = require("express")
+const app = express()
+
 
 
 // Connect mongoDB
-const db = require("./config/keys").mongoURI;
+const db = require("./config/keys").mongoURI
 mongoose.connect(
     db,
     {   useNewUrlParser: true,
@@ -24,6 +19,30 @@ mongoose.connect(
   )
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err))
+
+
+
+// Bodyparser middleware
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+
+// Passport middleware
+const passport = require("passport")
+app.use(passport.initialize())
+require("./config/passport")(passport)
+
+
+
+// Routes
+const users = require('./routes/api/users')
+const openings = require('./routes/api/openings')
+const lists = require('./routes/api/lists')
+app.use("/api/users", users)
+app.use("/api/openings", openings)
+app.use("/api/lists", lists)
+
 
 
 // Production build
@@ -35,5 +54,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 
+
+// Port setup
 const port = process.env.PORT || 5000
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+app.listen(port, () => console.log(`Server up and running on port ${port} !`))
