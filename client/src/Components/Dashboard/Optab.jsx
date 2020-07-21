@@ -25,7 +25,7 @@ class Optab extends React.Component {
                         <small title={this.props.data.type}>{this.props.data.type}</small>
                     </div>
                 </div>
-                {this.props.type == 1 ?
+                {this.props.type === 1 ?
                     <div className={type + "tab-addtodo"}>
                         <span className="delete-tab">
                             <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
@@ -35,11 +35,11 @@ class Optab extends React.Component {
                         </button>
                     </div> :
                     <div className={type + "tab-addtodo"}>
-                        {this.props.type == 0 ?
+                        {this.props.type === 0 ?
                             <button>
                                 <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} />
                             </button>
-                            : this.props.type == 2 ?
+                            : this.props.type === 2 ?
                                 <span className="delete-tab">
                                     <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
                                 </span>
