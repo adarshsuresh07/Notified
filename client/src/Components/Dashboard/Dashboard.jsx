@@ -61,7 +61,7 @@ class Dashboard extends React.Component {
                                     <img src={expiredactive} alt="x" style={{ width: "60%" }} />
                                 </button>
                             }
-                            <button className="second-col-bottom-buttons button3" title="Logout">
+                            <button className="second-col-bottom-buttons button3" title="Logout" onClick={()=>this.props.history.push("/")}>
                                 <img src={logout} alt="C-" style={{ width: "60%" }} />
                             </button>
                         </div>
