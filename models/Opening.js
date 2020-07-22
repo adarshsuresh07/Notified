@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose"
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const OpeningSchema = new Schema({
     position: {
@@ -47,4 +48,5 @@ const OpeningSchema = new Schema({
         default: Date.now
     }
 })
-export default Opening = model("opening", OpeningSchema)
+
+module.exports = Opening = mongoose.model("opening", OpeningSchema)

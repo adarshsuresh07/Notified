@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
-import List from './List'
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
  
 const UserSchema = new Schema({
   fullname: {
@@ -19,14 +19,15 @@ const UserSchema = new Schema({
     default: false
   },
   todo: {
-    type: [List]
+    type: [{id :  mongoose.ObjectId}]
   },
   applied: {
-    type: [List]
+    type: [{id :  mongoose.ObjectId}]
   },
   created_at: {
     type: Date,
     default: Date.now
   }
 })
-export default User = model("user", UserSchema)
+
+module.exports = User = mongoose.model("users", UserSchema)
