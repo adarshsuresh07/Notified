@@ -74,10 +74,10 @@ router.get("/:id", (req, res) => {
 
 
 
-// @route PUT api/openings/update
+// @route PUT api/openings/update/:id
 // @desc Update an Opening
 // @access Public
-router.put("/:id", (req, res) => {
+router.put("/update/:id", (req, res) => {
     Opening.findByIdAndUpdate(req.params.id, req.body)
         .then(opening => {
             res.json({ 
@@ -96,10 +96,10 @@ router.put("/:id", (req, res) => {
 
 
   
-// @route DELETE api/openings/:id
+// @route DELETE api/openings/delete/:id
 // @desc Delete an Opening
 // @access Private
-router.delete("/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
     Opening.findByIdAndRemove(req.params.id, req.body)
         .then(opening => {
             res.json({ 
