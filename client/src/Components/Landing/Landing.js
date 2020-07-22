@@ -2,7 +2,7 @@ import React from "react";
 import NavigationBar from './NavigationBar.js';
 import SigninForm from "./Signin/SigninForm.js";
 import SignupForm from "./Signup/SignupForm.js";
-import defaultimg from "../../Assets/Images/you.jpg"
+import defaultimg from "../../Assets/Images/notified.png"
 import Carousel from "./Carousel"
 export default class Landing extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Landing extends React.Component {
                     <div className="landing-left">
                         <img src={defaultimg} className="landing-logo" />
                         <div>
-                            <h1 className="field-names" style={{ color: "#f8b500" }}>notified</h1>
+                            <div className="landing-name">notified</div><br />
                             <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                             </p>
@@ -27,6 +27,9 @@ export default class Landing extends React.Component {
                     </div>
                     <div className="landing-right">
                         <div className="test">
+                            <div className="test-outer">
+                            </div>
+
                             {
                                 this.state.signup ?
                                     <SignupForm />

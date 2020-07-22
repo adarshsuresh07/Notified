@@ -6,7 +6,6 @@ export default class SignupForm extends React.Component {
         return (
             <div className="test-inner">
                 <input type="text" placeholder="Full Name"/>
-                <input type="text" placeholder="Username"/>
                 <input type="email" placeholder="Email"/>
                 <input type="password" placeholder="Password"/>
                 <input type="password" placeholder="Confirm Password"/>
