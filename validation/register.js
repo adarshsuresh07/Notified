@@ -6,14 +6,14 @@ module.exports = function validateRegisterInput(data) {
 
     let errors = {}
 
-    data.name = !isEmpty(data.name) ? data.name : ""
+    data.fullname = !isEmpty(data.fullname) ? data.fullname : ""
     data.email = !isEmpty(data.email) ? data.email : ""
     data.password = !isEmpty(data.password) ? data.password : ""
     data.password2 = !isEmpty(data.password2) ? data.password2 : ""
 
-    // Name
-    if (Validator.isEmpty(data.name)) {
-        errors.name = "Name field is required"
+    // Fullname
+    if (Validator.isEmpty(data.fullname)) {
+        errors.fullname = "Fullname field is required"
     }
 
     // Email
