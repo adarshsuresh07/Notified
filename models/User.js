@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose"
 import List from './List'
-
+ 
 const UserSchema = new Schema({
-  name: {
+  fullname: {
     type: String,
     required: true
   },

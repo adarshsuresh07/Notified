@@ -19,6 +19,10 @@ const OpeningSchema = new Schema({
     due: {
         type: Date
     },
+    active: {
+        type: Boolean,
+        default: true
+    },
     description: {
         type: String
     },
