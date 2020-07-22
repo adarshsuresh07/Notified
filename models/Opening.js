@@ -41,12 +41,9 @@ const OpeningSchema = new Schema({
     posted_by: {
         type: String
     },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
     updated_at: {
         type: Date,
+        expires: 5629750,           // 2 month <
         default: Date.now
     }
 })

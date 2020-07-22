@@ -1,6 +1,5 @@
 const express = require("express")
 const router = express.Router()
-const Opening = require("../../models/Opening")
 const User = require("../../models/User")
 
 
@@ -105,8 +104,23 @@ router.post("/applied/back", (req, res) => {
 // @route POST api/lists/todo/clear
 // @desc Clear items in todo list
 // @access Private
-router.post("/applied/clear", (req, res) => {
-    
+router.post("/todo/clear", (req, res) => {
+    User.findOne({ id: req.body.userid })
+        .then(user => {
+            user.todo.pullAll()        // or loop and pop until length=0 :update
+            user.save()
+                .then(user => res.status(200).json({ 
+                    msg: "Todo list cleared"
+                }))
+                .catch(err => res.status(400).json({
+                    msg: "Failed to clear todo",
+                    error: err
+                }))
+        })
+        .catch(err => res.status(400).json({
+            msg: "Unable to find user",
+            error: err
+        }))
 })
 
 
@@ -115,7 +129,22 @@ router.post("/applied/clear", (req, res) => {
 // @desc Clear items in applied list
 // @access Private
 router.post("/applied/clear", (req, res) => {
-    
+    User.findOne({ id: req.body.userid })
+        .then(user => {
+            user.applied.pullAll()        // or loop and pop until length=0 :update
+            user.save()
+                .then(user => res.status(200).json({ 
+                    msg: "Applied list cleared"
+                }))
+                .catch(err => res.status(400).json({
+                    msg: "Failed to clear applied",
+                    error: err
+                }))
+        })
+        .catch(err => res.status(400).json({
+            msg: "Unable to find user",
+            error: err
+        }))
 })
 
 
