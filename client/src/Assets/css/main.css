@@ -2,38 +2,39 @@
 
 .landing-container {
   width: 100%;
-  height: 100%;
-  background-color: #5c636e;
+  height: 100vh;
+  background-color: white;
   overflow-x: hidden;
-  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .landing-container::-webkit-scrollbar {
-  width: 3px;
+  width: 5px;
 }
 
 /* Track */
 
 .landing-container::-webkit-scrollbar-track {
-  background: #e2dfea;
+  background: #393e46;
 }
 
 /* Handle */
 
 .landing-container::-webkit-scrollbar-thumb {
-  background: #b45dfc;
+  background: #f8b500;
 }
 
 /* Handle on hover */
 
 .landing-container::-webkit-scrollbar-thumb:hover {
-  background: #b45dfc;
+  background: #f8b500;
 }
 
 .landing-first {
   width: 100%;
   height: 100vh;
   display: flex;
+  background-image: linear-gradient(to bottom right, #f8b500 70%, #393e46 30%);
 }
 
 .landing-left {
@@ -51,13 +52,14 @@
   justify-content: center;
 }
 
-.landing-carousel{
-  width:100%;
-  height:100vh;
+.landing-carousel {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #393e46;
+  background-image: linear-gradient(to bottom right, #393e46 70%, #f8b500 30%);
 }
 
 .test {
@@ -67,7 +69,9 @@
   background-color: #393e46;
   display: flex;
   justify-content: center;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  align-items:center;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6), -2px -2px 2px rgba(0, 0, 0, 0.6);
+  position: relative;
 }
 
 .test-inner {
@@ -80,6 +84,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  position: absolute;
+  top:0;
+}
+
+.test-outer{
+  width:20rem;
+  height:15rem;
+  background-color: #393e46;
+  margin-right: -5px;
+  margin-left: -5px;
+  position: absolute;
+  left:0;
 }
 
 .test-inner input {
@@ -92,21 +108,32 @@
   padding: 0.3rem 0.8rem;
   border: none;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
 }
 
 .landing-logo {
-  height: 30vh;
+  /* height: 30vh; */
+  width: 50vw;
   margin-left: 2rem;
+}
+
+.landing-name {
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  font-family: 'Pacifico', cursive;
+  font-size: 60px;
+  font-weight: bold;
+  margin: 2rem 2rem;
 }
 
 .landing-left p {
   margin-left: 2rem;
-  color: white;
+  color: #393e46;
+  text-align: justify;
 }
 
-.aboutus-container{
-  width:100%;
+.aboutus-container {
+  width: 100%;
 }
 
 /*-----------Dashboard----------------------*/
