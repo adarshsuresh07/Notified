@@ -3,12 +3,13 @@ import NavigationBar from './NavigationBar.js';
 import SigninForm from "./Signin/SigninForm.js";
 import SignupForm from "./Signup/SignupForm.js";
 import defaultimg from "../../Assets/Images/notified.png"
+import defaultteam from "../../Assets/Images/you.jpg"
 import Carousel from "./Carousel"
 export default class Landing extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signup: true
+            signup: false
         }
     }
     render() {
@@ -27,13 +28,19 @@ export default class Landing extends React.Component {
                     </div>
                     <div className="landing-right">
                         <div className="test">
-                            <div className="test-outer">
-                            </div>
-
+                            <div className="test-outer" />
                             {
                                 this.state.signup ?
                                     <SignupForm />
                                     : <SigninForm />
+                            }
+                        </div>
+                        <div className="landing-toggle" onClick={() => this.setState({ signup: !this.state.signup })}>
+                            <span class="bell fa fa-bell" /> &nbsp;
+                            {
+                                this.state.signup ?
+                                    "Login"
+                                    : "Register"
                             }
                         </div>
                     </div>
@@ -42,7 +49,24 @@ export default class Landing extends React.Component {
                     <Carousel />
                 </div>
                 <div className="aboutus-container">
-
+                    <div className="aboutus">
+                        <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Source Code</h4>
+                        <a className="team-card" href="https://github.com/adarshsuresh07/Notified" target="_blank">
+                            <img src={defaultimg} alt="" />
+                            <h5>Notified</h5>
+                        </a>
+                    </div>
+                    <div className="aboutus">
+                        <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Team</h4>
+                        <a className="team-card" href="" target="_blank">
+                            <img src={defaultteam} alt="" />
+                            <h5>Haseena Hassan</h5>
+                        </a>
+                        <a className="team-card" href="https://adarshsuresh07.github.io/Portfolio/" target="_blank">
+                            <img src={defaultteam} alt="" />
+                            <h5>Adarsh S</h5>
+                        </a>
+                    </div>
                 </div>
             </div>
         );

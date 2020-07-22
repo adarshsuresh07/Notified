@@ -1,13 +1,17 @@
 import React from "react";
 
 export default class SigninForm extends React.Component {
+    goNext=e=>{
+        e.preventDefault();
+        window.location.href="/dashboard"
+    }
     render() {
         return (
-            <div className="test-inner">
-                <input type="text" placeholder="Username"/>
-                <input type="password" placeholder="Password"/>
-                <button>Login</button>
-            </div>
+            <form className="test-inner" onSubmit={this.goNext}>
+                <input type="email" placeholder="Email Id" required/>
+                <input type="password" placeholder="Password" required/>
+                <button type="submit" >Login</button>
+            </form>
         );
     }
 }
