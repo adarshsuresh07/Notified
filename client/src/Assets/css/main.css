@@ -55,10 +55,10 @@
 
 .landing-carousel {
   width: 100%;
-  height: 100vh;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
   background-color: #393e46;
   background-image: linear-gradient(to bottom right, #393e46 70%, #f8b500 30%);
 }
@@ -71,7 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6), -2px -2px 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6), -2px -2px 2px rgba(0, 0, 0, 0.8), inset 2px 2px 2px rgba(0, 0, 0, 0.3), inset -2px -2px 2px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
@@ -91,11 +91,12 @@
 
 .landing-toggle {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   margin: 1rem;
   display: flex;
-  background-color: white;
+  background-color: #393e46;
+  color:#f8b500;
   align-items: center;
   padding: 0 0.5rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
@@ -184,6 +185,7 @@
   text-decoration: none;
   color:#393e46;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .team-card:hover{
@@ -192,7 +194,7 @@
 }
 
 .team-card img {
-  width: 5rem;
+  width: 4rem;
   border-radius: 50%;
 }
 

@@ -8,23 +8,23 @@ export default class Notifiedcarousel extends Component {
         return (
             <Carousel width="70vw" autoPlay={true} infiniteLoop={true}>
                 <div>
-                    <img src={require("../../Assets/Images/1.png")} />
+                    <img src={require("../../Assets/Images/1.png")} alt="" />
                     <p className="legend">Legend 1</p>
                 </div>
                 <div>
-                    <img src={require("../../Assets/Images/2.png")} />
+                    <img src={require("../../Assets/Images/2.png")} alt="" />
                     <p className="legend">Legend 2</p>
                 </div>
                 <div>
-                    <img src={require("../../Assets/Images/3.png")} />
+                    <img src={require("../../Assets/Images/3.png")} alt="" />
                     <p className="legend">Legend 3</p>
                 </div>
                 <div>
-                    <img src={require("../../Assets/Images/4.png")} />
+                    <img src={require("../../Assets/Images/4.png")} alt="" />
                     <p className="legend">Legend 3</p>
                 </div>
                 <div>
-                    <img src={require("../../Assets/Images/5.png")} />
+                    <img src={require("../../Assets/Images/5.png")} alt="" />
                     <p className="legend">Legend 3</p>
                 </div>
             </Carousel>

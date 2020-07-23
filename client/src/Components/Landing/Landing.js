@@ -1,5 +1,4 @@
 import React from "react";
-import NavigationBar from './NavigationBar.js';
 import SigninForm from "./Signin/SigninForm.js";
 import SignupForm from "./Signup/SignupForm.js";
 import defaultimg from "../../Assets/Images/notified.png"
@@ -15,10 +14,9 @@ export default class Landing extends React.Component {
     render() {
         return (
             <div className="landing-container">
-                {/* <NavigationBar /> */}
                 <div className="landing-first">
                     <div className="landing-left">
-                        <img src={defaultimg} className="landing-logo" />
+                        <img src={defaultimg} className="landing-logo" alt="" />
                         <div>
                             <div className="landing-name">notified</div><br />
                             <p>
@@ -36,7 +34,7 @@ export default class Landing extends React.Component {
                             }
                         </div>
                         <div className="landing-toggle" onClick={() => this.setState({ signup: !this.state.signup })}>
-                            <span class="bell fa fa-bell" /> &nbsp;
+                            <span className="bell fa fa-bell" /> &nbsp;
                             {
                                 this.state.signup ?
                                     "Login"
@@ -51,20 +49,20 @@ export default class Landing extends React.Component {
                 <div className="aboutus-container">
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Source Code</h4>
-                        <a className="team-card" href="https://github.com/adarshsuresh07/Notified" target="_blank">
-                            <img src={defaultimg} alt="" />
-                            <h5>Notified</h5>
+                        <a className="team-card" href="https://github.com/adarshsuresh07/Notified" target="_blank" rel="noopener noreferrer">
+                            <img src={defaultimg} alt="" style={{width:"3rem"}}/>
+                            <span>Notified</span>
                         </a>
                     </div>
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Team</h4>
-                        <a className="team-card" href="" target="_blank">
+                        <a className="team-card" href="" target="_blank" rel="noopener noreferrer">
                             <img src={defaultteam} alt="" />
-                            <h5>Haseena Hassan</h5>
+                            <h6>Haseena Hassan</h6>
                         </a>
-                        <a className="team-card" href="https://adarshsuresh07.github.io/Portfolio/" target="_blank">
+                        <a className="team-card" href="https://adarshsuresh07.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">
                             <img src={defaultteam} alt="" />
-                            <h5>Adarsh S</h5>
+                            <h6>Adarsh S</h6>
                         </a>
                     </div>
                 </div>

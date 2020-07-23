@@ -1,17 +1,33 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-
+import axios from "axios";
 export default class SignupForm extends React.Component {
-    goNext=()=>{
-        window.location.href="/dashboard"
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullname: '',
+            email: '',
+            password: '',
+            password2: ''
+        }
+    }
+    register = (e) => {
+        e.preventDefault();
+        axios
+            .post("/api/users/register", this.state)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err =>
+                console.log(err.response)
+            );
     }
     render() {
         return (
-            <form className="test-inner" onsubmit={this.goNext}>
-                <input type="text" placeholder="Full Name" required/>
-                <input type="email" placeholder="Email Id" required/>
-                <input type="password" placeholder="Password" required/>
-                <input type="password" placeholder="Confirm Password" required/>
+            <form className="test-inner" onSubmit={this.register}>
+                <input type="text" placeholder="Full Name" onChange={e => this.setState({ fullname: e.target.value })} required />
+                <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
+                <input type="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required />
+                <input type="password" placeholder="Confirm Password" onChange={e => this.setState({ password2: e.target.value })} required />
                 <button type="submit">Signup</button>
             </form>
         );
