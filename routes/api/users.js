@@ -105,7 +105,9 @@ router.get("/getuser/:id", (req, res) => {
                 id: user._id,
                 fullname: user.fullname,
                 email: user.email,
-                verified: user.verified
+                verified: user.verified,
+                todo: user.todo,
+                applied: user.applied
             }
             res.json(userData)
         })
