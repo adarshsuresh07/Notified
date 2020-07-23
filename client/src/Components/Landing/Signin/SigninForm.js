@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../../actions/actions"
+import axios from "axios";
+import setAuthToken from "../../../utils/setAuthToken";
+import { login, logout } from "../../../utils/Token";
 class SigninForm extends React.Component {
     constructor(props) {
         super(props);
@@ -11,28 +11,31 @@ class SigninForm extends React.Component {
         }
     }
 
+    userLogin = e => {
+        e.preventDefault();
+        axios.post("/api/users/login", this.state)
+            .then(res => {
+                const token = res.data.token;
+                login(token);
+                setAuthToken(token);
+                window.location.href="/dashboard"
+            })
+            .catch(err =>
+                console.log(err.response)
+            );
+    }
+
     render() {
         return (
-            <form className="test-inner" onSubmit={() => this.props.loginUser(this.state)}>
+            <form className="test-inner" onSubmit={this.userLogin}>
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
                 <input type="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required />
-                <button type="submit" >Login</button>
+                <button type="submit">Login</button>
             </form>
         );
     }
 }
-SigninForm.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-};
 
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-export default connect(
-    mapStateToProps,
-    { loginUser }
-)(SigninForm);
+export default SigninForm;
 
 

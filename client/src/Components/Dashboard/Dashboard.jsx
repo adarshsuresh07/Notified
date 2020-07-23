@@ -12,7 +12,8 @@ import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
 import { setUserData } from "../../actions/actions"
-
+import axios from "axios";
+import { getToken } from "../../utils/Token"
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -20,21 +21,43 @@ class Dashboard extends React.Component {
             newop: false,
             expired: false,
             opdata: [],
+            exdata: []
         }
     }
     componentDidMount() {
-        const response = {
-            name: "Adarsh S"
-        }
-        this.props.setUserData(response);
-        
+        console.log(getToken());
+        // axios.post("/api/users/getuser/"+ this.state)
+        //     .then(res => {
+        //         this.props.setUserData(res);
+        axios.get("/api/openings/all")
+            .then(res => {
+                // console.log(res.data);
+                this.divide(res.data);
+            }).catch(err => {
+                console.log(err.response);
+            })
+        // })
+        // .catch(err =>
+        //     console.log(err.response)
+        // );
     }
-   
+
+    divide = (data) => {
+        var active = [], inactive = [];
+        data.map(item => {
+            if (item.active)
+                active.push(item);
+            else
+                inactive.push(item)
+        })
+        this.setState({ opdata: active, exdata: inactive })
+    }
+
     render() {
         return (
             <div className="overlay">
                 <div className="first-col">
-                    <Opstack expired={this.state.expired} />
+                    <Opstack expired={this.state.expired} opdata={this.state.opdata} exdata={this.state.exdata}/>
                 </div>
                 <div className="second-col">
                     <div className="second-col-top">
