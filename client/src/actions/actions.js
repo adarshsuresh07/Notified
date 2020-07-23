@@ -14,8 +14,6 @@ export const loginUser = userData => dispatch => {
       const { token } = res.data;
       login(token);
       setAuthToken(token);
-      const decoded = jwt_decode(token);
-      dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
       dispatch({
@@ -25,18 +23,16 @@ export const loginUser = userData => dispatch => {
     );
 };
 
-export const setCurrentUser = decoded => {
+export const setCurrentUser = userData => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: userData
   };
 };
 
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
-  };
-};
+export const setUserData = userData => dispatch => {
+  dispatch(setCurrentUser(userData));
+}
 
 export const logoutUser = () => dispatch => {
   logout();
@@ -48,8 +44,8 @@ export const logoutUser = () => dispatch => {
 
 export const showData = (data, stack) => dispatch => {
   if (data && Object.keys(data).includes("position")) {
-    dispatch({ type: "Modal-On", data: data, stack:stack});
+    dispatch({ type: "Modal-On", data: data, stack: stack });
   }
   else
-    dispatch({ type: "Modal-Off"});
+    dispatch({ type: "Modal-Off" });
 };

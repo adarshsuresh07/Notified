@@ -11,6 +11,7 @@ import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
+import { setUserData } from "../../actions/actions"
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -18,11 +19,17 @@ class Dashboard extends React.Component {
         this.state = {
             newop: false,
             expired: false,
+            opdata: [],
         }
     }
-    // componentDidMount() {
-    //     console.log(this.props.feed);
-    // }
+    componentDidMount() {
+        const response = {
+            name: "Adarsh S"
+        }
+        this.props.setUserData(response);
+        
+    }
+   
     render() {
         return (
             <div className="overlay">
@@ -61,7 +68,7 @@ class Dashboard extends React.Component {
                                     <img src={expiredactive} alt="x" style={{ width: "60%" }} />
                                 </button>
                             }
-                            <button className="second-col-bottom-buttons button3" title="Logout" onClick={()=>this.props.history.push("/")}>
+                            <button className="second-col-bottom-buttons button3" title="Logout" onClick={() => this.props.history.push("/")}>
                                 <img src={logout} alt="C-" style={{ width: "60%" }} />
                             </button>
                         </div>
@@ -75,13 +82,16 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-    feed: PropTypes.object.isRequired
+    feed: PropTypes.object.isRequired,
+    setUserData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-    feed: state.feed
+    feed: state.feed,
+    auth: state.auth
 });
 
 export default connect(
     mapStateToProps,
+    { setUserData }
 )(Dashboard);

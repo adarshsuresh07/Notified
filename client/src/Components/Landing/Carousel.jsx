@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 export default class Notifiedcarousel extends Component {
     render() {
         return (
-            <Carousel width="70vw" autoPlay={true} infiniteLoop={true}>
+            <Carousel width={window.innerWidth > 700 ?"70vw":null} autoPlay={true} infiniteLoop={true}>
                 <div>
                     <img src={require("../../Assets/Images/1.png")} alt="" />
                     <p className="legend">Legend 1</p>

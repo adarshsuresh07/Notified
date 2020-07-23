@@ -43,14 +43,17 @@ export default class Landing extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="landing-carousel">
+                {window.innerWidth > 700 ?
+                    <div className="landing-carousel">
+                        <Carousel />
+                    </div> :
                     <Carousel />
-                </div>
+                }
                 <div className="aboutus-container">
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Source Code</h4>
                         <a className="team-card" href="https://github.com/adarshsuresh07/Notified" target="_blank" rel="noopener noreferrer">
-                            <img src={defaultimg} alt="" style={{width:"3rem"}}/>
+                            <img src={defaultimg} alt="" style={{ width: "3rem" }} />
                             <span>Notified</span>
                         </a>
                     </div>
