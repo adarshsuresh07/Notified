@@ -3,11 +3,11 @@ const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const keys = require("../../config/keys")
-
+const User = require("../../models/User")
 const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
 
-const User = require("../../models/User")
+const sendEmail = require('../../helperFunctions/emailHelper')
 
 
 
@@ -35,16 +35,38 @@ router.post("/register", (req, res) => {
                 newUser.password = hash
                 newUser
                     .save()
-                    .then(user => res.json({ 
-                        msg: 'User signup successful',
-                        newUser: user 
-                    }))
+                    .then(user => {
+                        const payload = {
+                            id: user.id,
+                            fullname: user.fullname
+                        }
+                        jwt.sign(
+                            payload,
+                            keys.secretOrKey,
+                            { expiresIn: 36000 },
+                            (err, token) => {
+                                if (err) res.status(400).json({
+                                    msg: "Token generation failed",
+                                    error: err
+                                })
+                                sendEmail(newUser.email, token)
+                                res.json({
+                                    msg: "Confirmation email sent"
+                                })
+                            }
+                        )
+                        res.json({ 
+                            msg: 'Registration successful',
+                            newUser: user 
+                        })
+                    }) 
                     .catch(err => console.log({ 
                         msg: 'Unable to register user',
                         error: err 
                     }))
                 })
             })
+
         }
     })
 })
@@ -81,8 +103,9 @@ router.post("/login", (req, res) => {
                             error: err
                         })
                         res.json({
-                            success: true,
-                            token: "Bearer " + token
+                            msg: "Login successful",
+                            user: user,
+                            token: token
                         })
                     }
                 )
@@ -98,8 +121,8 @@ router.post("/login", (req, res) => {
 // @route GET api/users/getuser/:id
 // @desc Get user details
 // @access Private
-router.get("/getuser/:id", (req, res) => {
-    User.findById(req.params.id)
+router.get("/getuser/:email", (req, res) => {
+    User.findOne({ email: req.body.email })
         .then(user => {
             const userData = {
                 id: user._id,
@@ -119,6 +142,24 @@ router.get("/getuser/:id", (req, res) => {
         )
 })
 
+// @route DELETE api/users/delete/:id
+// @desc Delete a user
+// @access Private
+router.delete("/delete/:id", (req, res) => {
+    User.findByIdAndRemove(req.params.id, req.body)
+        .then(user => {
+            res.json({ 
+                msg: 'User account deleted successfully',
+                deleted: user
+            })
+        })
+        .catch(err => {
+            res.status(400).json({ 
+                msg: 'No such user',
+                error: err
+            })
+        })
+})
 
 
 
