@@ -1,6 +1,6 @@
 import React from "react";
-import SigninForm from "./Signin/SigninForm.js";
-import SignupForm from "./Signup/SignupForm.js";
+import LoginForm from "./Login/LoginForm.js";
+import RegisterForm from "./Register/RegisterForm.js";
 import defaultimg from "../../Assets/Images/notified.png"
 import defaultteam from "../../Assets/Images/you.jpg"
 import Carousel from "./Carousel"
@@ -29,8 +29,8 @@ export default class Landing extends React.Component {
                             <div className="test-outer" />
                             {
                                 this.state.signup ?
-                                    <SignupForm />
-                                    : <SigninForm />
+                                    <RegisterForm />
+                                    : <LoginForm />
                             }
                         </div>
                         <div className="landing-toggle" onClick={() => this.setState({ signup: !this.state.signup })}>

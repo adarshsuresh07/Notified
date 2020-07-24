@@ -3,6 +3,7 @@ import Opstack from './Opstack'
 import Todostack from './Todostack'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { setUserData, setData } from "../../actions/actions"
 import Opmodal from "./Opmodal"
 import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
@@ -11,9 +12,7 @@ import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
-import { setUserData } from "../../actions/actions"
 import axios from "axios";
-import { getToken } from "../../utils/Token"
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -25,39 +24,23 @@ class Dashboard extends React.Component {
         }
     }
     componentDidMount() {
-        console.log(getToken());
         // axios.post("/api/users/getuser/"+ this.state)
         //     .then(res => {
-        //         this.props.setUserData(res);
-        axios.get("/api/openings/all")
-            .then(res => {
+                // this.props.setUserData(res);
+      
                 // console.log(res.data);
-                this.divide(res.data);
-            }).catch(err => {
-                console.log(err.response);
-            })
+                this.props.setData();
         // })
         // .catch(err =>
         //     console.log(err.response)
         // );
     }
 
-    divide = (data) => {
-        var active = [], inactive = [];
-        data.map(item => {
-            if (item.active)
-                active.push(item);
-            else
-                inactive.push(item)
-        })
-        this.setState({ opdata: active, exdata: inactive })
-    }
-
     render() {
         return (
             <div className="overlay">
                 <div className="first-col">
-                    <Opstack expired={this.state.expired} opdata={this.state.opdata} exdata={this.state.exdata}/>
+                    <Opstack expired={this.state.expired} />
                 </div>
                 <div className="second-col">
                     <div className="second-col-top">
@@ -107,6 +90,7 @@ class Dashboard extends React.Component {
 Dashboard.propTypes = {
     feed: PropTypes.object.isRequired,
     setUserData: PropTypes.func.isRequired,
+    setData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -116,5 +100,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { setUserData }
+    { setUserData, setData }
 )(Dashboard);

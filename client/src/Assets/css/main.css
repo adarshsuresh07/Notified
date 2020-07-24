@@ -424,6 +424,12 @@
   border-bottom: 3px solid #e84a5f;
 }
 
+.empty{
+  font-size: 1rem;
+  margin: 1rem 0;
+  font-family: 'Pacifico', cursive;
+}
+
 /* ----------------opportunity tab --------------*/
 
 .filters {

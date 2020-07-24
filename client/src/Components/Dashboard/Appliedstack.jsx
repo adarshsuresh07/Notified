@@ -1,43 +1,34 @@
 import React from 'react'
 import Optab from './Optab'
-class Appliedstack extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-    componentDidMount() {
-        var response = [];
-        const temp =
-        {
-            position: "Position Name",
-            company: "Company Name",
-            due: new Date(),
-            category: "internship",
-            type: "react",
-            description: "datakjncd ioejd jdsckls jsdlcm jsdlc kjslkcvj jsflkkj ljsdflkcjlk kljsdckmslk jsldskld dsklfjkls klsdjflk",
-            applylink: "https://www.google.co.in/",
-            contact: "Adarsh: 97898912030",
-            furtherdetails: "details to be added mdk kjsfkl lsfkljs ksjeflksjf kljseflkjf",
-            image: "https://picsum.photos/300/200?grayscale"
-        };
-        for (var i = 0; i < 10; i++)
-            response.push(temp);
-        this.setState({ data: response });
+class Appliedstack extends React.Component {
+
+    fetchData = () => {
+        if (!this.props.opps.applieddata.length)
+            return <div className="empty" style={{ color: "#f8b500" }}>No Opportunities yet!</div>
+        return this.props.opps.applieddata.map((item, index) => {
+            return <Optab data={item} key={index} type={2} />
+        })
     }
 
     render() {
         return (
             <div className="appliedstack-container">
-                {
-                    this.state.data.map((item, index) => {
-                        return <Optab data={item} key={index} type={2}/>
-                    })
-                }
+                {this.fetchData()}
             </div>
         );
     }
 }
-export default Appliedstack; 
+Appliedstack.propTypes = {
+    opps: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+    opps: state.opps,
+});
+
+export default connect(
+    mapStateToProps,
+)(Appliedstack);

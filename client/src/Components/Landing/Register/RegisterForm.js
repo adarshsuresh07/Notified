@@ -1,41 +1,36 @@
 import React from "react";
 import axios from "axios";
-import setAuthToken from "../../../utils/setAuthToken";
-import { login, logout } from "../../../utils/Token";
-class SigninForm extends React.Component {
+export default class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            fullname: '',
             email: '',
             password: '',
+            password2: ''
         }
     }
-
-    userLogin = e => {
+    register = (e) => {
         e.preventDefault();
-        axios.post("/api/users/login", this.state)
+        axios
+            .post("/api/users/register", this.state)
             .then(res => {
-                const token = res.data.token;
-                login(token);
-                setAuthToken(token);
-                window.location.href="/dashboard"
+                console.log(res);
             })
             .catch(err =>
                 console.log(err.response)
             );
     }
-
     render() {
         return (
-            <form className="test-inner" onSubmit={this.userLogin}>
+            <form className="test-inner" onSubmit={this.register}>
+                {/* <span>error</span> */}
+                <input type="text" placeholder="Full Name" onChange={e => this.setState({ fullname: e.target.value })} required />
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
                 <input type="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required />
-                <button type="submit">Login</button>
+                <input type="password" placeholder="Confirm Password" onChange={e => this.setState({ password2: e.target.value })} required />
+                <button type="submit">Register</button>
             </form>
         );
     }
 }
-
-export default SigninForm;
-
-

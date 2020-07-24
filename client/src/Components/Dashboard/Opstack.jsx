@@ -1,26 +1,28 @@
 import React from 'react'
 import Optab from './Optab'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 class Opstack extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filtered: this.props.opdata,
-            filterexpired: this.props.exdata,
+            filtered: [],
+            filterexpired: [],
         }
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({ filtered: nextProps.opdata, filterexpired: nextProps.exdata })
+        this.setState({ filtered: nextProps.opps.opdata, filterexpired: nextProps.opps.exdata });
     }
 
     filterbyCat = e => {
         var filter1, filter2;
         if (e.target.value !== "All") {
-            filter1 = this.props.opdata.filter(item => item.category === e.target.value);
-            filter2 = this.props.exdata.filter(item => item.category === e.target.value);
+            filter1 = this.props.opps.opdata.filter(item => item.category === e.target.value);
+            filter2 = this.props.opps.exdata.filter(item => item.category === e.target.value);
         } else {
-            filter1 = this.props.opdata;
-            filter2 = this.props.exdata;
+            filter1 = this.props.opps.opdata;
+            filter2 = this.props.opps.exdata;
         }
         this.setState({ filtered: filter1, filterexpired: filter2 });
     }
@@ -30,11 +32,11 @@ class Opstack extends React.Component {
         if (!e.charCode || e.charCode === 13) {
             const f = document.getElementById("drop-filter").value;
             if (f !== "All") {
-                filter1 = this.props.opdata.filter(item => item.category === f);
-                filter2 = this.props.exdata.filter(item => item.category === f);
+                filter1 = this.props.opps.opdata.filter(item => item.category === f);
+                filter2 = this.props.opps.exdata.filter(item => item.category === f);
             } else {
-                filter1 = this.props.opdata;
-                filter2 = this.props.exdata;
+                filter1 = this.props.opps.opdata;
+                filter2 = this.props.opps.exdata;
             }
             const val = document.getElementById("search-bar").value;
             filter1 = filter1.filter(item => this.checkforVal(item, val));
@@ -53,14 +55,14 @@ class Opstack extends React.Component {
 
     fetchOps = () => {
         if (this.state.filtered.length === 0)
-            return <h6>No Opportunities yet!</h6>
+            return <div className="empty" style={{color:"#b45dfc"}}>No Opportunities yet!</div>
         return this.state.filtered.map((item, index) => {
             return <Optab data={item} key={index} type={0} />
         })
     }
     fetchExp = () => {
         if (this.state.filterexpired.length === 0)
-            return <h6>No Opportunities yet!</h6>
+            return <div className="empty" style={{color:"white"}}>No Opportunities yet!</div>
         return this.state.filterexpired.map((item, index) => {
             return <Optab data={item} key={index} type={3} />
         })
@@ -97,4 +99,14 @@ class Opstack extends React.Component {
         );
     }
 }
-export default Opstack; 
+Opstack.propTypes = {
+    opps: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+    opps: state.opps,
+});
+
+export default connect(
+    mapStateToProps,
+)(Opstack);
