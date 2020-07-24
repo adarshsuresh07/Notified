@@ -11,7 +11,8 @@ const app = express()
 
 // Connect mongoDB
 const db = require("./config/keys").mongoURI
-mongoose.connect(
+mongoose
+  .connect(
     db,
     {   useNewUrlParser: true,
         useUnifiedTopology: true
