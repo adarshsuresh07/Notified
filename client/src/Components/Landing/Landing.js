@@ -59,7 +59,7 @@ export default class Landing extends React.Component {
                     </div>
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Team</h4>
-                        <a className="team-card" href="" target="_blank" rel="noopener noreferrer">
+                        <a className="team-card" href="https://adarshsuresh07.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">
                             <img src={defaultteam} alt="" />
                             <h6>Haseena Hassan</h6>
                         </a>

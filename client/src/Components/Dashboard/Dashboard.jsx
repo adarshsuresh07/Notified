@@ -12,7 +12,7 @@ import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
-import axios from "axios";
+// import axios from "axios";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);

@@ -38,7 +38,7 @@ export const setData = () => dispatch => {
       const data = res.data;
       console.log(store.getState());
       var active = [], inactive = [];
-      data.map(item => {
+      data.forEach(item => {
         if (item.active)
           active.push(item);
         else
@@ -61,8 +61,8 @@ export const addTodo = (id) => dispatch => {
   var opdata = data.opdata;
   var tododata = data.tododata;
   var todoop, opindex;
-  opdata.map((item, index) => {
-    if (item._id == id) {
+  opdata.forEach((item, index) => {
+    if (item._id === id) {
       todoop = item;
       opindex = index;
     }
@@ -83,8 +83,8 @@ export const addApplied = (id) => dispatch => {
   var applieddata = data.applieddata;
   var tododata = data.tododata;
   var todoop, opindex;
-  tododata.map((item, index) => {
-    if (item._id == id) {
+  tododata.forEach((item, index) => {
+    if (item._id === id) {
       todoop = item;
       opindex = index;
     }
