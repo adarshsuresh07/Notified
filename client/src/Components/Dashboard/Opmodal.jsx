@@ -10,7 +10,7 @@ class Opmodal extends React.Component {
         const data = this.props.feed.data;
         const d = new Date(data.due);
         const date = d.getDate() + " " + months[d.getMonth()]
-        const t = data.type ? data.type.split(" ") : [];
+        const t = data.type ? data.type.split(/[ ,]+/) : [];
         const color = colors[this.props.feed.stack]
         return (
             <div className={this.props.feed.modalon ? "dashboard-modal-on" : "dashboard-modal-off"}>
@@ -27,6 +27,7 @@ class Opmodal extends React.Component {
                     <div className="modal-type-container">
                         {
                             t.map((type, index) => {
+                                if (type)
                                 return <div className={"modal-type type" + index % 3}>{type}</div>
                             })
                         }

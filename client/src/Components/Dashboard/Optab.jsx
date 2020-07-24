@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { showData, addTodo, addApplied, deleteApplied, deleteTodo } from "../../actions/actions"
+import { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast } from "../../actions/actions"
 import addtodo from "../../Assets/Icons/add-todo.png"
 import close from "../../Assets/Icons/close.png"
 import applied from "../../Assets/Icons/add-applied.png"
@@ -65,5 +65,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { showData, addTodo, addApplied, deleteApplied, deleteTodo }
+    { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast }
 )(Optab);

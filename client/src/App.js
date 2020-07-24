@@ -10,7 +10,8 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/actions";
 import { Provider } from "react-redux";
 import store from "./store";
-import { isLogin, getToken} from './utils/Token'
+import { isLogin, getToken } from './utils/Token'
+import Toast from "./Components/Toast/Toast"
 if (isLogin()) {
   const token = getToken();
   setAuthToken(token);
@@ -33,6 +34,7 @@ class App extends Component {
             <PublicRoute component={Dashboard} path="/dashboard" exact />
           </Switch>
         </BrowserRouter>
+        <Toast />
       </Provider>
     );
   }

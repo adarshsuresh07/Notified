@@ -22,6 +22,17 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
+// Toast Actions
+
+export const handleToast = (type, data) => dispatch => {
+  if (data) {
+    dispatch({ type: "Show_Toast", result: type, data: data });
+  }
+  else
+    dispatch({ type: "OFF_Toast" });
+}
+
+
 // Feed Actions
 
 export const showData = (data, stack) => dispatch => {
@@ -36,7 +47,6 @@ export const setData = () => dispatch => {
   axios.get("/api/openings/all")
     .then(res => {
       const data = res.data;
-      console.log(store.getState());
       var active = [], inactive = [];
       data.forEach(item => {
         if (item.active)
@@ -68,6 +78,7 @@ export const addTodo = (id) => dispatch => {
   });
   opdata.splice(opindex, 1);
   tododata = [todoop, ...tododata];
+  dispatch(handleToast('success', "Successfully added to Todo!"));
   dispatch({
     type: "SET_DATA",
     opdata: opdata,
@@ -79,7 +90,7 @@ export const addTodo = (id) => dispatch => {
 
 export const addApplied = (id) => dispatch => {
   const data = store.getState().opps;
-  var {tododata, applieddata} = data;
+  var { tododata, applieddata } = data;
   var todoop, opindex;
   tododata.forEach((item, index) => {
     if (item._id === id) {
@@ -89,6 +100,7 @@ export const addApplied = (id) => dispatch => {
   });
   tododata.splice(opindex, 1);
   applieddata = [todoop, ...applieddata];
+  dispatch(handleToast('success', "Successfully added to Applied!"));
   dispatch({
     type: "SET_DATA",
     opdata: data.opdata,
@@ -111,6 +123,7 @@ export const deleteTodo = (id) => dispatch => {
   });
   tododata.splice(opindex, 1);
   opdata = [todoop, ...opdata];
+  dispatch(handleToast('success', "Successfully removed from Todo!"));
   dispatch({
     type: "SET_DATA",
     opdata: opdata,
@@ -122,7 +135,7 @@ export const deleteTodo = (id) => dispatch => {
 
 export const deleteApplied = (id) => dispatch => {
   const data = store.getState().opps;
-  var {tododata, applieddata} = data;
+  var { tododata, applieddata } = data;
   var todoop, opindex;
   applieddata.forEach((item, index) => {
     if (item._id === id) {
@@ -132,6 +145,7 @@ export const deleteApplied = (id) => dispatch => {
   });
   applieddata.splice(opindex, 1);
   tododata = [todoop, ...tododata];
+  dispatch(handleToast('success', "Successfully removed from Applied!"));
   dispatch({
     type: "SET_DATA",
     opdata: data.opdata,

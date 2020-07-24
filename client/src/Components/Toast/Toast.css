@@ -18,9 +18,11 @@
 	font-weight: bold;
 }
 
+.hidden{
+	display: none;
+}
+
 hr.hrtoast {
-	-webkit-transition: width 1.25s ease-out;
-	transition: width 1.25s ease-out;
 	border: 2px solid;
 	width: 0%;
 	position: absolute;
@@ -29,16 +31,14 @@ hr.hrtoast {
 
 hr.hrtoast-load {
 	width: 100%;
-	-webkit-transition: width 1.25s ease-out;
-	transition: width 1.25s ease-out;
+	-webkit-transition: width 1s ease-out;
+	transition: width 1s ease-out;
 	border: 2px solid;
 	position: absolute;
 	margin: 0;
 }
 
 .vrtoast {
-	-webkit-transition: height 1.25s ease-out;
-	transition: height 1.25s ease-out;
 	height: 0%;
 	position: absolute;
 	margin: 0;
@@ -46,8 +46,8 @@ hr.hrtoast-load {
 
 .vrtoast-load {
 	height: 100%;
-	-webkit-transition: height 1.25s ease-out;
-	transition: height 1.25s ease-out;
+	-webkit-transition: height 1s ease-out;
+	transition: height 1s ease-out;
 	border: 2px solid;
 	position: absolute;
 	margin: 0;

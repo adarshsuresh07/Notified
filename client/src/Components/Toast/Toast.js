@@ -1,56 +1,54 @@
 import React from 'react'
 import "./Toast.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import delopus from "../../assets/images/logo2.png";
+import notified from "../../Assets/Images/notified.png"
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { handleToast } from "../../actions/actions"
 const styles = {
 	hrsuccess: {
-		borderColor: "green"
+		borderColor: "#f8b500"
 	},
 	hrwarn: {
-		borderColor: "#ffdd00"
+		borderColor: "#b45dfc"
 	},
 	hrerror: {
-		borderColor: "#d11411"
+		borderColor: "#e84a5f"
 	},
-	imagesuccess: {
-		backgroundColor: "green"
+	imgs:{
+		backgroundColor: "#f8b500"
 	},
-	imagewarn: {
-		backgroundColor: "#ffdd00"
+	imgw:{
+		backgroundColor: "#b45dfc"
 	},
-	imageerror: {
-		backgroundColor: "#d11411"
-	},
-	closesuccess: {
-		color: "green"
-	},
-	closewarn: {
-		color: "#ffdd00"
-	},
-	closeerror: {
-		color: "#d11411"
-	},
+	imge:{
+		backgroundColor: "#e84a5f"
+	}
 }
 class Toast extends React.Component {
-	componentDidMount() {
-		setTimeout(function () {
-			if (document.getElementById("toast1"))
-				document.getElementById("toast1").className = "hrtoast-load"
-		}, 500);
-		setTimeout(function () {
-			if (document.getElementById("toast1"))
-				document.getElementById("toast4").className = "vrtoast-load"
-		}, 1500);
-		setTimeout(function () {
-			if (document.getElementById("toast1"))
-				document.getElementById("toast2").className = "hrtoast-load"
-		}, 2500);
-		setTimeout(function () {
-			if (document.getElementById("toast1"))
-				document.getElementById("toast3").className = "vrtoast-load"
-		}, 3500);
-		setTimeout(this.turnOff, 5500);
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		if (nextProps.toast.toast !== this.props.toast.toast && nextProps.toast.toast) {
+			document.getElementById("toast1").className = "hrtoast"
+			document.getElementById("toast2").className = "hrtoast"
+			document.getElementById("toast3").className = "vrtoast"
+			document.getElementById("toast4").className = "vrtoast"
+			setTimeout(function () {
+				if (document.getElementById("toast1"))
+					document.getElementById("toast1").className = "hrtoast-load"
+			}, 400);
+			setTimeout(function () {
+				if (document.getElementById("toast1"))
+					document.getElementById("toast4").className = "vrtoast-load"
+			}, 1200);
+			setTimeout(function () {
+				if (document.getElementById("toast1"))
+					document.getElementById("toast2").className = "hrtoast-load"
+			}, 2000);
+			setTimeout(function () {
+				if (document.getElementById("toast1"))
+					document.getElementById("toast3").className = "vrtoast-load"
+			}, 2800);
+			setTimeout(this.turnOff, 3600);
+		}
 	}
 
 	turnOff = () => {
@@ -60,29 +58,34 @@ class Toast extends React.Component {
 
 	render() {
 		return (
-			<div className="toast-container">
-				<FontAwesomeIcon icon={faTimes}
-					onClick={() => this.props.handleToast(null, null)}
-					cursor={"pointer"} className="close-toast"
-					style={this.props.toast == "success" ? styles.closesuccess :
-						this.props.toast == "warn" ? styles.closewarn :
-							styles.closeerror}
-				/>
+			<div className={this.props.toast.toast ? "toast-container" : "hidden"}>
 				<div className="message-container">
 					<div
 						className="toast-image"
-						style={{backgroundColor:"black"}}>
-						<img src={delopus} ></img>
+						style={this.props.toast.type == "success" ? styles.imgs : this.props.toast.type == "warn" ? styles.imgw : styles.imge}>
+						<img src={notified} ></img>
 					</div>
-					<small>{this.props.message}</small>
+					<small>{this.props.toast.data}</small>
 				</div>
-				<hr id="toast1" className="hrtoast" align="left" style={this.props.toast == "success" ? styles.hrsuccess : this.props.toast == "warn" ? styles.hrwarn : styles.hrerror} />
-				<hr id="toast2" className="hrtoast" align="left" style={this.props.toast == "success" ? styles.hrsuccess : this.props.toast == "warn" ? styles.hrwarn : styles.hrerror} />
-				<div id="toast3" className="vrtoast" align="left" style={this.props.toast == "success" ? styles.hrsuccess : this.props.toast == "warn" ? styles.hrwarn : styles.hrerror}></div>
-				<div id="toast4" className="vrtoast" align="left" style={this.props.toast == "success" ? styles.hrsuccess : this.props.toast == "warn" ? styles.hrwarn : styles.hrerror}></div>
+				<hr id="toast1" className="hrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror} />
+				<hr id="toast2" className="hrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror} />
+				<div id="toast3" className="vrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror}></div>
+				<div id="toast4" className="vrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror}></div>
 			</div>
 		)
 	}
 }
 
-export default Toast;
+Toast.propTypes = {
+	handleToast: PropTypes.func.isRequired,
+	toast: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+	toast: state.toast
+});
+
+export default connect(
+	mapStateToProps,
+	{ handleToast }
+)(Toast);

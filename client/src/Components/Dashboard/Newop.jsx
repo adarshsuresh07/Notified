@@ -55,6 +55,14 @@ class Newop extends React.Component {
                     <div className="modal-row">
                         Last Date: &nbsp; <input type="date" placeholder="Company" style={{ width: "40%" }} onChange={e => this.setState({ due: e.target.value })} />
                     </div>
+                    <div className="modal-type-container">
+                        {
+                            this.state.type.split(/[ ,]+/).map((type, index) => {
+                                if (type)
+                                    return <div className={"modal-type type" + index % 3}>{type}</div>
+                            })
+                        }
+                    </div>
                     <input type="text" placeholder="Requirements" onChange={e => this.setState({ type: e.target.value })} />
                     <textarea placeholder="Description" onChange={e => this.setState({ description: e.target.value })} />
                 </div>
