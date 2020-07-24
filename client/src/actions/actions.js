@@ -58,8 +58,7 @@ export const setData = () => dispatch => {
 
 export const addTodo = (id) => dispatch => {
   const data = store.getState().opps;
-  var opdata = data.opdata;
-  var tododata = data.tododata;
+  var { opdata, tododata } = data;
   var todoop, opindex;
   opdata.forEach((item, index) => {
     if (item._id === id) {
@@ -80,8 +79,7 @@ export const addTodo = (id) => dispatch => {
 
 export const addApplied = (id) => dispatch => {
   const data = store.getState().opps;
-  var applieddata = data.applieddata;
-  var tododata = data.tododata;
+  var {tododata, applieddata} = data;
   var todoop, opindex;
   tododata.forEach((item, index) => {
     if (item._id === id) {
@@ -102,11 +100,45 @@ export const addApplied = (id) => dispatch => {
 }
 
 export const deleteTodo = (id) => dispatch => {
-  console.log(store.getState());
+  const data = store.getState().opps;
+  var { opdata, tododata } = data;
+  var todoop, opindex;
+  tododata.forEach((item, index) => {
+    if (item._id === id) {
+      todoop = item;
+      opindex = index;
+    }
+  });
+  tododata.splice(opindex, 1);
+  opdata = [todoop, ...opdata];
+  dispatch({
+    type: "SET_DATA",
+    opdata: opdata,
+    exdata: data.exdata,
+    tododata: tododata,
+    applieddata: data.applieddata
+  });
 }
 
 export const deleteApplied = (id) => dispatch => {
-  console.log(store.getState());
+  const data = store.getState().opps;
+  var {tododata, applieddata} = data;
+  var todoop, opindex;
+  applieddata.forEach((item, index) => {
+    if (item._id === id) {
+      todoop = item;
+      opindex = index;
+    }
+  });
+  applieddata.splice(opindex, 1);
+  tododata = [todoop, ...tododata];
+  dispatch({
+    type: "SET_DATA",
+    opdata: data.opdata,
+    exdata: data.exdata,
+    tododata: tododata,
+    applieddata: applieddata
+  });
 }
 
 export const addOp = (data) => dispatch => {

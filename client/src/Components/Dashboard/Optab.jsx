@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { showData, addTodo, addApplied } from "../../actions/actions"
+import { showData, addTodo, addApplied, deleteApplied, deleteTodo } from "../../actions/actions"
 import addtodo from "../../Assets/Icons/add-todo.png"
 import close from "../../Assets/Icons/close.png"
 import applied from "../../Assets/Icons/add-applied.png"
@@ -28,20 +28,20 @@ class Optab extends React.Component {
                 {this.props.type === 1 ?
                     <div className={type + "tab-addtodo"}>
                         <span className="delete-tab">
-                            <img src={close} title="Delete todo" alt="x" style={{ width: "1rem" }} />
+                            <img src={close} title="Delete todo" alt="x" style={{ width: "1rem" }} onClick={() => this.props.deleteTodo(this.props.data._id)} />
                         </span>
                         <button title="Add to applied">
-                            <img src={applied} alt="+" style={{ width: "60%" }} onClick={()=>this.props.addApplied(this.props.data._id)}/>
+                            <img src={applied} alt="+" style={{ width: "60%" }} onClick={() => this.props.addApplied(this.props.data._id)} />
                         </button>
                     </div> :
                     <div className={type + "tab-addtodo"}>
                         {this.props.type === 0 ?
                             <button>
-                                <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} onClick={()=>this.props.addTodo(this.props.data._id)} />
+                                <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} onClick={() => this.props.addTodo(this.props.data._id)} />
                             </button>
                             : this.props.type === 2 ?
                                 <span className="delete-tab">
-                                    <img src={close} title="Back to todo" alt="x" style={{ width: "1rem" }} />
+                                    <img src={close} title="Back to todo" alt="x" style={{ width: "1rem" }} onClick={() => this.props.deleteApplied(this.props.data._id)} />
                                 </span>
                                 : null
                         }
@@ -54,7 +54,9 @@ class Optab extends React.Component {
 Optab.propTypes = {
     showData: PropTypes.func.isRequired,
     addTodo: PropTypes.func.isRequired,
-    addApplied: PropTypes.func.isRequired
+    addApplied: PropTypes.func.isRequired,
+    deleteApplied: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -63,5 +65,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { showData, addTodo, addApplied }
+    { showData, addTodo, addApplied, deleteApplied, deleteTodo }
 )(Optab);
