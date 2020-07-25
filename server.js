@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const path = require('path')
+const keys = require("./config/keys")
 
 
 // Express app
@@ -10,10 +11,9 @@ const app = express()
 
 
 // Connect mongoDB
-const db = require("./config/keys").mongoURI
 mongoose
   .connect(
-    db,
+    keys.mongoURI,
     {   useNewUrlParser: true,
         useUnifiedTopology: true
     }
@@ -32,7 +32,7 @@ app.use(bodyParser.json())
 // Passport middleware
 const passport = require("passport")
 app.use(passport.initialize())
-require("./config/passport")(passport)
+require("./helperFunctions/passportHelper")(passport)
 
 
 
@@ -47,7 +47,7 @@ app.use("/api/lists", lists)
 
 
 // Production build
-if(process.env.NODE_ENV === 'production') {
+if(keys.env === 'production') {
   app.use(express.static('client/build'))
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
@@ -57,5 +57,4 @@ if(process.env.NODE_ENV === 'production') {
 
 
 // Port setup
-const port = process.env.PORT || 5000
-app.listen(port, () => console.log(`Server up and running on port ${port} !`))
+app.listen(keys.port, () => console.log(`Server up and running on port ${keys.port} !`))

@@ -5,5 +5,7 @@ module.exports = {
     secretOrKey : process.env.JWT_SECRET,
     sendgridKey: process.env.SENDGRID_API_KEY,
     sendgSender: process.env.SENDGRID_SENDER,
-    domain: process.env.DOMAIN
+    domain: process.env.DOMAIN,
+    port: process.env.PORT,
+    env: process.env.NODE_ENV
 }

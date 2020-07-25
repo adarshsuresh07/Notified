@@ -118,7 +118,7 @@ router.post("/login", (req, res) => {
 // @route GET api/users/getuser/:id
 // @desc Get user details
 // @access Private
-router.get("/getuser/:email", (req, res) => {
+router.get("/getuser", (req, res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             const userData = {

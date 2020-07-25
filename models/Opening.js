@@ -40,7 +40,8 @@ const OpeningSchema = new Schema({
         type: String
     },
     posted_by: {
-        type: String
+        type: mongoose.ObjectId,
+        required: true
     },
     created_at: {
         type: Date,
@@ -48,7 +49,6 @@ const OpeningSchema = new Schema({
     },
     updated_at: {
         type: Date,
-        expires: 120,           // 2 month <
         default: Date.now
     }
 })
