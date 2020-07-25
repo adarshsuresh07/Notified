@@ -47,7 +47,7 @@ class Opstack extends React.Component {
 
     checkforVal = (item, val) => {
         for (const k of Object.values(item)) {
-            if (typeof k == "string" && k.includes(val))
+            if (typeof k == "string" && k.toLowerCase().includes(val))
                 return true;
         }
         return false;

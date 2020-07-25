@@ -1054,13 +1054,15 @@ option {
 }
 
 .modal-type-container {
-  display: flex;
-  max-width: 100%;
+  width: 80%;
 }
 
 .modal-type {
   padding: 0.2rem;
   width: auto;
+  display: inline-block;
+  zoom: 1; 
+  *display: inline;
   margin: 3px;
   font-size: 12px;
   border-radius: 1px;
@@ -1335,4 +1337,8 @@ option {
   100% {
     transform: rotate(0);
   }
+}
+
+a{
+  text-decoration: none;
 }

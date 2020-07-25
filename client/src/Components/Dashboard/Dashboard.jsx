@@ -3,7 +3,7 @@ import Opstack from './Opstack'
 import Todostack from './Todostack'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { setUserData, setData } from "../../actions/actions"
+import { setUserData, setData, logoutUser } from "../../actions/actions"
 import Opmodal from "./Opmodal"
 import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
@@ -12,7 +12,8 @@ import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
-// import axios from "axios";
+import { getToken } from "../../utils/Token";
+import axios from "axios";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -24,18 +25,8 @@ class Dashboard extends React.Component {
         }
     }
     componentDidMount() {
-        // axios.post("/api/users/getuser/"+ this.state)
-        //     .then(res => {
-                // this.props.setUserData(res);
-      
-                // console.log(res.data);
-                this.props.setData();
-        // })
-        // .catch(err =>
-        //     console.log(err.response)
-        // );
+        this.props.setUserData();
     }
-
     render() {
         return (
             <div className="overlay">
@@ -74,7 +65,7 @@ class Dashboard extends React.Component {
                                     <img src={expiredactive} alt="x" style={{ width: "60%" }} />
                                 </button>
                             }
-                            <button className="second-col-bottom-buttons button3" title="Logout" onClick={() => this.props.history.push("/")}>
+                            <button className="second-col-bottom-buttons button3" title="Logout" onClick={this.props.logoutUser}>
                                 <img src={logout} alt="C-" style={{ width: "60%" }} />
                             </button>
                         </div>
@@ -91,6 +82,7 @@ Dashboard.propTypes = {
     feed: PropTypes.object.isRequired,
     setUserData: PropTypes.func.isRequired,
     setData: PropTypes.func.isRequired,
+    logoutUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -100,5 +92,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { setUserData, setData }
+    { setUserData, setData, logoutUser }
 )(Dashboard);

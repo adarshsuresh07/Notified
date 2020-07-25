@@ -62,15 +62,15 @@ class Toast extends React.Component {
 				<div className="message-container">
 					<div
 						className="toast-image"
-						style={this.props.toast.type == "success" ? styles.imgs : this.props.toast.type == "warn" ? styles.imgw : styles.imge}>
-						<img src={notified} ></img>
+						style={this.props.toast.type === "success" ? styles.imgs : this.props.toast.type === "warn" ? styles.imgw : styles.imge}>
+						<img src={notified} alt=""></img>
 					</div>
 					<small>{this.props.toast.data}</small>
 				</div>
-				<hr id="toast1" className="hrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror} />
-				<hr id="toast2" className="hrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror} />
-				<div id="toast3" className="vrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror}></div>
-				<div id="toast4" className="vrtoast" align="left" style={this.props.toast.type == "success" ? styles.hrsuccess : this.props.toast.type == "warn" ? styles.hrwarn : styles.hrerror}></div>
+				<hr id="toast1" className="hrtoast" align="left" style={this.props.toast.type === "success" ? styles.hrsuccess : this.props.toast.type === "warn" ? styles.hrwarn : styles.hrerror} />
+				<hr id="toast2" className="hrtoast" align="left" style={this.props.toast.type === "success" ? styles.hrsuccess : this.props.toast.type === "warn" ? styles.hrwarn : styles.hrerror} />
+				<div id="toast3" className="vrtoast" align="left" style={this.props.toast.type === "success" ? styles.hrsuccess : this.props.toast.type === "warn" ? styles.hrwarn : styles.hrerror}></div>
+				<div id="toast4" className="vrtoast" align="left" style={this.props.toast.type === "success" ? styles.hrsuccess : this.props.toast.type === "warn" ? styles.hrwarn : styles.hrerror}></div>
 			</div>
 		)
 	}

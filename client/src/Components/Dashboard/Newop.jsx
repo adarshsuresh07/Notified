@@ -1,15 +1,18 @@
 import React from 'react'
 import addimage from "../../Assets/Images/add-image.png"
 import close from "../../Assets/Icons/close.png"
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { handleToast, newData } from "../../actions/actions"
 class Newop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             position: '',
             company: '',
-            category: "All",
+            category: "Job",
             due: new Date(),
-            type: "",
+            type: '',
             description: '',
             contact: '',
             applylink: '',
@@ -28,11 +31,19 @@ class Newop extends React.Component {
     }
 
     submit = () => {
-        if (!this.state.imageselected)
-            this.setState({ image: '' });
+        if (this.state.position === "")
+            this.props.handleToast("error", "Position should not be empty");
+        else if (this.state.company === "")
+            this.props.handleToast("error", "Company should not be empty");
+        else if (this.state.applylink === "")
+            this.props.handleToast("error", "Apply link should not be empty");
+        else {
+            this.props.newData(this.state);
+            // this.props.closeModal();
+        }
+        // if (!this.state.imageselected)
+        //     this.setState({ image: '' });
         // We have to change the value of image to null when we post this
-        console.log(this.state);
-        this.props.closeModal();
     }
 
     render() {
@@ -46,7 +57,6 @@ class Newop extends React.Component {
                     <input type="text" placeholder="Company" onChange={e => this.setState({ company: e.target.value })} /> <br />
                     <div className="modal-row" onChange={e => this.setState({ category: e.target.value })}>Category: &nbsp;
                         <select style={{ width: "40%" }}>
-                            <option value="All">All</option>
                             <option value="Job">Job</option>
                             <option value="Internship">Internship</option>
                             <option value="Fellowship">Fellowship</option>
@@ -82,5 +92,16 @@ class Newop extends React.Component {
 }
 
 
+Newop.propTypes = {
+    handleToast: PropTypes.func.isRequired,
+    newData: PropTypes.func.isRequired
+};
 
-export default Newop
+const mapStateToProps = state => ({
+    toast: state.toast
+});
+
+export default connect(
+    mapStateToProps,
+    { handleToast, newData }
+)(Newop);

@@ -1,5 +1,5 @@
 import setAuthToken from "../utils/setAuthToken";
-import { logout } from "../utils/Token";
+import { getToken, logout } from "../utils/Token";
 import store from "../store"
 import { SET_CURRENT_USER } from "./types";
 import axios from "axios"
@@ -12,14 +12,25 @@ export const setCurrentUser = userData => {
   };
 };
 
-export const setUserData = userData => dispatch => {
-  dispatch(setCurrentUser(userData));
+export const setUserData = () => dispatch => {
+  const token = getToken();
+  axios.get("/api/users/getuser", { token: token })
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err =>
+      console.log(err.response)
+    );
+  dispatch(setData());
+
+  dispatch(setCurrentUser({}));
 }
 
 export const logoutUser = () => dispatch => {
   logout();
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+  window.location.href = "/";
 };
 
 // Toast Actions
@@ -43,6 +54,22 @@ export const showData = (data, stack) => dispatch => {
     dispatch({ type: "Modal-Off" });
 };
 
+export const newData = (data) => dispatch => {
+  console.log(data);
+  const newOP = {
+    position: data.position,
+    company: data.company,
+    category: data.category,
+    due: data.due,
+    active: true,
+    description: data.description,
+    contact: data.contact,
+    applylink: data.applylink,
+    furtherdetails: data.furtherdetails,
+    image: data.imageselected ? data.image : '',
+    postedby: store.getState().auth.user._id,
+  }
+}
 export const setData = () => dispatch => {
   axios.get("/api/openings/all")
     .then(res => {

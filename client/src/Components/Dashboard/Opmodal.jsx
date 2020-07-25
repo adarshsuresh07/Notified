@@ -11,7 +11,7 @@ class Opmodal extends React.Component {
         const d = new Date(data.due);
         const date = d.getDate() + " " + months[d.getMonth()]
         const t = data.type ? data.type.split(/[ ,]+/) : [];
-        const color = colors[this.props.feed.stack]
+        const color = colors[this.props.feed.stack];
         return (
             <div className={this.props.feed.modalon ? "dashboard-modal-on" : "dashboard-modal-off"}>
                 <span className="modal-close" onClick={() => this.props.showData()}>
@@ -37,7 +37,7 @@ class Opmodal extends React.Component {
                 <div className="modal-right">
                     <img src={data.image} alt="" />
                     <span>{data.contact}</span>
-                    <span style={{ color: color }}>{data.applylink}</span>
+                    <a href={data.applylink} target="_blank" rel="noopener noreferrer"  style={{ color: color }}>{data.applylink}</a>
                     <p>{data.furtherdetails}</p>
                 </div>
             </div>
