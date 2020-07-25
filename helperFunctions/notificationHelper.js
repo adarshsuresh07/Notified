@@ -11,7 +11,13 @@ const sentNotification = function (to, publisher, details) {
         from: keys.sendgSender,
         subject: 'New opening added to Notified',
         text: 'Welcome user',
-        html: `<strong>Hello ${to.fullname}</strong><p>${publisher} added a new ${details.category} opening at ${details.company}. Check out Notified for more details.</p>Thanks for using Notified :)`,
+        html: `<strong>
+                    Hello ${to.fullname}
+                </strong>
+                <p>Your door to opportunities is one step away!
+                <br>${publisher} added a new ${details.category} opening at ${details.company}. Check out Notified for more details.<br>
+                <br>Thanks for using Notified :)</p>
+                `
     }
     sgMail.send(msg)
         .then(res => console.log("Success : " + res))
