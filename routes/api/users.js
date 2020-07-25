@@ -49,10 +49,7 @@ router.post("/register", (req, res) => {
                                     msg: "Token generation failed",
                                     error: err
                                 })
-                                sendEmail(newUser.email, token)
-                                res.json({
-                                    msg: "Confirmation email sent"
-                                })
+                                sendEmail(newUser, token)
                             }
                         )
                         res.json({ 

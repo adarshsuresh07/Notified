@@ -3,21 +3,17 @@ const keys = require('../config/keys')
 sgMail.setApiKey(keys.sendgridKey)
 
 
-
-
 module.exports = function sendVerificationEmail(to, token) {
     const msg = {
-        to: to,
+        to: to.email,
         from: keys.sendgSender,
         subject: 'Verify Your Email',
-        text: `Click on this link to verify your email ${keys.sendgSender}/verification?token=${token}&email=${to}`,
-        html: '<strong>Thanks for signing up to Notified</strong>',
+        text: 'Welcome user',
+        html: `<strong>Hello ${to.fullname}</strong><p>Click on this link to verify your email <br> ${keys.domain}/verification?token=${token}&email=${to.email}</p>Thanks for signing up to Notified :)`,
     }
     sgMail.send(msg)
-        .then(() => console.log("Confirmation Email sent successfully"))
-        .catch(err => console.log(err))
-        // .then(() => {}, error => { console.error(error)
-        // if (error.response) console.error(error.response.body) })
+        .then(res => console.log("Success : " + res))
+        .catch(err => console.log("Error : " + err))
     
 }
 
