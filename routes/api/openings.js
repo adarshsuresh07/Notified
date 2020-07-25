@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Opening = require("../../models/Opening")
-
+const notificationHandler = require('../../helperFunctions/notificationHelper')
 
 
 // @route POST api/openings/create
@@ -19,7 +19,7 @@ router.post("/create", (req, res) => {
             } else {
                 Opening.create(req.body)
                     .then(opening => {
-                        
+                        notificationHandler(opening)
                         res.json({ 
                             msg: 'Opening added successfully',
                             newEntry: opening

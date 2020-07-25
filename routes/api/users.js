@@ -4,12 +4,11 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const jwt_decode = require("jwt-decode")
 
+
 const keys = require("../../config/keys")
 const User = require("../../models/User")
-
 const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
-
 const sendEmail = require('../../helperFunctions/emailHelper')
 
 
