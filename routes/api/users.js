@@ -119,12 +119,11 @@ router.post("/login", (req, res) => {
 
 
 
-
 // @route GET api/users/getuser
 // @desc Get user details
 // @access Private
-router.get("/getuser", (req, res) => {
-    const decoded = jwt_decode(req.body.token)
+router.post("/getuser/:token", (req, res) => {
+    const decoded = jwt_decode(req.params.token)
     console.log(decoded)
     User.findById(decoded.id)
         .then(user => {

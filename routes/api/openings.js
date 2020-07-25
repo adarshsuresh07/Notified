@@ -18,18 +18,19 @@ router.post("/create", (req, res) => {
                 return res.status(400).json({ msg: "Opening already exists" })
             } else {
                 Opening.create(req.body)
-                    .then(opening => 
+                    .then(opening => {
+                        
                         res.json({ 
                             msg: 'Opening added successfully',
                             newEntry: opening
                         })
-                    )
-                    .catch(err => 
+                    })
+                    .catch(err => {
                         res.status(400).json({ 
                             msg: 'Unable to add opening',
                             error: err 
                         })
-                    )
+                    })
             }
         })
 })
