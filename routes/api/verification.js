@@ -22,7 +22,7 @@ router.post("/:token", (req, res) => {
                 })
                 .catch(err => {
                     res.json({
-                        msg: "User account not verified",
+                        msg: "Unable to verify user account",
                         error: err
                     })
                 })

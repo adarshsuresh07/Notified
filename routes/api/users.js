@@ -49,7 +49,7 @@ router.post("/register", (req, res) => {
                             { expiresIn: 3600*24 },
                             (err, token) => {
                                 if (err) res.status(400).json({
-                                    msg: "Token generation failed",
+                                    msg: "Token generation for verification failed",
                                     error: err
                                 })
                                 sendEmail(newUser, token)
@@ -90,28 +90,33 @@ router.post("/login", (req, res) => {
             return res.status(404).json({ msg: "Email not found" })
         }
         bcrypt.compare(password, user.password).then(isMatch => {
-            if (isMatch && user.verified) {
-                const payload = {
-                    id: user.id,
-                    fullname: user.fullname
-                }
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    { expiresIn: 36000 },
-                    (err, token) => {
-                        if (err) res.status(400).json({
-                            msg: "Token generation failed",
-                            error: err
-                        })
-                        res.status(200).json({
-                            msg: "Login successful",
-                            token: token
-                        })
+            if (isMatch) {
+                if(user.verified){
+                    const payload = {
+                        id: user.id,
+                        fullname: user.fullname
                     }
-                )
+                    jwt.sign(
+                        payload,
+                        keys.secretOrKey,
+                        { expiresIn: 36000 },
+                        (err, token) => {
+                            if (err) res.status(400).json({
+                                msg: "Token generation for login failed",
+                                error: err
+                            })
+                            res.status(200).json({
+                                msg: "Login successful",
+                                token: token
+                            })
+                        }
+                    )
+                } else {
+                    return res.status(400).json({ msg: "User account not verified" })
+                }
+                
             } else {
-                return res.status(400).json({ msg: "Password incorrect" })
+                return res.status(400).json({ msg: "Incorrect Password" })
             }
         })
     })
@@ -119,12 +124,11 @@ router.post("/login", (req, res) => {
 
 
 
-// @route GET api/users/getuser
+// @route GET api/users/getuser/:token
 // @desc Get user details
 // @access Private
 router.post("/getuser/:token", (req, res) => {
     const decoded = jwt_decode(req.params.token)
-    console.log(decoded)
     User.findById(decoded.id)
         .then(user => {
             const userData = {
