@@ -14,7 +14,7 @@ const sentNotification = function (to, publisher, details) {
         html: `<strong>Hello ${to.fullname}</strong><p>${publisher} added a new ${details.category} opening at ${details.company}. Check out Notified for more details.</p>Thanks for using Notified :)`,
     }
     sgMail.send(msg)
-        .then(res => console.log("Notification send to " + to.fullname + " : " + res))
+        .then(res => console.log("Success : " + res))
         .catch(err => console.log("Error : " + err))
 }
 
@@ -31,8 +31,6 @@ module.exports = function notificationHandler(opening) {
                 .then(users => {
                     users.forEach(user => {
                         if(user.verified && !(user._id.equals(author._id))) {
-                            console.log("user._id : " + user._id)
-                            console.log("author._id : " + author._id)
                             sentNotification(user, author.fullname, details)
                         }
                     })
