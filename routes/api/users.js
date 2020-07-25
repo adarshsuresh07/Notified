@@ -2,8 +2,11 @@ const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const jwt_decode = require("jwt-decode")
+
 const keys = require("../../config/keys")
 const User = require("../../models/User")
+
 const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
 
@@ -43,7 +46,7 @@ router.post("/register", (req, res) => {
                         jwt.sign(
                             payload,
                             keys.secretOrKey,
-                            { expiresIn: 36000 },
+                            { expiresIn: 3600*24 },
                             (err, token) => {
                                 if (err) res.status(400).json({
                                     msg: "Token generation failed",
@@ -57,10 +60,12 @@ router.post("/register", (req, res) => {
                             newUser: user 
                         })
                     }) 
-                    .catch(err => console.log({ 
-                        msg: 'Unable to register user',
-                        error: err 
-                    }))
+                    .catch(err => {
+                        res.status(400).json({
+                            msg: 'Unable to register user',
+                            error: err
+                        })
+                    })
                 })
             })
 
@@ -85,7 +90,7 @@ router.post("/login", (req, res) => {
             return res.status(404).json({ msg: "Email not found" })
         }
         bcrypt.compare(password, user.password).then(isMatch => {
-            if (isMatch) {
+            if (isMatch && user.verified) {
                 const payload = {
                     id: user.id,
                     fullname: user.fullname
@@ -99,9 +104,8 @@ router.post("/login", (req, res) => {
                             msg: "Token generation failed",
                             error: err
                         })
-                        res.json({
+                        res.status(200).json({
                             msg: "Login successful",
-                            user: user,
                             token: token
                         })
                     }
@@ -115,11 +119,14 @@ router.post("/login", (req, res) => {
 
 
 
-// @route GET api/users/getuser/:id
+
+// @route GET api/users/getuser
 // @desc Get user details
 // @access Private
 router.get("/getuser", (req, res) => {
-    User.findOne({ email: req.body.email })
+    const decoded = jwt_decode(req.body.token)
+    console.log(decoded)
+    User.findById(decoded.id)
         .then(user => {
             const userData = {
                 id: user._id,
@@ -138,6 +145,9 @@ router.get("/getuser", (req, res) => {
             })
         )
 })
+
+
+
 
 // @route DELETE api/users/delete/:id
 // @desc Delete a user

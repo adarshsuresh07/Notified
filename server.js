@@ -40,9 +40,11 @@ require("./helperFunctions/passportHelper")(passport)
 const users = require('./routes/api/users')
 const openings = require('./routes/api/openings')
 const lists = require('./routes/api/lists')
+const verification = require('./routes/api/verification')
 app.use("/api/users", users)
 app.use("/api/openings", openings)
 app.use("/api/lists", lists)
+app.use("/api/verification", verification)
 
 
 

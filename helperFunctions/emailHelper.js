@@ -9,7 +9,7 @@ module.exports = function sendVerificationEmail(to, token) {
         from: keys.sendgSender,
         subject: 'Verify Your Email',
         text: 'Welcome user',
-        html: `<strong>Hello ${to.fullname}</strong><p>Click on this link to verify your email <br> ${keys.domain}/verification?token=${token}&email=${to.email}</p>Thanks for signing up to Notified :)`,
+        html: `<strong>Hello ${to.fullname}</strong><p>Click on this link to verify your email <br> ${keys.domain}/verification/${token}</p>Thanks for signing up to Notified :)`,
     }
     sgMail.send(msg)
         .then(res => console.log("Success : " + res))
