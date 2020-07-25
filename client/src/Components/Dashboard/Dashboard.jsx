@@ -38,8 +38,8 @@ class Dashboard extends React.Component {
                         <h1 className="logo">Notified!</h1>
                         <div className="profile">
                             <div className="profile-name">
-                                <span>Adarsh S</span>
-                                <small>@adarsh</small>
+                                <span>{this.props.auth.user.fullname}</span>
+                                <small>{this.props.auth.user.email}</small>
                             </div>
                             <img src={defaultimg} alt="" />
                         </div>

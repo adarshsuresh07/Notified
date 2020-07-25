@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { isLogin, getToken } from './utils/Token'
 import Toast from "./Components/Toast/Toast"
+import Verifytoken from "./Components/Verifytoken"
 if (isLogin()) {
   const token = getToken();
   setAuthToken(token);
@@ -32,6 +33,7 @@ class App extends Component {
           <Switch>
             <PublicRoute component={Landing} path="/" exact />
             <PublicRoute component={Dashboard} path="/dashboard" exact />
+            <PublicRoute component={Verifytoken} path="/api/verification/:token" />
           </Switch>
         </BrowserRouter>
         <Toast />

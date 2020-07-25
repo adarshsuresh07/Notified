@@ -14,16 +14,14 @@ export const setCurrentUser = userData => {
 
 export const setUserData = () => dispatch => {
   const token = getToken();
-  axios.get("/api/users/getuser", { token: token })
+  axios.post("/api/users/getuser/" + token)
     .then(res => {
-      console.log(res.data);
+      dispatch(setCurrentUser(res.data));
+      dispatch(setData());
     })
     .catch(err =>
       console.log(err.response)
-    );
-  dispatch(setData());
-
-  dispatch(setCurrentUser({}));
+    )
 }
 
 export const logoutUser = () => dispatch => {
@@ -60,6 +58,7 @@ export const newData = (data) => dispatch => {
     position: data.position,
     company: data.company,
     category: data.category,
+    type: data.type,
     due: data.due,
     active: true,
     description: data.description,
@@ -67,26 +66,59 @@ export const newData = (data) => dispatch => {
     applylink: data.applylink,
     furtherdetails: data.furtherdetails,
     image: data.imageselected ? data.image : '',
-    postedby: store.getState().auth.user._id,
+    posted_by: store.getState().auth.user.id,
   }
+  axios.post("/api/openings/create", newOP)
+    .then(res => {
+      dispatch(handleToast('success', "Successfully added new Opportunity!"));
+      const op = res.data.newEntry
+      const data = store.getState().opps;
+      var { opdata, exdata } = data;
+      const today = new Date();
+      const duedate = new Date(op.due);
+      if (duedate >= today)
+        opdata = [op, ...opdata];
+      else
+        exdata = [op, ...exdata];
+      dispatch({
+        type: "SET_DATA",
+        opdata: opdata,
+        exdata: exdata,
+        tododata: data.tododata,
+        applieddata: data.applieddata
+      });
+      dispatch(showData());
+    }).catch(error => {
+      console.log(error.response)
+      if (error.response.data.error)
+        dispatch(handleToast('error', error.response.data.error));
+    }
+    );
 }
 export const setData = () => dispatch => {
+  const { todo, applied } = store.getState().auth.user;
   axios.get("/api/openings/all")
     .then(res => {
       const data = res.data;
-      var active = [], inactive = [];
+      var active = [], inactive = [], tododata = new Array(todo.length), applieddata = new Array(applied.length);
       data.forEach(item => {
-        if (item.active)
+        const today = new Date();
+        const duedate = new Date(item.due);
+        if (todo.some(t => t.id == item._id))
+          tododata[todo.findIndex(t => t.id == item._id)] = item;
+        else if (applied.some(t => t.id == item._id))
+          applieddata[applied.findIndex(t => t.id == item._id)] = item;
+        else if (duedate >= today)
           active.push(item);
-        else
-          inactive.push(item)
+        if (duedate < today)
+          inactive.push(item);
       })
       dispatch({
         type: "SET_DATA",
-        opdata: active,
-        exdata: inactive,
-        tododata: [],
-        applieddata: []
+        opdata: active.reverse(),
+        exdata: inactive.reverse(),
+        tododata: tododata,
+        applieddata: applieddata
       });
     }).catch(err => {
       console.log(err.response);
@@ -97,45 +129,63 @@ export const addTodo = (id) => dispatch => {
   const data = store.getState().opps;
   var { opdata, tododata } = data;
   var todoop, opindex;
-  opdata.forEach((item, index) => {
-    if (item._id === id) {
-      todoop = item;
-      opindex = index;
-    }
-  });
-  opdata.splice(opindex, 1);
-  tododata = [todoop, ...tododata];
-  dispatch(handleToast('success', "Successfully added to Todo!"));
-  dispatch({
-    type: "SET_DATA",
-    opdata: opdata,
-    exdata: data.exdata,
-    tododata: tododata,
-    applieddata: data.applieddata
-  });
+  const sendData = {
+    "userid": store.getState().auth.user.id,
+    "openingid": id
+  }
+  axios.post("/api/lists/todo/add", sendData)
+    .then(res => {
+      console.log(res);
+      opdata.forEach((item, index) => {
+        if (item._id === id) {
+          todoop = item;
+          opindex = index;
+        }
+      });
+      opdata.splice(opindex, 1);
+      tododata = [todoop, ...tododata];
+      dispatch(handleToast('success', "Successfully added to Todo!"));
+      dispatch({
+        type: "SET_DATA",
+        opdata: opdata,
+        exdata: data.exdata,
+        tododata: tododata,
+        applieddata: data.applieddata
+      });
+    }).catch(error =>
+      console.log(error.response)
+    );
 }
 
 export const addApplied = (id) => dispatch => {
   const data = store.getState().opps;
   var { tododata, applieddata } = data;
   var todoop, opindex;
-  tododata.forEach((item, index) => {
-    if (item._id === id) {
-      todoop = item;
-      opindex = index;
-    }
-  });
-  tododata.splice(opindex, 1);
-  applieddata = [todoop, ...applieddata];
-  dispatch(handleToast('success', "Successfully added to Applied!"));
-  dispatch({
-    type: "SET_DATA",
-    opdata: data.opdata,
-    exdata: data.exdata,
-    tododata: tododata,
-    applieddata: applieddata
-  });
-
+  const sendData = {
+    "userid": store.getState().auth.user.id,
+    "openingid": id
+  }
+  axios.post("/api/lists/applied/add", sendData)
+    .then(res => {
+      tododata.forEach((item, index) => {
+        if (item._id === id) {
+          todoop = item;
+          opindex = index;
+        }
+      });
+      tododata.splice(opindex, 1);
+      applieddata = [todoop, ...applieddata];
+      dispatch(handleToast('success', "Successfully added to Applied!"));
+      dispatch({
+        type: "SET_DATA",
+        opdata: data.opdata,
+        exdata: data.exdata,
+        tododata: tododata,
+        applieddata: applieddata
+      });
+    }).catch(error =>
+      console.log(error.response)
+    );
 }
 
 export const deleteTodo = (id) => dispatch => {
@@ -149,7 +199,10 @@ export const deleteTodo = (id) => dispatch => {
     }
   });
   tododata.splice(opindex, 1);
-  opdata = [todoop, ...opdata];
+  const today = new Date();
+  const duedate = new Date(todoop.due);
+  if (duedate >= today)
+    opdata = [todoop, ...opdata];
   dispatch(handleToast('success', "Successfully removed from Todo!"));
   dispatch({
     type: "SET_DATA",
@@ -180,8 +233,4 @@ export const deleteApplied = (id) => dispatch => {
     tododata: tododata,
     applieddata: applieddata
   });
-}
-
-export const addOp = (data) => dispatch => {
-  console.log(store.getState());
 }

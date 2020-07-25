@@ -39,11 +39,8 @@ class Newop extends React.Component {
             this.props.handleToast("error", "Apply link should not be empty");
         else {
             this.props.newData(this.state);
-            // this.props.closeModal();
+            this.props.closeModal();
         }
-        // if (!this.state.imageselected)
-        //     this.setState({ image: '' });
-        // We have to change the value of image to null when we post this
     }
 
     render() {
