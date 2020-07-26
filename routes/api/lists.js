@@ -45,17 +45,17 @@ router.post("/todo/add", (req, res) => {
 // @desc Remove from todo list
 // @access Private
 router.post("/todo/remove", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.todo.pull({id : req.body.openingid})
-            user.update()
+            user.todo.splice(user.todo.findIndex(t => t.id.equals(req.body.openingid)) , 1)
+            user.save()
                 .then(user => res.status(200).json({ 
                     msg: "Item removed from todo",
                     user: user.fullname,
                     updated_todo: user.todo
                 }))
                 .catch(err => res.status(400).json({
-                    msg: "Failed to remove item",
+                    msg: "Failed to remove item from todo",
                     error: err
                 }))
         })
@@ -71,10 +71,10 @@ router.post("/todo/remove", (req, res) => {
 // @desc Move item from todo to applied
 // @access Private
 router.post("/applied/add", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.todo.pull({id : req.body.openingid})
-            user.applied.push({id : req.body.openingid})
+            user.todo.splice(user.todo.findIndex(t => t.id.equals(req.body.openingid)) , 1)
+            user.applied.unshift({id : req.body.openingid})
             user.save()
                 .then(user => res.status(200).json({ 
                     msg: "Item moved from todo to applied",
@@ -99,9 +99,9 @@ router.post("/applied/add", (req, res) => {
 // @desc Move applied item back to todo
 // @access Private
 router.post("/applied/back", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.applied.pull({id : req.body.openingid})
+            user.applied.splice(user.applied.findIndex(t => t.id.equals(req.body.openingid)) , 1)
             user.todo.push({id : req.body.openingid})
             user.save()
                 .then(user => res.status(200).json({ 
