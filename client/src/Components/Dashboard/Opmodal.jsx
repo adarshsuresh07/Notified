@@ -38,7 +38,7 @@ class Opmodal extends React.Component {
                     <div className="modal-right">
                         <img src={data.image} alt="" />
                         <span>{data.contact}</span>
-                        <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color }}>{data.applylink}</a>
+                        <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color, width:"90%" }}>Apply Link</a>
                         <p>{data.furtherdetails}</p>
                     </div>
                 </div>

@@ -9,14 +9,16 @@ class NoPage extends React.Component {
     }
 
     goHome=()=>{
-        window.location.href="/";
+        setTimeout(() => {
+            window.location.href="/";            
+        }, 1000);
     }
 
     render() {
         return (
             <div className="verify-container">
                 <h1 className="landing-name">Notified</h1>
-                <h1 className="verify-content">Hi {this.state.user}!</h1>
+                <h1 className="verify-content">Hi!</h1>
                 <Typing speed={80} onFinishedTyping={this.goHome}>
                     <span>{this.state.data}</span>
                 </Typing> 
