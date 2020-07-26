@@ -34,7 +34,7 @@ class App extends Component {
           <Switch>
             <PublicRoute component={Landing} path="/" exact />
             <PublicRoute component={Dashboard} path="/dashboard" exact />
-            <PublicRoute component={Verifytoken} path="/api/verification/:token" />
+            <PublicRoute component={Verifytoken} path="/verification/:token" />
             <NoPage />
           </Switch>
         </BrowserRouter>
