@@ -9,7 +9,7 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", 
 const types = ["op", "todo", "applied", "expired"];
 
 class Optab extends React.Component {
-    
+
     render() {
         if (this.props.data) {
             const type = types[this.props.type];
@@ -42,8 +42,8 @@ class Optab extends React.Component {
                                     <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} onClick={() => this.props.addTodo(this.props.data._id)} />
                                 </button>
                                 : this.props.type === 2 ?
-                                    <span className="delete-tab">
-                                        <img src={close} title="Back to todo" alt="x" style={{ width: "1rem" }} onClick={() => this.props.deleteApplied(this.props.data._id)} />
+                                    <span className="delete-tab" title="Back to todo">
+                                        <i class="fa fa-undo" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.deleteApplied(this.props.data._id)}></i>
                                     </span>
                                     : null
                             }
