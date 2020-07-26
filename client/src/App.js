@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./Assets/css/main.css"
 import PublicRoute from "./Route/Publicroute"
+import UserRoute from "./Route/Userroute"
 import { BrowserRouter, Switch } from "react-router-dom";
 import Landing from "./Components/Landing/Landing"
 import Dashboard from "./Components/Dashboard/Dashboard.jsx"
@@ -32,9 +33,9 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <PublicRoute component={Landing} path="/" exact />
-            <PublicRoute component={Dashboard} path="/dashboard" exact />
-            <PublicRoute component={Verifytoken} path="/verification/:token" />
+            <PublicRoute component={Landing} path="/" restricted={true} exact />
+            <UserRoute component={Dashboard} path="/dashboard" exact />
+            <PublicRoute component={Verifytoken} restricted={true} path="/verification/:token" />
             <NoPage />
           </Switch>
         </BrowserRouter>

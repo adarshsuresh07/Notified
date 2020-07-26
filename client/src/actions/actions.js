@@ -53,7 +53,6 @@ export const showData = (data, stack) => dispatch => {
 };
 
 export const newData = (data) => dispatch => {
-  console.log(data);
   const newOP = {
     position: data.position,
     company: data.company,
@@ -135,7 +134,6 @@ export const addTodo = (id) => dispatch => {
   }
   axios.post("/api/lists/todo/add", sendData)
     .then(res => {
-      console.log(res);
       opdata.forEach((item, index) => {
         if (item._id === id) {
           todoop = item;
@@ -192,45 +190,63 @@ export const deleteTodo = (id) => dispatch => {
   const data = store.getState().opps;
   var { opdata, tododata } = data;
   var todoop, opindex;
-  tododata.forEach((item, index) => {
-    if (item._id === id) {
-      todoop = item;
-      opindex = index;
-    }
-  });
-  tododata.splice(opindex, 1);
-  const today = new Date();
-  const duedate = new Date(todoop.due);
-  if (duedate >= today)
-    opdata = [todoop, ...opdata];
-  dispatch(handleToast('success', "Successfully removed from Todo!"));
-  dispatch({
-    type: "SET_DATA",
-    opdata: opdata,
-    exdata: data.exdata,
-    tododata: tododata,
-    applieddata: data.applieddata
-  });
+  const sendData = {
+    "userid": store.getState().auth.user.id,
+    "openingid": id
+  }
+  axios.post("/api/lists/todo/remove", sendData)
+    .then(res => {
+      tododata.forEach((item, index) => {
+        if (item._id === id) {
+          todoop = item;
+          opindex = index;
+        }
+      });
+      tododata.splice(opindex, 1);
+      const today = new Date();
+      const duedate = new Date(todoop.due);
+      if (duedate >= today)
+        opdata = [todoop, ...opdata];
+      dispatch(handleToast('success', "Successfully removed from Todo!"));
+      dispatch({
+        type: "SET_DATA",
+        opdata: opdata,
+        exdata: data.exdata,
+        tododata: tododata,
+        applieddata: data.applieddata
+      });
+    }).catch(error =>
+      console.log(error.response)
+    );
 }
 
 export const deleteApplied = (id) => dispatch => {
   const data = store.getState().opps;
   var { tododata, applieddata } = data;
   var todoop, opindex;
-  applieddata.forEach((item, index) => {
-    if (item._id === id) {
-      todoop = item;
-      opindex = index;
-    }
-  });
-  applieddata.splice(opindex, 1);
-  tododata = [todoop, ...tododata];
-  dispatch(handleToast('success', "Successfully removed from Applied!"));
-  dispatch({
-    type: "SET_DATA",
-    opdata: data.opdata,
-    exdata: data.exdata,
-    tododata: tododata,
-    applieddata: applieddata
-  });
+  const sendData = {
+    "userid": store.getState().auth.user.id,
+    "openingid": id
+  }
+  axios.post("/api/lists/applied/back", sendData)
+    .then(res => {
+      applieddata.forEach((item, index) => {
+        if (item._id === id) {
+          todoop = item;
+          opindex = index;
+        }
+      });
+      applieddata.splice(opindex, 1);
+      tododata = [todoop, ...tododata];
+      dispatch(handleToast('success', "Successfully removed from Applied!"));
+      dispatch({
+        type: "SET_DATA",
+        opdata: data.opdata,
+        exdata: data.exdata,
+        tododata: tododata,
+        applieddata: applieddata
+      });
+    }).catch(error =>
+      console.log(error.response)
+    );
 }
