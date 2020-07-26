@@ -127,9 +127,9 @@ router.post("/applied/back", (req, res) => {
 // @desc Clear items in todo list
 // @access Private
 router.post("/todo/clear", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.todo.pullAll()        // or loop and pop until length=0 :update
+            user.todo.splice(0, user.todo.length)
             user.save()
                 .then(user => res.status(200).json({ 
                     msg: "Todo list cleared",
@@ -153,9 +153,9 @@ router.post("/todo/clear", (req, res) => {
 // @desc Clear items in applied list
 // @access Private
 router.post("/applied/clear", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.applied.pullAll()        // or loop and pop until length=0 :update
+            user.applied.splice(0, user.applied.length)
             user.save()
                 .then(user => res.status(200).json({ 
                     msg: "Applied list cleared",
