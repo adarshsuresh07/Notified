@@ -96,7 +96,7 @@
   margin: 1rem;
   display: flex;
   background-color: #393e46;
-  color:#f8b500;
+  color: #f8b500;
   align-items: center;
   padding: 0 0.5rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
@@ -154,23 +154,22 @@
   font-weight: bold;
 }
 
-.aboutus-container{
-  width:100%;
+.aboutus-container {
+  width: 100%;
   background-color: #f8b500;
   padding: 2rem 0;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
- justify-content: space-between;
+  justify-content: space-between;
 }
 
-.aboutus{
+.aboutus {
   margin: 0 4rem;
   background-color: #393e46;
-  padding:0.5rem;
+  padding: 0.5rem;
   border-radius: 0.2rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
-  
 }
 
 .team-card {
@@ -179,16 +178,16 @@
   align-items: center;
   background-color: white;
   margin: 0.5rem;
-  padding:0 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.2rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
   text-decoration: none;
-  color:#393e46;
+  color: #393e46;
   cursor: pointer;
   font-size: 0.9rem;
 }
 
-.team-card:hover{
+.team-card:hover {
   text-decoration: none;
   color: #f8b500;
 }
@@ -198,20 +197,18 @@
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 600px){
-  .landing-container{
+@media only screen and (max-width: 600px) {
+  .landing-container {
     background-color: #393e46;
   }
-
   .landing-first {
     width: 100%;
-    height:200vh;
+    height: 200vh;
     display: flex;
     flex-direction: column;
     background-color: #393e46;
     background-image: none;
   }
-  
   .landing-left {
     width: 100%;
     height: 90vh;
@@ -220,7 +217,6 @@
     flex-direction: column;
     background-color: #f8b500;
   }
-  
   .landing-right {
     width: 100%;
     height: 100vh;
@@ -230,7 +226,6 @@
     position: relative;
     background-image: linear-gradient(to bottom right, #f8b500 70%, #393e46 30%);
   }
-  
   .landing-toggle {
     position: absolute;
     top: 85vh;
@@ -238,19 +233,17 @@
     margin: 1rem;
     display: flex;
     color: #393e46;
-    background-color:white;
+    background-color: white;
     align-items: center;
     padding: 0 0.5rem;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
     border-radius: 0.2rem;
     cursor: pointer;
   }
-  
   .landing-logo {
     width: 30vw;
     margin-left: 2rem;
   }
-  
   .landing-name {
     color: white;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
@@ -259,7 +252,6 @@
     font-weight: bold;
     margin: 1rem 2rem;
   }
-  
   .landing-left p {
     width: 80vw;
     margin-left: 0;
@@ -267,26 +259,22 @@
     text-align: justify;
     font-weight: bold;
   }
-  
-  .aboutus-container{
+  .aboutus-container {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .aboutus{
-    width:80%;
+  .aboutus {
+    width: 80%;
     margin: 0.5rem 2rem;
   }
-  
   .team-card {
     font-size: 0.8rem;
   }
-  
   .team-card img {
     width: 3rem;
-    margin-right: 0.5rem;    
+    margin-right: 0.5rem;
   }
-} 
+}
 
 /*-----------Dashboard----------------------*/
 
@@ -326,12 +314,18 @@
   align-items: center;
 }
 
-.profile img {
+.profile-img {
   width: 4rem;
   height: 4rem;
-  border: 5px solid #393e46;
+  color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  /* border: 5px solid #f8b500; */
+  /* font-family: 'Pacifico', cursive; */
+  background-color: #f8b500;
   border-radius: 50%;
-  cursor: pointer;
 }
 
 .profile-name {
@@ -339,6 +333,7 @@
   flex-direction: column;
   align-items: flex-end;
   margin: 0.5rem;
+  color: #f8b500;
 }
 
 .profile-name span {
@@ -424,7 +419,7 @@
   border-bottom: 3px solid #e84a5f;
 }
 
-.empty{
+.empty {
   font-size: 1rem;
   margin: 1rem 0;
   font-family: 'Pacifico', cursive;
@@ -978,27 +973,39 @@ option {
 
 /* ---------------- Modal --------------*/
 
-.dashboard-modal-off {
+.modal-container-off {
+  visibility: hidden;
   position: absolute;
-  top: 0;
+}
+
+.modal-container-on {
+  visibility: visible;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  /* filter: blur(8px);
+  -webkit-filter: blur(8px); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+.dashboard-modal-off {
   width: 80%;
-  margin-top: 0;
-  margin-left: 0;
-  height: 0;
   visibility: hidden;
   opacity: 0;
   color: white;
-  /* transition: height 0.5s ease-in-out opacity 5s; */
+  position: relative;
 }
 
 .dashboard-modal-on {
-  position: absolute;
-  top: 0;
   width: 80%;
-  margin-top: 10vh;
   height: 80vh;
-  margin-left: 10%;
   visibility: visible;
+  z-index: 9;
   background-color: #393e46;
   color: white;
   transition: opacity 0.5s;
@@ -1006,6 +1013,7 @@ option {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
   border-radius: 0.2rem;
   display: flex;
+  position: relative;
 }
 
 .modal-close {
@@ -1061,7 +1069,7 @@ option {
   padding: 0.2rem;
   width: auto;
   display: inline-block;
-  zoom: 1; 
+  zoom: 1;
   *display: inline;
   margin: 3px;
   font-size: 12px;
@@ -1339,6 +1347,25 @@ option {
   }
 }
 
-a{
+a {
   text-decoration: none;
 }
+
+/*-----------------Email Verify----------------------*/
+
+.verify-container{
+  width:100vw;
+  height:100vh;
+  background-color: #393e46;
+  color:#f8b500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.verify-content{
+  font-family: 'Pacifico', cursive;
+  margin: 3rem 0;
+}
+

@@ -27,6 +27,18 @@ class Dashboard extends React.Component {
     componentDidMount() {
         this.props.setUserData();
     }
+
+    getProfileImg = () => {
+        if (this.props.auth.user.fullname) {
+            var matches = this.props.auth.user.fullname.match(/\b(\w)/g);
+            var str = matches[0];
+            if (matches.length > 1) {
+                str = str + matches[1];
+            }
+            return str;
+        }
+        return '';
+    }
     render() {
         return (
             <div className="overlay">
@@ -41,7 +53,9 @@ class Dashboard extends React.Component {
                                 <span>{this.props.auth.user.fullname}</span>
                                 <small>{this.props.auth.user.email}</small>
                             </div>
-                            <img src={defaultimg} alt="" />
+                            <div className="profile-img">
+                                {this.getProfileImg()}
+                            </div>
                         </div>
                     </div>
                     <div className="second-col-bottom">

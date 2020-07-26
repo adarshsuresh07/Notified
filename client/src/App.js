@@ -13,6 +13,7 @@ import store from "./store";
 import { isLogin, getToken } from './utils/Token'
 import Toast from "./Components/Toast/Toast"
 import Verifytoken from "./Components/Verifytoken"
+import NoPage from "./Components/NoPage"
 if (isLogin()) {
   const token = getToken();
   setAuthToken(token);
@@ -34,6 +35,7 @@ class App extends Component {
             <PublicRoute component={Landing} path="/" exact />
             <PublicRoute component={Dashboard} path="/dashboard" exact />
             <PublicRoute component={Verifytoken} path="/api/verification/:token" />
+            <NoPage />
           </Switch>
         </BrowserRouter>
         <Toast />

@@ -39,50 +39,54 @@ class Newop extends React.Component {
             this.props.handleToast("error", "Apply link should not be empty");
         else {
             this.props.newData(this.state);
-            this.props.closeModal();
+            setTimeout(() => {
+                this.props.closeModal();
+            }, 800);
         }
     }
 
     render() {
         return (
-            <div className={this.props.newop ? "dashboard-modal-on" : "dashboard-modal-off"}>
-                <span className="modal-close" onClick={this.props.closeModal}>
-                    <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
-                </span>
-                <div className="modal-left">
-                    <input type="text" placeholder="Position" onChange={e => this.setState({ position: e.target.value })} />
-                    <input type="text" placeholder="Company" onChange={e => this.setState({ company: e.target.value })} /> <br />
-                    <div className="modal-row" onChange={e => this.setState({ category: e.target.value })}>Category: &nbsp;
+            <div className={this.props.newop ? "modal-container-on" : "modal-container-off"}>
+                <div className={this.props.newop ? "dashboard-modal-on" : "dashboard-modal-off"}>
+                    <span className="modal-close" onClick={this.props.closeModal}>
+                        <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                    </span>
+                    <div className="modal-left">
+                        <input type="text" placeholder="Position" onChange={e => this.setState({ position: e.target.value })} />
+                        <input type="text" placeholder="Company" onChange={e => this.setState({ company: e.target.value })} /> <br />
+                        <div className="modal-row" onChange={e => this.setState({ category: e.target.value })}>Category: &nbsp;
                         <select style={{ width: "40%" }}>
-                            <option value="Job">Job</option>
-                            <option value="Internship">Internship</option>
-                            <option value="Fellowship">Fellowship</option>
-                        </select>
-                    </div> <br />
-                    <div className="modal-row">
-                        Last Date: &nbsp; <input type="date" placeholder="Company" style={{ width: "40%" }} onChange={e => this.setState({ due: e.target.value })} />
+                                <option value="Job">Job</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Fellowship">Fellowship</option>
+                            </select>
+                        </div> <br />
+                        <div className="modal-row">
+                            Last Date: &nbsp; <input type="date" placeholder="Company" style={{ width: "40%" }} onChange={e => this.setState({ due: e.target.value })} />
+                        </div>
+                        <div className="modal-type-container">
+                            {
+                                this.state.type.split(/[ ,]+/).map((type, index) => {
+                                    if (type)
+                                        return <div className={"modal-type type" + index % 3}>{type}</div>
+                                })
+                            }
+                        </div>
+                        <input type="text" placeholder="Requirements" onChange={e => this.setState({ type: e.target.value })} />
+                        <textarea placeholder="Description" onChange={e => this.setState({ description: e.target.value })} />
                     </div>
-                    <div className="modal-type-container">
-                        {
-                            this.state.type.split(/[ ,]+/).map((type, index) => {
-                                if (type)
-                                    return <div className={"modal-type type" + index % 3}>{type}</div>
-                            })
-                        }
+                    <div className="modal-right">
+                        <label style={{ height: "50%", cursor: "pointer" }}>
+                            <input type="file" style={{ visibility: "hidden" }} accept="image/*" onChange={this.fileSelectHandler} />
+                            <img src={this.state.image} style={{ height: "80%" }} alt=""></img>
+                        </label>
+                        <input type="text" placeholder="Contact" onChange={e => this.setState({ contact: e.target.value })} />
+                        <input type="text" placeholder="Apply link" onChange={e => this.setState({ applylink: e.target.value })} />
+                        <textarea placeholder="Further details" onChange={e => this.setState({ furtherdetails: e.target.value })} />
                     </div>
-                    <input type="text" placeholder="Requirements" onChange={e => this.setState({ type: e.target.value })} />
-                    <textarea placeholder="Description" onChange={e => this.setState({ description: e.target.value })} />
+                    <span className="modal-submit" onClick={this.submit}>Add Opportunity</span>
                 </div>
-                <div className="modal-right">
-                    <label style={{ height: "50%", cursor: "pointer" }}>
-                        <input type="file" style={{ visibility: "hidden" }} accept="image/*" onChange={this.fileSelectHandler} />
-                        <img src={this.state.image} style={{ height: "80%" }} alt=""></img>
-                    </label>
-                    <input type="text" placeholder="Contact" onChange={e => this.setState({ contact: e.target.value })} />
-                    <input type="text" placeholder="Apply link" onChange={e => this.setState({ applylink: e.target.value })} />
-                    <textarea placeholder="Further details" onChange={e => this.setState({ furtherdetails: e.target.value })} />
-                </div>
-                <span className="modal-submit" onClick={this.submit}>Add Opportunity</span>
             </div>
         )
     }

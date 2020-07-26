@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import setAuthToken from "../../../utils/setAuthToken";
 import { login } from "../../../utils/Token";
+import { handleToast } from "../../../actions/actions"
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -18,11 +21,13 @@ class LoginForm extends React.Component {
                 const token = res.data.token;
                 login(token);
                 setAuthToken(token);
-                window.location.href="/dashboard"
+                window.location.href = "/dashboard"
             })
-            .catch(err =>
-                console.log(err.response)
-            );
+            .catch(error => {
+                console.log(error.response);
+                if (error.response.data.msg)
+                    this.props.handleToast("error", error.response.data.msg);
+            });
     }
 
     render() {
@@ -37,6 +42,17 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+LoginForm.propTypes = {
+    handleToast: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    toast: state.toast
+});
+
+export default connect(
+    mapStateToProps,
+    { handleToast }
+)(LoginForm);
 
 
