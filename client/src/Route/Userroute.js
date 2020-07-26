@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 		// Otherwise, redirect the user to /signin page
 		<Route {...rest} render={props => (
 			isLogin() ?
-				<Component {...props} handleToast={handleToast} />
+				<Component {...props} />
 				: <Redirect to="/" />
 		)} />
 	);
