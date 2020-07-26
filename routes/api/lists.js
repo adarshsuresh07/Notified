@@ -7,19 +7,31 @@ const User = require("../../models/User")
 // @desc Add to todo list
 // @access Private
 router.post("/todo/add", (req, res) => {
-    User.findOne({ _id: req.body.userid })
+    User.findById(req.body.userid)
         .then(user => {
-            user.todo.push({id : req.body.openingid})
-            user.save()
-                .then(user => res.status(200).json({ 
-                    msg: "Item added to todo",
-                    user: user.fullname,
-                    updated_todo: user.todo
-                }))
-                .catch(err => res.status(400).json({
-                    msg: "Failed to add item to todo",
-                    error: err
-                }))
+            var exist = false
+            user.todo.forEach(element => {
+                if(element.id.equals(req.body.openingid)){
+                    exist = true
+                }
+            })
+            if(exist){
+                res.status(400).json({ 
+                    msg: "Item already in todo"
+                })
+            } else {
+                user.todo.unshift({id : req.body.openingid})
+                user.save()
+                    .then(user => res.status(200).json({ 
+                        msg: "Item added to todo",
+                        user: user.fullname,
+                        updated_todo: user.todo
+                    }))
+                    .catch(err => res.status(400).json({
+                        msg: "Failed to add item to todo",
+                        error: err
+                    }))
+            }
         })
         .catch(err => res.status(400).json({
             msg: "Unable to find user",
