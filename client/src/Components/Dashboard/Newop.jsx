@@ -1,9 +1,18 @@
 import React from 'react'
-import addimage from "../../Assets/Images/add-image.png"
+import job from "../../Assets/Images/job.jpg"
+import internship from "../../Assets/Images/intern2.jpg"
+import fellow from "../../Assets/Images/fellowship.jpg"
+import scholar from "../../Assets/Images/scholarship.jpg"
 import close from "../../Assets/Icons/close.png"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { handleToast, newData } from "../../actions/actions"
+const images = {
+    "Job": job,
+    "Internship": internship,
+    "Fellowship": fellow,
+    "Scholarship": scholar
+}
 class Newop extends React.Component {
     constructor(props) {
         super(props);
@@ -17,18 +26,18 @@ class Newop extends React.Component {
             contact: '',
             applylink: '',
             furtherdetails: '',
-            image: addimage,
-            imageselected: false,
+            // image: addimage,
+            // imageselected: false,
         }
     }
 
-    fileSelectHandler = e => {
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = (event) => {
-            this.setState({ image: event.target.result, imageselected: true })
-        }
-    }
+    // fileSelectHandler = e => {
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(e.target.files[0]);
+    //     reader.onload = (event) => {
+    //         this.setState({ image: event.target.result, imageselected: true })
+    //     }
+    // }
 
     submit = () => {
         if (this.state.position === "")
@@ -60,6 +69,7 @@ class Newop extends React.Component {
                                 <option value="Job">Job</option>
                                 <option value="Internship">Internship</option>
                                 <option value="Fellowship">Fellowship</option>
+                                <option value="Scholarship">Scholarship</option>
                             </select>
                         </div> <br />
                         <div className="modal-row">
@@ -77,10 +87,13 @@ class Newop extends React.Component {
                         <textarea placeholder="Description" onChange={e => this.setState({ description: e.target.value })} />
                     </div>
                     <div className="modal-right">
-                        <label style={{ height: "50%", cursor: "pointer" }}>
-                            <input type="file" style={{ visibility: "hidden" }} accept="image/*" onChange={this.fileSelectHandler} />
-                            <img src={this.state.image} style={{ height: "80%" }} alt=""></img>
-                        </label>
+                        <div className="modal-right-img">
+                            <img
+                                src={images[this.state.category]}
+                                style={{ height: "80%" }}
+                                alt=""
+                            />
+                        </div>
                         <input type="text" placeholder="Contact" onChange={e => this.setState({ contact: e.target.value })} />
                         <input type="text" placeholder="Apply link" onChange={e => this.setState({ applylink: e.target.value })} />
                         <textarea placeholder="Further details" onChange={e => this.setState({ furtherdetails: e.target.value })} />

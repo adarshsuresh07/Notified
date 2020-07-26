@@ -9,6 +9,7 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", 
 const types = ["op", "todo", "applied", "expired"];
 
 class Optab extends React.Component {
+    
     render() {
         if (this.props.data) {
             const type = types[this.props.type];

@@ -991,8 +991,8 @@ option {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
 
 .dashboard-modal-off {
@@ -1057,8 +1057,11 @@ option {
   justify-content: space-evenly;
 }
 
-.modal-right img {
-  width: 70%;
+.modal-right-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
   height: 50%;
   object-fit: contain;
 }
@@ -1104,6 +1107,16 @@ option {
   align-items: center;
   margin: 0;
   margin-left: 5px;
+}
+
+.modal-copy-link{
+  opacity:0;
+  transition: 1s opacity ease-in-out; 
+}
+
+.modal-show-copy-link{
+  opacity:1;
+  transition: 1s opacity ease-in-out; 
 }
 
 /*----Bell animation---*/
@@ -1353,21 +1366,24 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 /*-----------------Email Verify----------------------*/
 
-.verify-container{
-  width:100vw;
-  height:100vh;
+.verify-container {
+  width: 100vw;
+  height: 100vh;
   background-color: #393e46;
-  color:#f8b500;
+  color: #f8b500;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 20px;
 }
 
-.verify-content{
+.verify-content {
   font-family: 'Pacifico', cursive;
   margin: 3rem 0;
 }
-

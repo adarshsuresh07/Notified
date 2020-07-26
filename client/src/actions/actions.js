@@ -64,7 +64,6 @@ export const newData = (data) => dispatch => {
     contact: data.contact,
     applylink: data.applylink,
     furtherdetails: data.furtherdetails,
-    image: data.imageselected ? data.image : '',
     posted_by: store.getState().auth.user.id,
   }
   axios.post("/api/openings/create", newOP)

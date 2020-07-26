@@ -77,6 +77,7 @@ class Opstack extends React.Component {
                         <option value="Job">Job</option>
                         <option value="Internship">Internship</option>
                         <option value="Fellowship">Fellowship</option>
+                        <option value="Scholarship">Scholarship</option>
                     </select>
                     <div className="searchBox">
                         <input className="searchInput" type="text" id="search-bar" placeholder="Search" onKeyPress={this.filterbySearch} />

@@ -3,9 +3,32 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import close from "../../Assets/Icons/close.png"
 import { showData } from "../../actions/actions"
+import job from "../../Assets/Images/job.jpg"
+import internship from "../../Assets/Images/intern2.jpg"
+import fellow from "../../Assets/Images/fellowship.jpg"
+import scholar from "../../Assets/Images/scholarship.jpg"
+const images = {
+    "Job": job,
+    "Internship": internship,
+    "Fellowship": fellow,
+    "Scholarship": scholar
+}
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const colors = ["#b45dfc", "#e84a5f", "#f8b500"];
 class Opmodal extends React.Component {
+    copyLink = () => {
+        var text = this.props.feed.data.applylink;
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        document.getElementById("copy-clip").className = "modal-show-copy-link";
+        setTimeout(() => {
+            document.getElementById("copy-clip").className = "modal-copy-link";
+        }, 3000);
+    }
     render() {
         const data = this.props.feed.data;
         const d = new Date(data.due);
@@ -36,9 +59,23 @@ class Opmodal extends React.Component {
                         <p>{data.description}</p>
                     </div>
                     <div className="modal-right">
-                        <img src={data.image} alt="" />
+                        <div className="modal-right-img">
+                            <img
+                                src={images[data.category]}
+                                style={{ height: "80%" }}
+                                alt=""
+                            />
+                        </div>
                         <span>{data.contact}</span>
-                        <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color, width:"90%" }}>Apply Link</a>
+                        <div>
+                            <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color, width: "90%" }}>
+                                <span className="modal-type" style={{ backgroundColor: color, color: "white" }}>Apply Link</span>
+                            </a>
+                            <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer" }}>
+                                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <small className="modal-copy-link" id="copy-clip" style={{ color: color }}>Link copied to Clipboard!</small>
                         <p>{data.furtherdetails}</p>
                     </div>
                 </div>
