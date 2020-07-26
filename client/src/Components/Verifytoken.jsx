@@ -26,13 +26,20 @@ class Verifytoken extends React.Component {
                 });
             })
     }
+
+    goHome=()=>{
+        setTimeout(() => {
+            this.props.history.push("/")         
+        }, 1000);
+    }
+
     render() {
         return (
             <div className="verify-container">
                 <h1 className="landing-name">Notified</h1>
                 <h1 className="verify-content">Hi {this.state.user}!</h1>
                 {this.state.finished ?
-                    <Typing speed={80} onFinishedTyping={() => this.props.history.push("/")}>
+                    <Typing speed={80} onFinishedTyping={this.goHome}>
                         <span>{this.state.data}</span>
                     </Typing> : null
                 }
