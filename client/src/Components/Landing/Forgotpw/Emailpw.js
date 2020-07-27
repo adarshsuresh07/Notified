@@ -1,27 +1,24 @@
 import React from "react";
 import axios from "axios";
-import setAuthToken from "../../../utils/setAuthToken";
-import { login } from "../../../utils/Token";
 import { handleToast } from "../../../actions/actions"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-class LoginForm extends React.Component {
+class Emailpw extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: '',
         }
     }
-
-    userLogin = e => {
+    register = (e) => {
         e.preventDefault();
-        axios.post("/api/users/login", this.state)
+        const data = {
+            "email": this.state.email,
+        }
+        axios
+            .post("/api/users/register", this.state)
             .then(res => {
-                const token = res.data.token;
-                login(token);
-                setAuthToken(token);
-                window.location.href = "/dashboard"
+                this.props.handleToast("success", "Email for reseting password sent");
             })
             .catch(error => {
                 console.log(error.response);
@@ -32,18 +29,15 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <form className="test-inner" onSubmit={this.userLogin}>
-                {/* <span>error</span> */}
+            <form className="test-inner" onSubmit={this.register}>
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
-                <input type="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required />
-                <button type="submit">Login</button>
-                <small style={{ color: "#f8b500", cursor: "pointer" }} onClick={this.props.forgotPw}>Forgot Password?</small>
+                <button type="submit">Send Mail</button>
             </form>
         );
     }
 }
 
-LoginForm.propTypes = {
+Emailpw.propTypes = {
     handleToast: PropTypes.func.isRequired,
 };
 
@@ -54,6 +48,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { handleToast }
-)(LoginForm);
-
-
+)(Emailpw);

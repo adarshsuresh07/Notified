@@ -125,7 +125,7 @@
 .test button {
   background-color: #f8b500;
   color: #393e46;
-  margin-top: 0.8rem;
+  margin: 0.8rem 0;
   padding: 0.3rem 0.8rem;
   border: none;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -159,9 +159,9 @@
   background-color: #f8b500;
   padding: 2rem 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .aboutus {
@@ -169,6 +169,27 @@
   background-color: #393e46;
   padding: 0.5rem;
   border-radius: 0.2rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.landing-button-grp {
+  display: flex;
+  flex-direction: column;
+  width: 12vw;
+}
+
+.landing-button-grp button {
+  margin: 0.3rem 0;
+  padding: 0.2rem 0.5rem;
+  background-color: #393e46;
+  border: none;
+  border-radius: 0.2rem;
+  color: white;
+  text-align: left;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.landing-button-grp button:hover {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
 }
 
@@ -195,6 +216,30 @@
 .team-card img {
   width: 4rem;
   border-radius: 50%;
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  height: 70%;
+  width: 50%;
+}
+
+.feedback-container textarea {
+  height: 40%;
+}
+
+.feedback-container button {
+  background-color: #f8b500;
+  color: #393e46;
+  margin: 0.8rem 0;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 0.2rem;
+  width: 10rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1109,14 +1154,14 @@ option {
   margin-left: 5px;
 }
 
-.modal-copy-link{
-  opacity:0;
-  transition: 1s opacity ease-in-out; 
+.modal-copy-link {
+  opacity: 0;
+  transition: 1s opacity ease-in-out;
 }
 
-.modal-show-copy-link{
-  opacity:1;
-  transition: 1s opacity ease-in-out; 
+.modal-show-copy-link {
+  opacity: 1;
+  transition: 1s opacity ease-in-out;
 }
 
 /*----Bell animation---*/
@@ -1362,11 +1407,7 @@ option {
   }
 }
 
-a {
-  text-decoration: none;
-}
-
-a:hover {
+a, a:hover {
   text-decoration: none;
 }
 

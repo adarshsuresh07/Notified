@@ -69,9 +69,9 @@ class Opmodal extends React.Component {
                         <span>{data.contact}</span>
                         <div>
                             <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color, width: "90%" }}>
-                                <span className="modal-type" style={{ backgroundColor: color, color: "white" }}>Apply Link</span>
+                                <span className="modal-type" style={{ backgroundColor: color, color: "white", fontSize:"0.9rem" }}>Apply Link</span>
                             </a>
-                            <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer" }}>
+                            <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer",  fontSize:"0.9rem" }}>
                                 <i class="fa fa-clipboard" aria-hidden="true"></i>
                             </span>
                         </div>

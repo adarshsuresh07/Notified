@@ -1,6 +1,10 @@
 import React from "react";
 import LoginForm from "./Login/LoginForm.js";
 import RegisterForm from "./Register/RegisterForm.js";
+import Emailpw from "./Forgotpw/Emailpw"
+import Feedback from "./Feedback"
+import Help from "./Help"
+import Scope from "./Scope"
 import defaultimg from "../../Assets/Images/notified.png"
 import defaultteam from "../../Assets/Images/you.jpg"
 import Carousel from "./Carousel"
@@ -8,7 +12,10 @@ export default class Landing extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signup: false
+            signup: 0,
+            feedback: false,
+            help: false,
+            scope: false
         }
     }
     render() {
@@ -28,12 +35,15 @@ export default class Landing extends React.Component {
                         <div className="test">
                             <div className="test-outer" />
                             {
-                                this.state.signup ?
+                                this.state.signup === 1 ?
                                     <RegisterForm />
-                                    : <LoginForm />
+                                    : this.state.signup === 2 ?
+                                        <Emailpw />
+                                        : <LoginForm forgotPw={() => this.setState({ signup: 2 })} />
+
                             }
                         </div>
-                        <div className="landing-toggle" onClick={() => this.setState({ signup: !this.state.signup })}>
+                        <div className="landing-toggle" onClick={() => this.setState({ signup: this.state.signup === 0 ? 1 : 0 })}>
                             <span className="bell fa fa-bell" /> &nbsp;
                             {
                                 this.state.signup ?
@@ -50,6 +60,17 @@ export default class Landing extends React.Component {
                     <Carousel />
                 }
                 <div className="aboutus-container">
+                    <div className="landing-button-grp">
+                        <button title="Help" onClick={() => this.setState({ help: true })}>
+                            Help
+                        </button>
+                        <button title="Feedback/ Ask Questions" onClick={() => this.setState({ feedback: true })}>
+                            Feedback
+                        </button>
+                        <button title="Future Scope" onClick={() => this.setState({ scope: true })}>
+                            Scope
+                        </button>
+                    </div>
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Source Code</h4>
                         <a className="team-card" href="https://github.com/adarshsuresh07/Notified" target="_blank" rel="noopener noreferrer">
@@ -69,7 +90,16 @@ export default class Landing extends React.Component {
                         </a>
                     </div>
                 </div>
-            </div>
+                {this.state.feedback ?
+                    <Feedback closeModal={() => this.setState({ feedback: false })} /> : null
+                }
+                {this.state.help ?
+                    <Help closeModal={() => this.setState({ help: false })} /> : null
+                }
+                {this.state.scope ?
+                    <Scope closeModal={() => this.setState({ scope: false })} /> : null
+                }
+            </div >
         );
     }
 }

@@ -84,7 +84,7 @@ class Newop extends React.Component {
                             }
                         </div>
                         <input type="text" placeholder="Requirements" onChange={e => this.setState({ type: e.target.value })} />
-                        <textarea placeholder="Description" onChange={e => this.setState({ description: e.target.value })} />
+                        <textarea placeholder="Description" maxLength="300" onChange={e => this.setState({ description: e.target.value })} />
                     </div>
                     <div className="modal-right">
                         <div className="modal-right-img">
@@ -96,7 +96,7 @@ class Newop extends React.Component {
                         </div>
                         <input type="text" placeholder="Contact" onChange={e => this.setState({ contact: e.target.value })} />
                         <input type="text" placeholder="Apply link" onChange={e => this.setState({ applylink: e.target.value })} />
-                        <textarea placeholder="Further details" onChange={e => this.setState({ furtherdetails: e.target.value })} />
+                        <textarea placeholder="Further details" maxLength="300" onChange={e => this.setState({ furtherdetails: e.target.value })} />
                     </div>
                     <span className="modal-submit" onClick={this.submit}>Add Opportunity</span>
                 </div>
