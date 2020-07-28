@@ -12,24 +12,27 @@ class Feedback extends React.Component {
             feedback: '',
         }
     }
-    register = (e) => {
+    feedback = (e) => {
         e.preventDefault();
         const data = {
             "email": this.state.email,
             "feedback": this.state.feedback
         }
         axios
-            .post("/api/users/register", this.state)
+            .post("/api/feedback/add", data)
             .then(res => {
-                this.props.handleToast("success", "Password Reset successful");
+                console.log(res);
+                this.props.handleToast("success", "Feedback sent successful");
             })
             .catch(error => {
                 console.log(error.response);
-                if (error.response.data.msg)
-                    this.props.handleToast("error", error.response.data.msg);
-            });
+                this.props.handleToast("error", "Feedback couldn't send");
+            }).finally(() => {
+                setTimeout(() => {
+                    this.props.closeModal();
+                }, 1000);
+            })
     }
-
 
     render() {
         const modalStyle = {
@@ -44,7 +47,7 @@ class Feedback extends React.Component {
                         <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
                     </span>
                     <h1 className="landing-name">Notified</h1>
-                    <form className="feedback-container" onSubmit={this.register}>
+                    <form className="feedback-container" onSubmit={this.feedback}>
                         <input type="email" placeholder="Email" onChange={e => this.setState({ email: e.target.value })} required />
                         <textarea placeholder="Feedback" onChange={e => this.setState({ feedback: e.target.value })} required />
                         <button type="submit">Submit Feedback</button>

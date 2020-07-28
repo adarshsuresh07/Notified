@@ -41,10 +41,12 @@ const users = require('./routes/api/users')
 const openings = require('./routes/api/openings')
 const lists = require('./routes/api/lists')
 const verification = require('./routes/api/verification')
+const feedback = require('./routes/api/feedback')
 app.use("/api/users", users)
 app.use("/api/openings", openings)
 app.use("/api/lists", lists)
 app.use("/api/verification", verification)
+app.use("/api/feedback", feedback)
 
 
 
