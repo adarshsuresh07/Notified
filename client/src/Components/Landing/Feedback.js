@@ -19,7 +19,7 @@ class Feedback extends React.Component {
             "feedback": this.state.feedback
         }
         axios
-            .post("/api/feedback/add", data)
+            .post("/api/feedback/", data)
             .then(res => {
                 console.log(res);
                 this.props.handleToast("success", "Feedback sent successful");

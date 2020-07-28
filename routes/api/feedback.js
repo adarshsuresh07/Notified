@@ -6,7 +6,7 @@ const Validator = require("validator")
 // @route POST api/feedback/
 // @desc Send feedback
 // @access Public
-router.post("/add", (req, res) => {
+router.post("/", (req, res) => {
     const data = {
         email: req.body.email,
         feedback: req.body.feedback
