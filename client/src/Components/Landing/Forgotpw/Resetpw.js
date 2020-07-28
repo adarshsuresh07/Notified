@@ -15,7 +15,7 @@ class Resetpw extends React.Component {
             token: this.props.match.params.token
         }
     }
-    register = (e) => {
+    resetPass = (e) => {
         e.preventDefault();
         const data = {
             "token": this.state.token,
@@ -24,15 +24,20 @@ class Resetpw extends React.Component {
         }
         if (!this.state.error)
             axios
-                .post("/api/users/register", this.state)
+                .post("/api/reset-password/password", data)
                 .then(res => {
+                    console.log(res);
                     this.props.handleToast("success", "Password Reset successful");
                 })
                 .catch(error => {
                     console.log(error.response);
                     if (error.response.data.msg)
                         this.props.handleToast("error", error.response.data.msg);
-                });
+                }).finally(()=>{
+                    setTimeout(() => {
+                        this.props.history.push("/");                        
+                    }, 1000);
+                })
     }
 
     validatePassword = (e) => {
@@ -78,7 +83,7 @@ class Resetpw extends React.Component {
                 <h1 className="landing-name">Notified</h1>
                 <div className="test" style={{ marginTop: "3rem", fontSize:"0.9rem" }}>
                     <div className="test-outer" />
-                    <form className="test-inner" onSubmit={this.register}>
+                    <form className="test-inner" onSubmit={this.resetPass}>
                         <small style={{ color: "red" }}>{this.state.error}</small>
                         <input type="password" placeholder="Password" onChange={this.validatePassword} required />
                         <input type="password" placeholder="Confirm Password" onChange={this.validateCPassword} required />

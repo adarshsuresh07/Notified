@@ -51,7 +51,7 @@ router.post("/register", (req, res) => {
                                     msg: "Token generation for verification failed",
                                     error: err
                                 })
-                                sendEmail(newUser, token)
+                                sendEmail(newUser, token, "register")
                             }
                         )
                         res.json({ 

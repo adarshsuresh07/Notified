@@ -10,7 +10,13 @@ const User = require("../../models/User")
 // @desc Verify registered user 
 // @access Private
 router.post("/:token", (req, res) => {
-    const decoded = jwt_decode(req.params.token)
+    var decode=''
+    try{
+        decoded = jwt_decode(req.params.token)
+    }
+    catch{
+        return res.status(400).json({ msg: "Invalid token error" })
+    }
     User.findById(decoded.id)
         .then(user => {
             user.update({verified: true})

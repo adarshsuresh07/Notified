@@ -10,14 +10,15 @@ class Emailpw extends React.Component {
             email: '',
         }
     }
-    register = (e) => {
+    sentEmail = (e) => {
         e.preventDefault();
         const data = {
             "email": this.state.email,
         }
         axios
-            .post("/api/users/register", this.state)
+            .post("/api/reset-password/email", data)
             .then(res => {
+                console.log(res);
                 this.props.handleToast("success", "Email for reseting password sent");
             })
             .catch(error => {
@@ -29,7 +30,7 @@ class Emailpw extends React.Component {
 
     render() {
         return (
-            <form className="test-inner" onSubmit={this.register}>
+            <form className="test-inner" onSubmit={this.sentEmail}>
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
                 <button type="submit">Send Mail</button>
             </form>
