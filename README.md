@@ -67,22 +67,16 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 
 ## Contributors
 
- `Adarsh S `
- 
 [1]: https://github.com/adarshsuresh07
 [2]: https://adarshsuresh07.github.io/Portfolio/
-
-
-[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][1]      [![portfolio](https://img.icons8.com/material-sharp/24/000000/domain.png)][2]
----
-
-`Haseena Hassan`
-
 [3]: https://github.com/haseena-hassan
 [4]: http://www.linkedin.com/in/haseena-hassan
 
 
-[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][3]    [![linkedin](https://img.icons8.com/material-rounded/24/000000/linkedin.png)][4]
+ `Adarsh S `  [![github](https://img.icons8.com/material-sharp/24/000000/github.png)][1]      [![portfolio](https://img.icons8.com/material-sharp/24/000000/domain.png)][2]
+
+
+`Haseena Hassan` [![github](https://img.icons8.com/material-sharp/24/000000/github.png)][3]    [![linkedin](https://img.icons8.com/material-rounded/24/000000/linkedin.png)][4]
 
 
 

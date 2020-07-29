@@ -1119,7 +1119,7 @@ option {
   padding: 0.2rem;
   width: auto;
   display: inline-block;
-  zoom: 1;
+  /* zoom: 1; */
   *display: inline;
   margin: 3px;
   font-size: 12px;

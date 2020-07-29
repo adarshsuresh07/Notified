@@ -15,7 +15,6 @@ export const setCurrentUser = userData => {
 };
 
 const checkToken = () => {
-  console.log("hi");
   if (isLogin()) {
     const token = getToken();
     const decoded = jwt_decode(token);
