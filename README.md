@@ -7,7 +7,7 @@ Notified is a web application where students looking for career opportunities ca
  - [Motivation](https://github.com/adarshsuresh07/Notified#motivation)
  - [Stacks Used](https://github.com/adarshsuresh07/Notified#stacks-used)
  - [Basic concept](https://github.com/adarshsuresh07/Notified#basic-concept)
- - [Features](https://github.com/adarshsuresh07/Notified#features-implemeted)
+ - [Features Implemented](https://github.com/adarshsuresh07/Notified#features-implemented)
  - [Future Scopes](https://github.com/adarshsuresh07/Notified#future-scopes)
  - [Contributors](https://github.com/adarshsuresh07/Notified#contributors)
 
@@ -19,12 +19,12 @@ The initial motive behind the idea was to create a space dedicated for sharing c
 
 The whole application is build on the following : 
 
- -  `Reactjs`  front end
+ - `Reactjs`  front end
  - `Redux` state management
  - `MongoDB` database
  - `Nodejs - Express` backend
  - `SendGrid` email communication
- -  `Heroku` deployment
+ - `Heroku` deployment
 
 
 ## Basic concept
@@ -37,8 +37,19 @@ Lets now familiarise Notified a bit more clearly. You'll find 4 different stacks
  - ***Expired stack*** : A place where an opening from your main stack gets piled up when its no longer active.
 
 
-## Features Implemeted
+## Features Implemented
 
+ - [x] User authentication and account verification
+ - [x] Users can add a new opportunity
+ - [x] When a new opportunity is added, all users gets notified about it
+ - [x] The opportunities which are no longer active gets automatically moved to the expired stack
+ - [x] Users can filter the opportunities based on the categories  by any keyword
+ - [x] Users can search for opportunities by keywords
+ - [x] Users can customise their todo and applied stack by moving the opportunities back and forth between the stack
+ - [x] Even though a user can move an opportunity from main stack to todo, the change wont get reflected to other users, its perfectly abstracted
+ - [x] To apply for an opportunity, there is an apply button which directly takes you for applying or you can copy the link easily from there
+ - [x] Users can submit feedback and reach us in person for any queries or suggestions
+ - [x] A help section is available in the landing page to let you know the interface
  
 
 ## Future Scopes
@@ -61,7 +72,7 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 [2]: https://adarshsuresh07.github.io/Portfolio/
 
 
-[![github](https://img.icons8.com/fluent/48/000000/github.png)][1][![facebook](https://img.icons8.com/ios/50/000000/domain.png)][2]
+[![github](https://img.icons8.com/fluent/48/000000/github.png)][1]      [![portfolio](https://img.icons8.com/ios/50/000000/domain.png)][2]
 ---
 
 `Haseena Hassan`
@@ -70,16 +81,16 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 [2]: http://www.linkedin.com/in/haseena-hassan
 
 
-[![github](https://img.icons8.com/fluent/48/000000/github.png)][1][![linkedin](https://img.icons8.com/fluent/48/000000/linkedin.png)][2]
+[![github](https://img.icons8.com/fluent/48/000000/github.png)][1]      [![linkedin](https://img.icons8.com/fluent/48/000000/linkedin.png)][2]
 
 
 
 
-## # `A Note to Readers..`
+## #a note to readers..
 
-Have a question or want to reach out?
+Thank You ! Have a question or want to reach out?
 
 **We'd love to hear from you. If you don’t see the information you need or have a suggestion or feedback, email us at notified.team@gmail.com**
 
-Thank You !
+
 <img src="https://img.icons8.com/flat_round/64/000000/filled-like.png"/>
