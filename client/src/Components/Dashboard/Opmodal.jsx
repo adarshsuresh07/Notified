@@ -53,6 +53,7 @@ class Opmodal extends React.Component {
                                 t.map((type, index) => {
                                     if (type)
                                         return <div className={"modal-type type" + index % 3}>{type}</div>
+                                    return 
                                 })
                             }
                         </div>

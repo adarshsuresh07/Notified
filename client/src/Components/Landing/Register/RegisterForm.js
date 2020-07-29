@@ -26,7 +26,7 @@ class RegisterForm extends React.Component {
         }
         if (!this.state.error)
             axios
-                .post("/api/users/register", this.state)
+                .post("/api/users/register", data)
                 .then(res => {
                     this.props.handleToast("success", "Verification email sent");
                 })
