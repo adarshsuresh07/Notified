@@ -17,7 +17,8 @@ export default function (state = initialState, action) {
     default:
       return {
         ...state,
-        modalon: false
+        modalon: false,
+        data:{},
       }
   }
 }
