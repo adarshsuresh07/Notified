@@ -14,7 +14,7 @@ class Help extends React.Component {
             <div className="modal-container-on">
                 <div className="dashboard-modal-on" style={modalStyle}>
                     <span className="modal-close" onClick={this.props.closeModal}>
-                        <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                        <img src={close} title="Close" alt="x" style={{ width: "1rem" }} />
                     </span>
                     <h1 className="landing-name">Notified</h1>
                     <div className="row">
