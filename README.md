@@ -61,6 +61,7 @@ We are looking forward to incorporate many more user-friendly and amazing featur
  > 
  > Under the **room concept**, a user can initiate a room and invite users to the cluster and share things relevant to their cluster. Thus, there will be many rooms with two or more users belonging to it and is abstracted from other similar rooms.
  - [ ] Option to share an opportunity to a non user via a link
+ - [ ] Get notified on new openings based on preferences
 
  By listing them here, we feel more responsible in implementing them as soon as possible and glad to know what you think about it. 
 

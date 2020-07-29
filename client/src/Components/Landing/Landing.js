@@ -27,7 +27,8 @@ export default class Landing extends React.Component {
                         <div>
                             <div className="landing-name">notified</div><br />
                             <p>
-                            Notified is a web application where students looking for career opportunities can collaboratively manage and track the latest openings by adding to it as well as get notified when added by someone else. 
+                            Notified is a web application where students looking for career opportunities can collaboratively manage and track the latest openings by adding to it as well as get notified when added by someone else. <br/>
+                            The initial motive behind the idea was to create a space dedicated for sharing career openings for the students of our class. When shared through mediums like Whatsapp group, there is a much greater chance of getting ignored and at some point these messages gets piled up and students end up in no more paying attention to that. In addition, we felt a need to get notified about the openings of our preference and keep track of the application and wish list status of the opportunities.
                             </p>
                         </div>
                     </div>

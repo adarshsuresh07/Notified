@@ -24,7 +24,7 @@ class Help extends React.Component {
                                 <li>You will receive a mail (check in promotions also) and click on the link to verify</li>
                                 <li>Login with the registered email id and password</li>
                                 <li>You will see your dashboard if you login successfully</li>
-                                <li>You will be automatically logged out after a specific amount of time</li>
+                                <li>You will be automatically logged out after 10 hours</li>
                                 <li>Four stacks
                             <ol>
                                         <li>Opportunity</li>
