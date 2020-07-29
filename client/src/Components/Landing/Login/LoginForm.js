@@ -11,11 +11,13 @@ class LoginForm extends React.Component {
         this.state = {
             email: '',
             password: '',
+            loading: false
         }
     }
 
     userLogin = e => {
         e.preventDefault();
+        this.setState({ loading: true });
         axios.post("/api/users/login", this.state)
             .then(res => {
                 const token = res.data.token;
@@ -27,7 +29,9 @@ class LoginForm extends React.Component {
                 console.log(error.response);
                 if (error.response.data.msg)
                     this.props.handleToast("error", error.response.data.msg);
-            });
+            }).finally(() => {
+                this.setState({ loading: false });
+            })
     }
 
     render() {
@@ -36,7 +40,7 @@ class LoginForm extends React.Component {
                 {/* <span>error</span> */}
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
                 <input type="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required />
-                <button type="submit">Login</button>
+                <button type="submit" disabled={this.state.loading}>Login</button>
                 <small style={{ color: "#f8b500", cursor: "pointer" }} onClick={this.props.forgotPw}>Forgot Password?</small>
             </form>
         );

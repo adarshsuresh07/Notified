@@ -12,7 +12,8 @@ class Resetpw extends React.Component {
             perror: '',
             cerror: '',
             error: '',
-            token: this.props.match.params.token
+            token: this.props.match.params.token,
+            loading: true
         }
     }
     resetPass = (e) => {
@@ -22,7 +23,8 @@ class Resetpw extends React.Component {
             "password": this.state.password,
             "password2": this.state.password2
         }
-        if (!this.state.error)
+        if (!this.state.error) {
+            this.setState({ loading: true });
             axios
                 .post("/api/reset-password/password", data)
                 .then(res => {
@@ -33,11 +35,13 @@ class Resetpw extends React.Component {
                     console.log(error.response);
                     if (error.response.data.msg)
                         this.props.handleToast("error", error.response.data.msg);
-                }).finally(()=>{
+                }).finally(() => {
+                    this.setState({ loading: false });
                     setTimeout(() => {
-                        this.props.history.push("/");                        
+                        this.props.history.push("/");
                     }, 1000);
                 })
+        }
     }
 
     validatePassword = (e) => {
@@ -81,13 +85,13 @@ class Resetpw extends React.Component {
         return (
             <div className="verify-container">
                 <h1 className="landing-name">Notified</h1>
-                <div className="test" style={{ marginTop: "3rem", fontSize:"0.9rem" }}>
+                <div className="test" style={{ marginTop: "3rem", fontSize: "0.9rem" }}>
                     <div className="test-outer" />
                     <form className="test-inner" onSubmit={this.resetPass}>
                         <small style={{ color: "red" }}>{this.state.error}</small>
                         <input type="password" placeholder="Password" onChange={this.validatePassword} required />
                         <input type="password" placeholder="Confirm Password" onChange={this.validateCPassword} required />
-                        <button type="submit">Reset Password</button>
+                        <button type="submit" disabled={this.state.loading}>Reset Password</button>
                     </form>
                 </div>
             </div >

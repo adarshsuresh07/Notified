@@ -8,6 +8,7 @@ class Emailpw extends React.Component {
         super(props);
         this.state = {
             email: '',
+            loading: false
         }
     }
     sentEmail = (e) => {
@@ -15,6 +16,7 @@ class Emailpw extends React.Component {
         const data = {
             "email": this.state.email,
         }
+        this.setState({ loading: true });
         axios
             .post("/api/reset-password/email", data)
             .then(res => {
@@ -25,14 +27,16 @@ class Emailpw extends React.Component {
                 console.log(error.response);
                 if (error.response.data.msg)
                     this.props.handleToast("error", error.response.data.msg);
-            });
+            }).finally(() => {
+                this.setState({ loading: false });
+            })
     }
 
     render() {
         return (
             <form className="test-inner" onSubmit={this.sentEmail}>
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
-                <button type="submit">Send Mail</button>
+                <button type="submit" disabled={this.state.loading}>Send Mail</button>
             </form>
         );
     }

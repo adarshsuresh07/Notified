@@ -13,7 +13,8 @@ class RegisterForm extends React.Component {
             password2: '',
             perror: '',
             cerror: '',
-            error: ''
+            error: '',
+            loading: false
         }
     }
     register = (e) => {
@@ -24,7 +25,8 @@ class RegisterForm extends React.Component {
             "password": this.state.password,
             "password2": this.state.password2
         }
-        if (!this.state.error)
+        if (!this.state.error) {
+            this.setState({ loading: true });
             axios
                 .post("/api/users/register", data)
                 .then(res => {
@@ -34,7 +36,11 @@ class RegisterForm extends React.Component {
                     console.log(error.response);
                     if (error.response.data.msg)
                         this.props.handleToast("error", error.response.data.msg);
-                });
+                }).finally(() => {
+                    this.setState({ loading: false });
+                })
+        }
+
     }
 
     validatePassword = (e) => {
@@ -46,7 +52,7 @@ class RegisterForm extends React.Component {
         else {
             if (e.target.value !== this.state.password2)
                 this.setState({
-                    perror:'',
+                    perror: '',
                     cerror: 'Passwords should match',
                     error: 'Password should match'
                 });
@@ -82,7 +88,7 @@ class RegisterForm extends React.Component {
                 <input type="email" placeholder="Email Id" onChange={e => this.setState({ email: e.target.value })} required />
                 <input type="password" placeholder="Password" onChange={this.validatePassword} required />
                 <input type="password" placeholder="Confirm Password" onChange={this.validateCPassword} required />
-                <button type="submit">Register</button>
+                <button type="submit" disable={this.state.loading}>Register</button>
             </form>
         );
     }
