@@ -78,20 +78,20 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 
 `Haseena Hassan`
 
-[1]: https://github.com/haseena-hassan
-[2]: http://www.linkedin.com/in/haseena-hassan
+[3]: https://github.com/haseena-hassan
+[4]: http://www.linkedin.com/in/haseena-hassan
 
 
-[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][1]    [![linkedin](https://img.icons8.com/material-rounded/24/000000/linkedin.png)][2]
+[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][3]    [![linkedin](https://img.icons8.com/material-rounded/24/000000/linkedin.png)][4]
 
 
 
 
-## #a note to readers..
+## Note to readers..
 
 Thank You ! Have a question or want to reach out?
 
-**We'd love to hear from you. If you don’t see the information you need or have a suggestion or feedback, email us at notified.team@gmail.com**
+We'd love to hear from you. If you don’t see the information you need or have a suggestion or feedback, email us at notified.team@gmail.com
 
 
 <img src="https://img.icons8.com/bubbles/50/000000/filled-like.png"/>
