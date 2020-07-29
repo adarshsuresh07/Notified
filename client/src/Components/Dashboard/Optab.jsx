@@ -43,7 +43,7 @@ class Optab extends React.Component {
                                 </button>
                                 : this.props.type === 2 ?
                                     <span className="delete-tab" title="Back to todo">
-                                        <i class="fa fa-undo" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.deleteApplied(this.props.data._id)}></i>
+                                        <i className="fa fa-undo" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.deleteApplied(this.props.data._id)}></i>
                                     </span>
                                     : null
                             }

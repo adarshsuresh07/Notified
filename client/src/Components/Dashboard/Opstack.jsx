@@ -13,7 +13,6 @@ class Opstack extends React.Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({ filtered: nextProps.opps.opdata, filterexpired: nextProps.opps.exdata });
-        console.log(nextProps.opps.applieddata);
     }
 
     filterbyCat = e => {

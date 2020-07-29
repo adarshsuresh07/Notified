@@ -52,8 +52,8 @@ class Opmodal extends React.Component {
                             {
                                 t.map((type, index) => {
                                     if (type)
-                                        return <div className={"modal-type type" + index % 3}>{type}</div>
-                                    return 
+                                        return <div className={"modal-type type" + index % 3} key={index}>{type}</div>
+                                    return <span id={index}/>
                                 })
                             }
                         </div>
@@ -73,7 +73,7 @@ class Opmodal extends React.Component {
                                 <span className="modal-type" style={{ backgroundColor: color, color: "white", fontSize:"0.9rem" }}>Apply Link</span>
                             </a>
                             <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer",  fontSize:"0.9rem" }}>
-                                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                                <i className="fa fa-clipboard" aria-hidden="true"></i>
                             </span>
                         </div>
                         <small className="modal-copy-link" id="copy-clip" style={{ color: color }}>Link copied to Clipboard!</small>
