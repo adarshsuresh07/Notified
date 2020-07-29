@@ -44,14 +44,15 @@ class Feedback extends React.Component {
             <div className="modal-container-on">
                 <div className="dashboard-modal-on" style={modalStyle}>
                     <span className="modal-close" onClick={this.props.closeModal}>
-                        <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
+                        <img src={close} title="Close" alt="x" style={{ width: "1rem" }} />
                     </span>
                     <h1 className="landing-name">Notified</h1>
-                    <form className="feedback-container" onSubmit={this.feedback}>
-                        <input type="email" placeholder="Email" onChange={e => this.setState({ email: e.target.value })} required />
-                        <textarea placeholder="Feedback" onChange={e => this.setState({ feedback: e.target.value })} required />
-                        <button type="submit">Submit Feedback</button>
-                    </form>
+                            <form className="feedback-container" onSubmit={this.feedback}>
+                            <p>Thank You ! Have a question or want to reach out? <br/>We'd love to hear from you. Write to us !</p>
+                                <input type="email" placeholder="Email" onChange={e => this.setState({ email: e.target.value })} required />
+                                <textarea placeholder="Feedback" onChange={e => this.setState({ feedback: e.target.value })} required />
+                                <button type="submit">Submit Feedback</button>
+                            </form>
                 </div >
             </div>
         );
