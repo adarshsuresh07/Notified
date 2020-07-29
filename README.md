@@ -2,14 +2,14 @@
 
 Notified is a web application where students looking for career opportunities can collaboratively manage and track the latest openings by adding to it as well as get notified when added by someone else. You can see the live  application here, [Notified](https://be-notified.herokuapp.com)
 
-### Table of Contents
+## Table of Contents
 
- 1. Motivation
- 2. Basic concept
- 3. Stacks Used
- 4. Features
- 5. Future Scopes
- 6. Contributors
+ - [Motivation](https://github.com/adarshsuresh07/Notified#motivation)
+ - [Basic concept](https://github.com/adarshsuresh07/Notified#basic-concept)
+ - [Stacks Used](https://github.com/adarshsuresh07/Notified#stacks-used)
+ - [Features](https://github.com/adarshsuresh07/Notified#features-implemeted)
+ - [Future Scopes](https://github.com/adarshsuresh07/Notified#future-scopes)
+ - [Contributors](https://github.com/adarshsuresh07/Notified#contributors)
 
 ## Motivation
 
@@ -37,6 +37,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-# `A Note to Readers ;)`
+## # `A Note to Readers..`
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
