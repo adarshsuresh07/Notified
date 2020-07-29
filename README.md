@@ -73,7 +73,7 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 [2]: https://adarshsuresh07.github.io/Portfolio/
 
 
-[![github](https://img.icons8.com/fluent/48/000000/github.png)][1]      [![portfolio](https://img.icons8.com/ios/50/000000/domain.png)][2]
+[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][1]      [![portfolio](https://img.icons8.com/material-sharp/24/000000/domain.png)][2]
 ---
 
 `Haseena Hassan`
@@ -82,7 +82,7 @@ We are looking forward to incorporate many more user-friendly and amazing featur
 [2]: http://www.linkedin.com/in/haseena-hassan
 
 
-[![github](https://img.icons8.com/fluent/48/000000/github.png)][1]      [![linkedin](https://img.icons8.com/fluent/48/000000/linkedin.png)][2]
+[![github](https://img.icons8.com/material-sharp/24/000000/github.png)][1]    [![linkedin](https://img.icons8.com/material-rounded/24/000000/linkedin.png)][2]
 
 
 
@@ -94,4 +94,4 @@ Thank You ! Have a question or want to reach out?
 **We'd love to hear from you. If you don’t see the information you need or have a suggestion or feedback, email us at notified.team@gmail.com**
 
 
-<img src="https://img.icons8.com/flat_round/64/000000/filled-like.png"/>
+<img src="https://img.icons8.com/bubbles/50/000000/filled-like.png"/>
