@@ -17,7 +17,12 @@ The initial motive behind the idea was to create a space dedicated for sharing c
 
 ## Basic concept
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+Lets now familiarise Notified a bit more clearly. You'll find 4 different stacks for opportunity management on the dashboard once you've successfully set up your account :
+
+ - ***Opportunity stack*** : aka main stack, this is a global stack that contains all active opportunities added by users. It gets updated with every new opportunity that you add to the system.
+ - ***Todo stack*** : aka wish stack, every user gets a private copy of todo stack to own and you can pool this by picking those openings from the main stack which you wish to apply or look into.
+ - ***Applied stack*** : This is the place where you move the openings which you've applied ( yes, an end to this : "Dude, I get the link, I give my name..don't even know which all I've applied and what I've to wait for") and yes, it is also private to the user.
+ - ***Expired stack*** : A place where an opening from your main stack gets piled up when its no longer active.
 
 ## Stacks Used
 
