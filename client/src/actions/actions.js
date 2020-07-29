@@ -1,8 +1,10 @@
 import setAuthToken from "../utils/setAuthToken";
-import { getToken, logout } from "../utils/Token";
+import { getToken, logout, isLogin } from "../utils/Token";
 import store from "../store"
 import { SET_CURRENT_USER } from "./types";
 import axios from "axios"
+import jwt_decode from "jwt-decode";
+
 // Auth Actions
 
 export const setCurrentUser = userData => {
@@ -11,6 +13,19 @@ export const setCurrentUser = userData => {
     payload: userData
   };
 };
+
+const checkToken = () => {
+  console.log("hi");
+  if (isLogin()) {
+    const token = getToken();
+    const decoded = jwt_decode(token);
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+      return true;
+    }
+  }
+  return false;
+}
 
 export const setUserData = () => dispatch => {
   const token = getToken();
@@ -53,45 +68,52 @@ export const showData = (data, stack) => dispatch => {
 };
 
 export const newData = (data) => dispatch => {
-  const newOP = {
-    position: data.position,
-    company: data.company,
-    category: data.category,
-    type: data.type,
-    due: data.due,
-    active: true,
-    description: data.description,
-    contact: data.contact,
-    applylink: data.applylink,
-    furtherdetails: data.furtherdetails,
-    posted_by: store.getState().auth.user.id,
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
   }
-  axios.post("/api/openings/create", newOP)
-    .then(res => {
-      dispatch(handleToast('success', "Successfully added new Opportunity!"));
-      const op = res.data.newEntry
-      const data = store.getState().opps;
-      var { opdata, exdata } = data;
-      const today = new Date();
-      const duedate = new Date(op.due);
-      if (duedate >= today)
-        opdata = [op, ...opdata];
-      else
-        exdata = [op, ...exdata];
-      dispatch({
-        type: "SET_DATA",
-        opdata: opdata,
-        exdata: exdata,
-        tododata: data.tododata,
-        applieddata: data.applieddata
-      });
-      dispatch(showData());
-    }).catch(error => {
-      console.log(error.response)
-      if (error.response.data.error)
-        dispatch(handleToast('error', error.response.data.error));
+  else {
+    const newOP = {
+      position: data.position,
+      company: data.company,
+      category: data.category,
+      type: data.type,
+      due: data.due,
+      active: true,
+      description: data.description,
+      contact: data.contact,
+      applylink: data.applylink,
+      furtherdetails: data.furtherdetails,
+      posted_by: store.getState().auth.user.id,
     }
-    );
+    axios.post("/api/openings/create", newOP)
+      .then(res => {
+        dispatch(handleToast('success', "Successfully added new Opportunity!"));
+        const op = res.data.newEntry
+        const data = store.getState().opps;
+        var { opdata, exdata } = data;
+        const today = new Date();
+        const duedate = new Date(op.due);
+        if (duedate >= today)
+          opdata = [op, ...opdata];
+        else
+          exdata = [op, ...exdata];
+        dispatch({
+          type: "SET_DATA",
+          opdata: opdata,
+          exdata: exdata,
+          tododata: data.tododata,
+          applieddata: data.applieddata
+        });
+        dispatch(showData());
+      }).catch(error => {
+        console.log(error.response)
+        if (error.response.data.error)
+          dispatch(handleToast('error', error.response.data.error));
+      }
+      );
+  }
 }
 export const setData = () => dispatch => {
   const { todo, applied } = store.getState().auth.user;
@@ -102,10 +124,10 @@ export const setData = () => dispatch => {
       data.forEach(item => {
         const today = new Date();
         const duedate = new Date(item.due);
-        if (todo.some(t => t.id == item._id))
-          tododata[todo.findIndex(t => t.id == item._id)] = item;
-        else if (applied.some(t => t.id == item._id))
-          applieddata[applied.findIndex(t => t.id == item._id)] = item;
+        if (todo.some(t => t.id === item._id))
+          tododata[todo.findIndex(t => t.id === item._id)] = item;
+        else if (applied.some(t => t.id === item._id))
+          applieddata[applied.findIndex(t => t.id === item._id)] = item;
         else if (duedate >= today)
           active.push(item);
         if (duedate < today)
@@ -124,128 +146,156 @@ export const setData = () => dispatch => {
 }
 
 export const addTodo = (id) => dispatch => {
-  const data = store.getState().opps;
-  var { opdata, tododata } = data;
-  var todoop, opindex;
-  const sendData = {
-    "userid": store.getState().auth.user.id,
-    "openingid": id
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
   }
-  axios.post("/api/lists/todo/add", sendData)
-    .then(res => {
-      opdata.forEach((item, index) => {
-        if (item._id === id) {
-          todoop = item;
-          opindex = index;
-        }
-      });
-      opdata.splice(opindex, 1);
-      tododata = [todoop, ...tododata];
-      dispatch(handleToast('success', "Successfully added to Todo!"));
-      dispatch({
-        type: "SET_DATA",
-        opdata: opdata,
-        exdata: data.exdata,
-        tododata: tododata,
-        applieddata: data.applieddata
-      });
-    }).catch(error =>
-      console.log(error.response)
-    );
+  else {
+    const data = store.getState().opps;
+    var { opdata, tododata } = data;
+    var todoop, opindex;
+    const sendData = {
+      "userid": store.getState().auth.user.id,
+      "openingid": id
+    }
+    axios.post("/api/lists/todo/add", sendData)
+      .then(res => {
+        opdata.forEach((item, index) => {
+          if (item._id === id) {
+            todoop = item;
+            opindex = index;
+          }
+        });
+        opdata.splice(opindex, 1);
+        tododata = [todoop, ...tododata];
+        dispatch(handleToast('success', "Successfully added to Todo!"));
+        dispatch({
+          type: "SET_DATA",
+          opdata: opdata,
+          exdata: data.exdata,
+          tododata: tododata,
+          applieddata: data.applieddata
+        });
+      }).catch(error =>
+        dispatch(handleToast('error', "Couldn't added to Todo!"))
+      );
+  }
 }
 
 export const addApplied = (id) => dispatch => {
-  const data = store.getState().opps;
-  var { tododata, applieddata } = data;
-  var todoop, opindex;
-  const sendData = {
-    "userid": store.getState().auth.user.id,
-    "openingid": id
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
   }
-  axios.post("/api/lists/applied/add", sendData)
-    .then(res => {
-      tododata.forEach((item, index) => {
-        if (item._id === id) {
-          todoop = item;
-          opindex = index;
-        }
-      });
-      tododata.splice(opindex, 1);
-      applieddata = [todoop, ...applieddata];
-      dispatch(handleToast('success', "Successfully added to Applied!"));
-      dispatch({
-        type: "SET_DATA",
-        opdata: data.opdata,
-        exdata: data.exdata,
-        tododata: tododata,
-        applieddata: applieddata
-      });
-    }).catch(error =>
-      console.log(error.response)
-    );
+  else {
+    const data = store.getState().opps;
+    var { tododata, applieddata } = data;
+    var todoop, opindex;
+    const sendData = {
+      "userid": store.getState().auth.user.id,
+      "openingid": id
+    }
+    axios.post("/api/lists/applied/add", sendData)
+      .then(res => {
+        tododata.forEach((item, index) => {
+          if (item._id === id) {
+            todoop = item;
+            opindex = index;
+          }
+        });
+        tododata.splice(opindex, 1);
+        applieddata = [todoop, ...applieddata];
+        dispatch(handleToast('success', "Successfully added to Applied!"));
+        dispatch({
+          type: "SET_DATA",
+          opdata: data.opdata,
+          exdata: data.exdata,
+          tododata: tododata,
+          applieddata: applieddata
+        });
+      }).catch(error =>
+        dispatch(handleToast('error', "Couldn't added to Applied!"))
+      );
+  }
 }
 
 export const deleteTodo = (id) => dispatch => {
-  const data = store.getState().opps;
-  var { opdata, tododata } = data;
-  var todoop, opindex;
-  const sendData = {
-    "userid": store.getState().auth.user.id,
-    "openingid": id
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
   }
-  axios.post("/api/lists/todo/remove", sendData)
-    .then(res => {
-      tododata.forEach((item, index) => {
-        if (item._id === id) {
-          todoop = item;
-          opindex = index;
-        }
-      });
-      tododata.splice(opindex, 1);
-      const today = new Date();
-      const duedate = new Date(todoop.due);
-      if (duedate >= today)
-        opdata = [todoop, ...opdata];
-      dispatch(handleToast('success', "Successfully removed from Todo!"));
-      dispatch({
-        type: "SET_DATA",
-        opdata: opdata,
-        exdata: data.exdata,
-        tododata: tododata,
-        applieddata: data.applieddata
-      });
-    }).catch(error =>
-      console.log(error.response)
-    );
+  else {
+    const data = store.getState().opps;
+    var { opdata, tododata } = data;
+    var todoop, opindex;
+    const sendData = {
+      "userid": store.getState().auth.user.id,
+      "openingid": id
+    }
+    axios.post("/api/lists/todo/remove", sendData)
+      .then(res => {
+        tododata.forEach((item, index) => {
+          if (item._id === id) {
+            todoop = item;
+            opindex = index;
+          }
+        });
+        tododata.splice(opindex, 1);
+        const today = new Date();
+        const duedate = new Date(todoop.due);
+        if (duedate >= today)
+          opdata = [todoop, ...opdata];
+        dispatch(handleToast('success', "Successfully removed from Todo!"));
+        dispatch({
+          type: "SET_DATA",
+          opdata: opdata,
+          exdata: data.exdata,
+          tododata: tododata,
+          applieddata: data.applieddata
+        });
+      }).catch(error =>
+        dispatch(handleToast('error', "Couldn't remove from Todo!"))
+      );
+  }
 }
 
 export const deleteApplied = (id) => dispatch => {
-  const data = store.getState().opps;
-  var { tododata, applieddata } = data;
-  var todoop, opindex;
-  const sendData = {
-    "userid": store.getState().auth.user.id,
-    "openingid": id
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
   }
-  axios.post("/api/lists/applied/back", sendData)
-    .then(res => {
-      applieddata.forEach((item, index) => {
-        if (item._id === id) {
-          todoop = item;
-          opindex = index;
-        }
-      });
-      applieddata.splice(opindex, 1);
-      tododata = [todoop, ...tododata];
-      dispatch(handleToast('success', "Successfully removed from Applied!"));
-      dispatch({
-        type: "SET_DATA",
-        opdata: data.opdata,
-        exdata: data.exdata,
-        tododata: tododata,
-        applieddata: applieddata
-      });
-    }).catch(error =>
-      console.log(error.response)
-    );
+  else {
+    const data = store.getState().opps;
+    var { tododata, applieddata } = data;
+    var todoop, opindex;
+    const sendData = {
+      "userid": store.getState().auth.user.id,
+      "openingid": id
+    }
+    axios.post("/api/lists/applied/back", sendData)
+      .then(res => {
+        applieddata.forEach((item, index) => {
+          if (item._id === id) {
+            todoop = item;
+            opindex = index;
+          }
+        });
+        applieddata.splice(opindex, 1);
+        tododata = [todoop, ...tododata];
+        dispatch(handleToast('success', "Successfully removed from Applied!"));
+        dispatch({
+          type: "SET_DATA",
+          opdata: data.opdata,
+          exdata: data.exdata,
+          tododata: tododata,
+          applieddata: applieddata
+        });
+      }).catch(error =>
+        dispatch(handleToast('error', "Couldn't add back to Todo!"))
+      );
+  }
 }

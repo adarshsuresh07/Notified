@@ -27,7 +27,7 @@ export default class Landing extends React.Component {
                         <div>
                             <div className="landing-name">notified</div><br />
                             <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            Notified is a web application where students looking for career opportunities can collaboratively manage and track the latest openings by adding to it as well as get notified when added by someone else. 
                             </p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ export default class Landing extends React.Component {
                     </div>
                     <div className="aboutus">
                         <h4 className="field-names" style={{ color: "#f8b500", marginLeft: "2px" }}>Team</h4>
-                        <a className="team-card" href="https://adarshsuresh07.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">
+                        <a className="team-card" href="https://www.linkedin.com/in/haseena-hassan" target="_blank" rel="noopener noreferrer">
                             <img src={defaultteam} alt="" />
                             <h6>Haseena Hassan</h6>
                         </a>

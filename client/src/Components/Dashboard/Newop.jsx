@@ -80,6 +80,7 @@ class Newop extends React.Component {
                                 this.state.type.split(/[ ,]+/).map((type, index) => {
                                     if (type)
                                         return <div className={"modal-type type" + index % 3}>{type}</div>
+                                    return
                                 })
                             }
                         </div>

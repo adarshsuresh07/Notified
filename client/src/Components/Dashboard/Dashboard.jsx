@@ -7,13 +7,10 @@ import { setUserData, setData, logoutUser } from "../../actions/actions"
 import Opmodal from "./Opmodal"
 import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
-import defaultimg from "../../Assets/Images/you.jpg"
 import newjob from "../../Assets/Icons/new-job.png"
 import expired from "../../Assets/Icons/expired.png"
 import expiredactive from "../../Assets/Icons/expired-active.png"
 import logout from "../../Assets/Icons/logout.png"
-import { getToken } from "../../utils/Token";
-import axios from "axios";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
