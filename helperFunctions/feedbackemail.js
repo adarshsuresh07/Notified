@@ -7,19 +7,18 @@ module.exports = function sendVerificationEmail(data) {
     const msg = {
         to: data.email,
         from: keys.sendgSender,
-        subject: 'Thanks for the feedback',
+        subject: 'Thanks for writing to us',
         text: 'Feedback',
         html: `<strong>
                     Hi
                 </strong>
-                <p>First of all,
-                    <br>Thanks for the Feedback</p>
+                <p>Thanks for the Feedback</p>
                 <p>We will get back to you soon with many changes with all your support</p>
                 <p>Thanks for using Notified :)</p>
                 `
     }
     const msg2 = {
-        to: keys.sendgSender,
+        to: keys.fbHolder,
         from: keys.sendgSender,
         subject: 'Notified feedback',
         text: 'Feedback',
