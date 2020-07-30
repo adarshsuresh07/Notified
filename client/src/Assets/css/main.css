@@ -621,22 +621,32 @@ option {
 }
 
 .optab-container:hover>.optab-addtodo {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
   width: 15%;
   height: 100%;
 }
 
-.optab-addtodo button {
+.editable-optab button {
   all: unset;
-  height: 100%;
   width: 100%;
-  background-color: #f5f3f8;
-  color: #b45dfc;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.editable-optab {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
 }
 
 .opstack-container::-webkit-scrollbar {
@@ -978,7 +988,9 @@ option {
 }
 
 .expiredtab-container:hover>.expiredtab-addtodo {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   width: 15%;
   height: 100%;
 }
@@ -1023,6 +1035,10 @@ option {
 .modal-container-off {
   visibility: hidden;
   position: absolute;
+  top: 0;
+  left: 0;
+  max-height: 90vh;
+  overflow: hidden;
 }
 
 .modal-container-on {
@@ -1042,7 +1058,6 @@ option {
 
 .dashboard-modal-off {
   width: 80%;
-  visibility: hidden;
   opacity: 0;
   color: white;
   position: relative;
@@ -1051,7 +1066,6 @@ option {
 .dashboard-modal-on {
   width: 80%;
   height: 80vh;
-  visibility: visible;
   z-index: 9;
   background-color: #393e46;
   color: white;

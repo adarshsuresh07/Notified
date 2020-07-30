@@ -38,6 +38,7 @@ class RegisterForm extends React.Component {
                         this.props.handleToast("error", error.response.data.msg);
                 }).finally(() => {
                     this.setState({ loading: false });
+                    this.props.gotoLogin();
                 })
         }
 

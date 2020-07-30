@@ -15,7 +15,8 @@ mongoose
   .connect(
     keys.mongoURI,
     {   useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     }
   )
   .then(() => console.log("MongoDB successfully connected"))

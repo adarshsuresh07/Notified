@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast } from "../../actions/actions"
+import { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast, editOP } from "../../actions/actions"
 import addtodo from "../../Assets/Icons/add-todo.png"
 import close from "../../Assets/Icons/close.png"
 import applied from "../../Assets/Icons/add-applied.png"
@@ -15,6 +15,7 @@ class Optab extends React.Component {
             const type = types[this.props.type];
             const d = new Date(this.props.data.due);
             const date = d.getDate() + " " + months[d.getMonth()]
+            const owner = this.props.auth.user.id === this.props.data.posted_by;
             return (
                 <div className={type + "tab-container"}>
                     <div className={type + "tab"} onClick={() => this.props.showData(this.props.data, this.props.type)}>
@@ -38,21 +39,33 @@ class Optab extends React.Component {
                         </div> :
                         <div className={type + "tab-addtodo"}>
                             {this.props.type === 0 ?
-                                <button>
-                                    <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} onClick={() => this.props.addTodo(this.props.data._id)} />
-                                </button>
+                                <div className={"editable-optab"}>
+                                    <button>
+                                        <img src={addtodo} title="Add to todo" alt="C-" style={{ width: "60%" }} onClick={() => this.props.addTodo(this.props.data._id)} />
+                                    </button>
+                                    {
+                                        owner ?
+                                            <span className="delete-tab" title="Edit Oppotunity">
+                                                <i className="fa fa-edit" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.editOP(this.props.data,"edit")}></i>
+                                            </span>
+                                            : null
+                                    }
+                                </div>
                                 : this.props.type === 2 ?
                                     <span className="delete-tab" title="Back to todo">
                                         <i className="fa fa-undo" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.deleteApplied(this.props.data._id)}></i>
                                     </span>
-                                    : null
+                                    : this.props.type === 3 ?
+                                        <span className="delete-tab" title="Back to todo">
+                                            <i className="fa fa-edit" style={{ fontSize: "1rem", color: "#393e46", textShadow: "none" }} aria-hidden="true" onClick={() => this.props.editOP(this.props.data, "edit")}></i>
+                                        </span> : null
                             }
                         </div>
                     }
                 </div>
             );
         }
-        else return <div></div>
+        else return <div />
 
     }
 }
@@ -61,14 +74,15 @@ Optab.propTypes = {
     addTodo: PropTypes.func.isRequired,
     addApplied: PropTypes.func.isRequired,
     deleteApplied: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired
+    deleteTodo: PropTypes.func.isRequired,
+    editOP: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-    feed: state.feed
+    auth: state.auth
 });
 
 export default connect(
     mapStateToProps,
-    { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast }
+    { showData, addTodo, addApplied, deleteApplied, deleteTodo, handleToast, editOP }
 )(Optab);

@@ -66,6 +66,126 @@ export const showData = (data, stack) => dispatch => {
     dispatch({ type: "Modal-Off" });
 };
 
+export const editOP = (data, type) => dispatch => {
+  if (type === "edit") {
+    if (data && Object.keys(data).includes("position")) {
+      dispatch({ type: "Edit-Modal-On", data: data });
+    }
+    else
+      dispatch({ type: "Modal-Off" });
+  }
+  else if (type === "open") {
+    dispatch({ type: "New-Modal-On" });
+  }
+  else {
+    dispatch({ type: "Modal-Off" });
+  }
+};
+
+export const editData = (data) => dispatch => {
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
+  }
+  else {
+    const editOp = {
+      position: data.position,
+      company: data.company,
+      category: data.category,
+      type: data.type,
+      due: data.due,
+      description: data.description,
+      contact: data.contact,
+      applylink: data.applylink,
+      furtherdetails: data.furtherdetails,
+      posted_by: store.getState().auth.user.id,
+    }
+    axios.put("/api/openings/update/" + data.id, editOp)
+      .then(res => {
+        dispatch(handleToast('success', "Successfully updated new Opportunity!"));
+        const op = res.data.updatedTo;
+        const opps = store.getState().opps;
+        var { opdata, exdata, tododata, applieddata } = opps;
+        const today = new Date();
+        const duedate = new Date(op.due);
+        today.setHours(-1);
+        if (duedate >= today) {
+          if (opdata.some(t => t._id === data.id))
+            opdata[opdata.findIndex(t => t._id === data.id)] = op;
+          else {
+            exdata.splice(exdata.findIndex(t => t._id === data.id), 1);
+            if (tododata.some(t => t._id === data.id))
+              tododata[tododata.findIndex(t => t._id === data.id)] = op;
+            else if (applieddata.some(t => t._id === data.id))
+              applieddata[applieddata.findIndex(t => t._id === data.id)] = op;
+            else {
+              opdata = [op, ...opdata];
+            }
+          }
+        }
+        else {
+          if (opdata.some(t => t._id === data.id)) {
+            console.log("2");
+            opdata.splice(opdata.findIndex(t => t._id === data.id), 1);
+            exdata = [op, ...exdata];
+          }
+          else
+            exdata[exdata.findIndex(t => t._id === data.id)] = op;
+        }
+        dispatch({
+          type: "SET_DATA",
+          opdata: opdata,
+          exdata: exdata,
+          tododata: tododata,
+          applieddata: applieddata
+        });
+        dispatch(editOP({}));
+      }).catch(error => {
+        console.log(error)
+        if (error.response.data.error)
+          dispatch(handleToast('error', error.response.data.error));
+      }
+      );
+  }
+}
+
+export const deleteData = (opid) => dispatch => {
+  if (checkToken()) {
+    dispatch(logoutUser());
+    window.location.href = "/";
+    dispatch(handleToast("warn", "Token time out. Pls login again"));
+  }
+  else {
+    const delop = {
+      id: opid
+    }
+    axios.delete("/api/openings/delete/" + opid, delop)
+      .then(res => {
+        dispatch(handleToast('success', "Successfully deleted!"));
+        const opps = store.getState().opps;
+        var { opdata, exdata } = opps;
+        if (opdata.some(t => t._id === opid))
+          opdata.splice(opdata.findIndex(t => t._id === opid), 1);
+        else
+          exdata.splice(exdata.findIndex(t => t._id === opid), 1);
+        dispatch({
+          type: "SET_DATA",
+          opdata: opdata,
+          exdata: exdata,
+          tododata: opps.tododata,
+          applieddata: opps.applieddata
+        });
+        dispatch(editOP({}));
+      }).catch(error => {
+        console.log(error.response)
+        if (error.response.data.error)
+          dispatch(handleToast('error', error.response.data.error));
+      }
+      );
+  }
+}
+
 export const newData = (data) => dispatch => {
   if (checkToken()) {
     dispatch(logoutUser());
@@ -94,6 +214,7 @@ export const newData = (data) => dispatch => {
         var { opdata, exdata } = data;
         const today = new Date();
         const duedate = new Date(op.due);
+        today.setHours(-1);
         if (duedate >= today)
           opdata = [op, ...opdata];
         else
@@ -105,7 +226,7 @@ export const newData = (data) => dispatch => {
           tododata: data.tododata,
           applieddata: data.applieddata
         });
-        dispatch(showData());
+        dispatch(editOP({}));
       }).catch(error => {
         console.log(error.response)
         if (error.response.data.error)
@@ -123,6 +244,7 @@ export const setData = () => dispatch => {
       data.forEach(item => {
         const today = new Date();
         const duedate = new Date(item.due);
+        today.setHours(-1);
         if (todo.some(t => t.id === item._id))
           tododata[todo.findIndex(t => t.id === item._id)] = item;
         else if (applied.some(t => t.id === item._id))

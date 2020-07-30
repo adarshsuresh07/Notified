@@ -6,7 +6,7 @@ import scholar from "../../Assets/Images/scholarship.jpg"
 import close from "../../Assets/Icons/close.png"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { handleToast, newData } from "../../actions/actions"
+import { handleToast, newData, editOP, editData, deleteData } from "../../actions/actions"
 const images = {
     "Job": job,
     "Internship": internship,
@@ -17,6 +17,7 @@ class Newop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             position: '',
             company: '',
             category: "Job",
@@ -26,18 +27,37 @@ class Newop extends React.Component {
             contact: '',
             applylink: '',
             furtherdetails: '',
-            // image: addimage,
-            // imageselected: false,
+            posted_by: ''
         }
     }
 
-    // fileSelectHandler = e => {
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(e.target.files[0]);
-    //     reader.onload = (event) => {
-    //         this.setState({ image: event.target.result, imageselected: true })
-    //     }
-    // }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.feed.modalon !== this.props.feed.modalon && nextProps.feed.modalon === 3) {
+            var data = nextProps.feed.edit;
+            var d = new Date(data.due),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+            const due = [year, month, day].join('-');
+            this.setState({
+                id: data._id,
+                position: data.position,
+                company: data.company,
+                category: data.category,
+                type: data.type,
+                due: due,
+                description: data.description,
+                contact: data.contact,
+                applylink: data.applylink,
+                furtherdetails: data.furtherdetails,
+                posted_by: data.posted_by,
+            });
+        }
+    }
 
     submit = () => {
         if (this.state.position === "")
@@ -47,25 +67,25 @@ class Newop extends React.Component {
         else if (this.state.applylink === "")
             this.props.handleToast("error", "Apply link should not be empty");
         else {
-            this.props.newData(this.state);
-            setTimeout(() => {
-                this.props.closeModal();
-            }, 800);
+            if (this.props.feed.modalon === 2)
+                this.props.newData(this.state);
+            else
+                this.props.editData(this.state);
         }
     }
 
     render() {
         return (
-            <div className={this.props.newop ? "modal-container-on" : "modal-container-off"}>
-                <div className={this.props.newop ? "dashboard-modal-on" : "dashboard-modal-off"}>
-                    <span className="modal-close" onClick={this.props.closeModal}>
+            <div className={this.props.feed.modalon > 1 ? "modal-container-on" : "modal-container-off"}>
+                <div className={this.props.feed.modalon > 1 ? "dashboard-modal-on" : "dashboard-modal-off"}>
+                    <span className="modal-close" onClick={this.props.editOP}>
                         <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
                     </span>
                     <div className="modal-left">
-                        <input type="text" placeholder="Position" onChange={e => this.setState({ position: e.target.value })} />
-                        <input type="text" placeholder="Company" onChange={e => this.setState({ company: e.target.value })} /> <br />
+                        <input type="text" placeholder="Position" value={this.state.position} onChange={e => this.setState({ position: e.target.value })} />
+                        <input type="text" placeholder="Company" value={this.state.company} onChange={e => this.setState({ company: e.target.value })} /> <br />
                         <div className="modal-row" onChange={e => this.setState({ category: e.target.value })}>Category: &nbsp;
-                        <select style={{ width: "40%" }}>
+                        <select style={{ width: "40%" }} value={this.state.category}>
                                 <option value="Job">Job</option>
                                 <option value="Internship">Internship</option>
                                 <option value="Fellowship">Fellowship</option>
@@ -73,19 +93,19 @@ class Newop extends React.Component {
                             </select>
                         </div> <br />
                         <div className="modal-row">
-                            Last Date: &nbsp; <input type="date" placeholder="Company" style={{ width: "40%" }} onChange={e => this.setState({ due: e.target.value })} />
+                            Last Date: &nbsp; <input type="date" value={this.state.due} style={{ width: "40%" }} onChange={e => this.setState({ due: e.target.value })} />
                         </div>
                         <div className="modal-type-container">
                             {
                                 this.state.type.split(/[ ,]+/).map((type, index) => {
                                     if (type)
                                         return <div className={"modal-type type" + index % 3} key={index}>{type}</div>
-                                    return <span id={index}/>
+                                    return <span id={index} />
                                 })
                             }
                         </div>
-                        <input type="text" placeholder="Requirements" onChange={e => this.setState({ type: e.target.value })} />
-                        <textarea placeholder="Description" maxLength="300" onChange={e => this.setState({ description: e.target.value })} />
+                        <input type="text" placeholder="Requirements" value={this.state.type} onChange={e => this.setState({ type: e.target.value })} />
+                        <textarea placeholder="Description" maxLength="300" value={this.state.description} onChange={e => this.setState({ description: e.target.value })} />
                     </div>
                     <div className="modal-right">
                         <div className="modal-right-img">
@@ -95,11 +115,20 @@ class Newop extends React.Component {
                                 alt=""
                             />
                         </div>
-                        <input type="text" placeholder="Contact" onChange={e => this.setState({ contact: e.target.value })} />
-                        <input type="text" placeholder="Apply link" onChange={e => this.setState({ applylink: e.target.value })} />
-                        <textarea placeholder="Further details" maxLength="300" onChange={e => this.setState({ furtherdetails: e.target.value })} />
+                        <input type="text" placeholder="Contact" value={this.state.contact} onChange={e => this.setState({ contact: e.target.value })} />
+                        <input type="text" placeholder="Apply link" value={this.state.applylink} onChange={e => this.setState({ applylink: e.target.value })} />
+                        <textarea placeholder="Further details" maxLength="300" value={this.state.furtherdetails} onChange={e => this.setState({ furtherdetails: e.target.value })} />
                     </div>
-                    <span className="modal-submit" onClick={this.submit}>Add Opportunity</span>
+                    {
+                        this.props.feed.modalon === 2 ?
+                            <span className="modal-submit" onClick={this.submit}>Add Opportunity</span>
+                            :
+                            <span className="modal-submit" >
+                                <span onClick={()=>this.props.deleteData(this.props.feed.edit._id)}>Delete</span>
+                                &emsp;
+                                <span onClick={this.submit}>Update</span>
+                            </span>
+                    }
                 </div>
             </div>
         )
@@ -109,14 +138,18 @@ class Newop extends React.Component {
 
 Newop.propTypes = {
     handleToast: PropTypes.func.isRequired,
-    newData: PropTypes.func.isRequired
+    newData: PropTypes.func.isRequired,
+    deleteData: PropTypes.func.isRequired,
+    editData: PropTypes.func.isRequired,
+    editOP: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-    toast: state.toast
+    toast: state.toast,
+    feed: state.feed
 });
 
 export default connect(
     mapStateToProps,
-    { handleToast, newData }
+    { handleToast, newData, editOP, editData, deleteData }
 )(Newop);

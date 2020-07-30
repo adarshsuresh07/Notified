@@ -3,7 +3,7 @@ import Opstack from './Opstack'
 import Todostack from './Todostack'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { setUserData, setData, logoutUser } from "../../actions/actions"
+import { setUserData, setData, logoutUser,editOP } from "../../actions/actions"
 import Opmodal from "./Opmodal"
 import Newop from "./Newop"
 import Appliedstack from "./Appliedstack"
@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
                             <Appliedstack />
                         </div>
                         <div className="second-col-bottom-options">
-                            <button className="second-col-bottom-buttons button1" title="Add Opportunity" onClick={() => this.setState({ newop: true })}>
+                            <button className="second-col-bottom-buttons button1" title="Add Opportunity" onClick={()=>this.props.editOP({},"open")}>
                                 <img src={newjob} alt="+" style={{ width: "60%" }} />
                             </button>
                             {!this.state.expired ?
@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <Opmodal />
-                {this.state.newop ? <Newop newop={this.state.newop} closeModal={() => this.setState({ newop: false })} /> : null}
+                <Newop /> 
             </div>
         );
     }
@@ -94,6 +94,7 @@ Dashboard.propTypes = {
     setUserData: PropTypes.func.isRequired,
     setData: PropTypes.func.isRequired,
     logoutUser: PropTypes.func.isRequired,
+    editOP: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -103,5 +104,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { setUserData, setData, logoutUser }
+    { setUserData, setData, logoutUser, editOP }
 )(Dashboard);

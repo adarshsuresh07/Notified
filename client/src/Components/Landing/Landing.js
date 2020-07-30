@@ -37,9 +37,9 @@ export default class Landing extends React.Component {
                             <div className="test-outer" />
                             {
                                 this.state.signup === 1 ?
-                                    <RegisterForm />
+                                    <RegisterForm gotoLogin={() => this.setState({ signup: 0 })}/>
                                     : this.state.signup === 2 ?
-                                        <Emailpw />
+                                        <Emailpw gotoLogin={() => this.setState({ signup: 0 })}/>
                                         : <LoginForm forgotPw={() => this.setState({ signup: 2 })} />
 
                             }

@@ -36,8 +36,8 @@ class Opmodal extends React.Component {
         const t = data.type ? data.type.split(/[ ,]+/) : [];
         const color = colors[this.props.feed.stack];
         return (
-            <div className={this.props.feed.modalon ? "modal-container-on" : "modal-container-off"}>
-                <div className={this.props.feed.modalon ? "dashboard-modal-on" : "dashboard-modal-off"}>
+            <div className={this.props.feed.modalon === 1 ? "modal-container-on" : "modal-container-off"}>
+                <div className={this.props.feed.modalon === 1 ? "dashboard-modal-on" : "dashboard-modal-off"}>
                     <span className="modal-close" onClick={() => this.props.showData()}>
                         <img src={close} title="Add to todo" alt="x" style={{ width: "1rem" }} />
                     </span>
@@ -53,7 +53,7 @@ class Opmodal extends React.Component {
                                 t.map((type, index) => {
                                     if (type)
                                         return <div className={"modal-type type" + index % 3} key={index}>{type}</div>
-                                    return <span id={index}/>
+                                    return <span id={index} />
                                 })
                             }
                         </div>
@@ -70,9 +70,9 @@ class Opmodal extends React.Component {
                         <span>{data.contact}</span>
                         <div>
                             <a href={data.applylink} target="_blank" rel="noopener noreferrer" style={{ color: color, width: "90%" }}>
-                                <span className="modal-type" style={{ backgroundColor: color, color: "white", fontSize:"0.9rem" }}>Apply Link</span>
+                                <span className="modal-type" style={{ backgroundColor: color, color: "white", fontSize: "0.9rem" }}>Apply Link</span>
                             </a>
-                            <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer",  fontSize:"0.9rem" }}>
+                            <span className="modal-type" onClick={this.copyLink} style={{ backgroundColor: color, color: "white", cursor: "pointer", fontSize: "0.9rem" }}>
                                 <i className="fa fa-clipboard" aria-hidden="true"></i>
                             </span>
                         </div>
