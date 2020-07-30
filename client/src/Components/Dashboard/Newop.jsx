@@ -57,6 +57,20 @@ class Newop extends React.Component {
                 posted_by: data.posted_by,
             });
         }
+        if (nextProps.feed.modalon !== this.props.feed.modalon && nextProps.feed.modalon === 2) {
+            this.setState({
+                id: '',
+                position: '',
+                company: '',
+                category: "Job",
+                type: '',
+                due: new Date(),
+                description: '',
+                contact: '',
+                applylink: '',
+                furtherdetails: '',
+            });
+        }
     }
 
     submit = () => {
