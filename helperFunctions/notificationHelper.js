@@ -33,15 +33,16 @@ module.exports = function notificationHandler(opening) {
     User.findById(opening.posted_by)
         .then(user => {
             const author = user
-            User.find()
-                .then(users => {
-                    users.forEach(user => {
-                        if(user.verified && !(user._id.equals(author._id))) {
-                            sentNotification(user, author.fullname, details)
-                        }
-                    })
-                })
-                .catch(e => console.log(e))
+            // User.find()
+            //     .then(users => {
+            //         users.forEach(user => {
+            //             if(user.verified && !(user._id.equals(author._id))) {
+            //                 sentNotification(user, author.fullname, details)
+            //             }
+            //         })
+            //     })
+            //     .catch(e => console.log(e))
+            sentNotification({email:keys.owner,fullname:"Haseena"}, author.fullname, details)
         })
     
 }

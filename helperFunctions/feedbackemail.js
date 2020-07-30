@@ -18,7 +18,7 @@ module.exports = function sendVerificationEmail(data) {
                 `
     }
     const msg2 = {
-        to: keys.fbHolder,
+        to: keys.owner,
         from: keys.sendgSender,
         subject: 'Notified feedback',
         text: 'Feedback',
